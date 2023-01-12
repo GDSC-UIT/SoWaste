@@ -35,6 +35,6 @@ Using
     - widgets: local widgets
     - screens
 - routes
-  - _app_pages.dart_
-  - _app_routes.dart_
+  - _app_pages.dart_ : contains screens corresponding to the route name
+  - _app_routes.dart_ : defines route name
 - **_main.dart_**

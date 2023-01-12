@@ -30,11 +30,10 @@ Using
   - global_widgets
 - **modules**
   - <module_name>
-    - bindings : provide dependencies - controller...
-    - view_models : executes the commands and data linked to the View(s)
-    - views: responsible for display purposes
-      - widgets: local widgets
-      - screens : _<screen_name>.dart_
+    - _<module_name>\_binding.dart_ : provide dependencies - controller...
+    - _<module_name>\_controller.dart_ : executes the commands and data linked to the View(s)
+    - widgets: local widgets
+    - screens
 - routes
   - _app_pages.dart_
   - _app_routes.dart_

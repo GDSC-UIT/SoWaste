@@ -18,12 +18,13 @@ Using
 **lib**
 
 - core
-  - themes : eg- define TextTheme, TextStyle...
+  - themes : eg- define TextTheme, TextStyle..., color
   - utils : static method
   - values :
     - app_assets: contains paths for different images, icons.
     - app_string: contains strings used across entire application .
-    - app_colors: initialize the different color variations.
+    - app_constant: initialize the different color variations.
+      ...
   - data
     - models : saves the data and associated logic.
     - services : eg- contains api services : authentication , fetch data...

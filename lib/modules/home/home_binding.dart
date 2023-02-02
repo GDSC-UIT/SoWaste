@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sowaste/modules/home/view_models/home_controller.dart';
+import 'package:sowaste/modules/home/home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override

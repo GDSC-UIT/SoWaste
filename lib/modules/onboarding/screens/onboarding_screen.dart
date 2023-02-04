@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
@@ -13,7 +12,6 @@ class OnboardingScreen extends StatelessWidget {
   final OnboardingController _controller = Get.find();
 
   OnboardingScreen({super.key});
-  int _index = 0;
   Widget customImage(String path) {
     return Center(
       child: Image.asset(
@@ -27,7 +25,7 @@ class OnboardingScreen extends StatelessWidget {
       imageFlex: 5,
       bodyFlex: 4,
       titleTextStyle: CustomTextStyle.h3(AppColors.primary),
-      bodyTextStyle: CustomTextStyle.body(AppColors.primary),
+      bodyTextStyle: CustomTextStyle.medium(AppColors.primary),
       titlePadding: const EdgeInsets.only(bottom: 16),
       pageColor: AppColors.background);
 
@@ -59,24 +57,24 @@ class OnboardingScreen extends StatelessWidget {
         body: Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height * 0.7,
           child: IntroductionScreen(
             pages: [
               PageViewModel(
-                  image: customImage('assets/images/sort.png'),
+                  image: customImage('assets/images/dustbin.png'),
                   title: "Raise awareness",
                   body:
                       "Garbage pollution threatens the environment and public health.",
                   decoration: pageDecoration()),
               PageViewModel(
-                  image: customImage('assets/images/dustbin.png'),
+                  image: customImage('assets/images/recycle.png'),
                   title: "Reduce waste",
                   body:
                       "Reducing trash by recycling is crucial for preserving our planet's health.",
                   decoration: pageDecoration()),
               PageViewModel(
-                  image: customImage('assets/images/recycle.png'),
+                  image: customImage('assets/images/sort.png'),
                   title: "Sorting trash",
                   body:
                       "Effective trash management can help address the garbage pollution.",
@@ -98,7 +96,7 @@ class OnboardingScreen extends StatelessWidget {
             next: const Icon(Icons.arrow_forward),
           ),
         ),
-        Container(
+        SizedBox(
           height: 56,
           width: 350,
           child: Obx(
@@ -107,7 +105,7 @@ class OnboardingScreen extends StatelessWidget {
                 : Container(),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         )
       ],

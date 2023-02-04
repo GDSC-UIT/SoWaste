@@ -51,26 +51,58 @@ class CustomTextStyle extends TextStyle {
     );
   }
 
-  static TextStyle bodyBold(Color color) {
+  static TextStyle large(Color color) {
     return GoogleFonts.roboto(
       fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: color,
+    );
+  }
+
+  static TextStyle medium(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+      color: color,
+    );
+  }
+
+  static TextStyle normal(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 12,
       fontWeight: FontWeight.w600,
       color: color,
     );
   }
 
-  static TextStyle body(Color color) {
+  static TextStyle boldButton(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
       color: color,
     );
   }
 
   static TextStyle button(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: FontWeight.w400,
+      color: color,
+    );
+  }
+
+  static TextStyle link(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 10,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
+  }
+
+  static TextStyle tinyText(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 7,
+      fontWeight: FontWeight.w300,
       color: color,
     );
   }

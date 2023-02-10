@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/global_widget/app_button.dart';
 import 'package:sowaste/modules/onboarding/onboarding_controller.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
@@ -38,17 +39,6 @@ class OnboardingScreen extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)));
   void gotoHomeScreen() {
     Get.toNamed(AppRoutes.homePage);
-  }
-
-  Widget getStartBtn() {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50))),
-        onPressed: gotoHomeScreen,
-        child:
-            Text("GET STARTED", style: CustomTextStyle.button(Colors.white)));
   }
 
   @override
@@ -101,7 +91,9 @@ class OnboardingScreen extends StatelessWidget {
           width: 350,
           child: Obx(
             () => (_controller.pageIndex.value == 2)
-                ? getStartBtn()
+                ? AppButton(
+                    buttonText: "GET STARTED",
+                    onPressedFunction: gotoHomeScreen)
                 : Container(),
           ),
         ),

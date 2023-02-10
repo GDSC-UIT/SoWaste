@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'app_colors.dart';
+
 class CustomTextStyle extends TextStyle {
   static TextStyle h1(Color color) {
     return GoogleFonts.roboto(
@@ -37,7 +39,7 @@ class CustomTextStyle extends TextStyle {
 
   static TextStyle sub(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 20,
+      fontSize: 22,
       fontWeight: FontWeight.w600,
       color: color,
     );
@@ -46,6 +48,14 @@ class CustomTextStyle extends TextStyle {
   static TextStyle title(Color color) {
     return GoogleFonts.roboto(
       fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: color,
+    );
+  }
+
+  static TextStyle bodyBold(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 16,
       fontWeight: FontWeight.w600,
       color: color,
     );
@@ -70,7 +80,7 @@ class CustomTextStyle extends TextStyle {
   static TextStyle normal(Color color) {
     return GoogleFonts.roboto(
       fontSize: 12,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
       color: color,
     );
   }
@@ -106,4 +116,12 @@ class CustomTextStyle extends TextStyle {
       color: color,
     );
   }
+}
+
+class AppTheme {
+  static final ThemeData lightTheme = ThemeData.light().copyWith(
+    colorScheme: const ColorScheme.light().copyWith(
+      primary: AppColors.primary,
+    ),
+  );
 }

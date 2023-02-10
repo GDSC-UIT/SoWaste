@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
+import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
+import 'package:sowaste/modules/dictionary/screens/dictionary_main_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/fail_quizz_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
 
+import '../modules/dictionary/screens/congratulation_quizz_screen.dart';
 import '../modules/home/screens/home_screen.dart';
 import 'app_routes.dart';
 
@@ -19,6 +23,21 @@ class AppPages {
         name: AppRoutes.onboardingPage,
         page: () => OnboardingScreen(),
         transition: Transition.cupertino,
-        binding: OnBoardingBinding())
+        binding: OnBoardingBinding()),
+    GetPage(
+        name: AppRoutes.dictionaryPage,
+        page: () => DictionaryMainScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.failedQuizPage,
+        page: () => FailQuizScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.passedQuizPage,
+        page: () => CongratulationScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding())
   ];
 }

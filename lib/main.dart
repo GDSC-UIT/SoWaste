@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/routes/app_page.dart';
 
 import 'routes/app_routes.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.onboardingPage,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
     );
   }
 }

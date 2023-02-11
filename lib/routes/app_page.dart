@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_main_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/fail_quizz_screen.dart';
+import 'package:sowaste/modules/env_news/screens/env_news_detailed_screen.dart';
+import 'package:sowaste/modules/env_news/screens/env_news_done_screen.dart';
+import 'package:sowaste/modules/env_news/screens/env_news_search_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
@@ -26,18 +29,35 @@ class AppPages {
         binding: OnBoardingBinding()),
     GetPage(
         name: AppRoutes.dictionaryPage,
-        page: () => DictionaryMainScreen(),
+        page: () => const DictionaryMainScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.failedQuizPage,
-        page: () => FailQuizScreen(),
+        page: () => const FailQuizScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.passedQuizPage,
-        page: () => CongratulationScreen(),
+        page: () => const CongratulationScreen(),
         transition: Transition.cupertino,
-        binding: DictionaryBinding())
+        binding: DictionaryBinding()),
+
+    // env news page
+    GetPage(
+        name: AppRoutes.envNewsDonePage,
+        page: () => const EnvNewsDoneScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.envNewsSearchPage,
+        page: () => const EnvNewsSearchScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.envNewsDetailedPage,
+        page: () => const EnvsNewsDetailtedScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
   ];
 }

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   google_fonts: ^4.0.1
+  http: ^0.13.5
   introduction_screen: ^3.1.4
   flutter_launcher_icons: ^0.11.0
   http: ^0.13.5
@@ -45,11 +46,13 @@ dependencies:
   percent_indicator: ^4.2.2
   flutter_markdown: ^0.6.13+1
   image_picker: ^0.7.2+1
+  
 
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/icons/app_icon.png"
+ 
 
 dev_dependencies:
   flutter_test:

@@ -1,13 +1,20 @@
 import 'package:get/get.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
-import 'package:sowaste/modules/dictionary/screens/dictionary_main_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/detail_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/fail_quizz_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/questions_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
+import 'package:sowaste/modules/dictionary/screens/recent_types.dart';
+import 'package:sowaste/modules/dictionary/screens/saved_types_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
 import '../modules/dictionary/screens/congratulation_quizz_screen.dart';
 import '../modules/home/screens/home_screen.dart';
+import '../modules/trash_detecting/trash_detecting_binding.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -26,7 +33,7 @@ class AppPages {
         binding: OnBoardingBinding()),
     GetPage(
         name: AppRoutes.dictionaryPage,
-        page: () => DictionaryMainScreen(),
+        page: () => DictionaryOverviewScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -38,6 +45,36 @@ class AppPages {
         name: AppRoutes.passedQuizPage,
         page: () => CongratulationScreen(),
         transition: Transition.cupertino,
-        binding: DictionaryBinding())
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.savedTypesPage,
+        page: () => SavedTypesScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.recentTypesPage,
+        page: () => RecentTypesScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.quizzesPage,
+        page: () => QuizzesScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.questionsPage,
+        page: () => QuestionScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.detailPage,
+        page: () => DetailScreen(),
+        transition: Transition.cupertino,
+        binding: DictionaryBinding()),
+    GetPage(
+        name: AppRoutes.detectPage,
+        page: () => TrashDetectingScreen(),
+        transition: Transition.cupertino,
+        binding: TrashDetectingBinding()),
   ];
 }

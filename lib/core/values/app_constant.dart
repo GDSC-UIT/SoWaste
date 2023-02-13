@@ -1,3 +1,3 @@
 class AppConst {
-  static const double? iconSize = 24;
+  static const double iconSize = 24;
 }

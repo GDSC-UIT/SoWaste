@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 
 import '../core/themes/app_themes.dart';
@@ -20,7 +18,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: color,

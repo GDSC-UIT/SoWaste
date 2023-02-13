@@ -5,10 +5,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 
-class DetectingTrashButton extends StatelessWidget {
-  DetectingTrashButton({super.key});
+class CameraButton extends StatelessWidget {
+  CameraButton({super.key});
   HomeController _homeController = Get.find();
 
   @override
@@ -16,9 +17,10 @@ class DetectingTrashButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: InkWell(
-          onTap: () {
+          onTap: () async {
             _homeController.count.value += 1;
-            print(_homeController.count.value);
+            await ImageServices.getImageFormCamera();
+            Get.toNamed('/detect');
           },
           borderRadius: BorderRadius.circular(24),
           child: Container(

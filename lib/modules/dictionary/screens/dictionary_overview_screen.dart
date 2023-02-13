@@ -8,8 +8,8 @@ import 'package:sowaste/modules/dictionary/widgets/search_input.dart';
 import '../../../global_widget/app_card_button.dart';
 import '../widgets/dictionary_card.dart';
 
-class DictionaryMainScreen extends StatelessWidget {
-  const DictionaryMainScreen({super.key});
+class DictionaryOverviewScreen extends StatelessWidget {
+  const DictionaryOverviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

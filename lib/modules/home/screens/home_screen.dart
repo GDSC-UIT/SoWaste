@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                             style: CustomTextStyle.bodyBold(AppColors.onBg)
                                 .copyWith(height: 1.5),
                           ),
-                          DetectingTrashButton(),
+                          CameraButton(),
                           title("Your Quizzes"),
                           const ToDicButton(),
                         ],

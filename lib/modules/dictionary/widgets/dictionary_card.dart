@@ -82,9 +82,10 @@ class DictionaryCard extends StatelessWidget {
               ),
             ),
           ),
-          child: Image.network(
-            imageUrl,
+          child: FadeInImage(
             fit: BoxFit.cover,
+            placeholder: AssetImage('assets/images/placeholder.png'),
+            image: NetworkImage(imageUrl),
           ),
         ),
       ),

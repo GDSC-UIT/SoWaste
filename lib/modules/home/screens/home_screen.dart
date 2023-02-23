@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
-import 'package:sowaste/global_widget/bottom_navbar.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
@@ -15,7 +14,7 @@ import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  int _count = 0;
+  final int _count = 0;
   Row title(String text, [bool seeAllBtn = false]) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +35,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavBar(),
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
           backgroundColor: AppColors.background,

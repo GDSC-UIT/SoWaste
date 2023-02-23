@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
@@ -38,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
       activeShape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)));
   void gotoHomeScreen() {
-    Get.toNamed(AppRoutes.homePage);
+    Get.toNamed(AppRoutes.baseScreen);
   }
 
   @override

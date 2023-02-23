@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_main_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/fail_quizz_screen.dart';
@@ -15,8 +16,8 @@ class AppPages {
   static final List<GetPage> pages = [
     //home page
     GetPage(
-      name: AppRoutes.homePage,
-      page: () => HomeScreen(),
+      name: AppRoutes.baseScreen,
+      page: () => const BaseScreen(),
       transition: Transition.cupertino,
       binding: HomeBinding(),
     ),
@@ -43,7 +44,7 @@ class AppPages {
 
     // env news page
     GetPage(
-        name: AppRoutes.envNewsPage,
+        name: AppRoutes.envNewsScreen,
         page: () => const EnvNewsScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),

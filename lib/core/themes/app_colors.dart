@@ -18,4 +18,6 @@ class AppColors {
   static const Color onSur = Color(0xFF494949);
   static const Color onError = Color(0xFFFFFFFF);
   static const Color onInfo = Color(0xFFD3D3D3);
+  // Drop shadow
+  static const Color dropShadow = Color.fromRGBO(4, 6, 15, 0.07);
 }

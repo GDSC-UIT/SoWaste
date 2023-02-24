@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/widgets/search_input.dart';
@@ -24,9 +22,9 @@ class DictionaryOverviewScreen extends StatelessWidget {
         ),
         body: Stack(children: [
           ListView(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 55,
               ),
               gap(),
@@ -46,9 +44,9 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 onTapFunction: () {
                   print("Clicked!");
                 },
-                title: "Plastic Bottle",
+                title: "Quiz time",
                 leading: const Icon(
-                  Icons.save_as_rounded,
+                  Icons.import_contacts,
                   color: AppColors.primary,
                 ),
               ),
@@ -56,9 +54,9 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 onTapFunction: () {
                   print("Clicked!");
                 },
-                title: "Plastic Bottle",
+                title: "Saved types of trash",
                 leading: const Icon(
-                  Icons.save_as_rounded,
+                  Icons.bookmark_outline,
                   color: AppColors.primary,
                 ),
               ),
@@ -66,9 +64,9 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 onTapFunction: () {
                   print("Clicked!");
                 },
-                title: "Plastic Bottle",
+                title: "Recent types of trash ",
                 leading: const Icon(
-                  Icons.save_as_rounded,
+                  Icons.update_rounded,
                   color: AppColors.primary,
                 ),
               ),

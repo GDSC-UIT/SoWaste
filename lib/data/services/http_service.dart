@@ -5,7 +5,6 @@ class HttpService {
     return await http.post(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          // 'Authorization': 'Bearer ${AuthService.instance.accessToken}',
         },
         body: body);
   }
@@ -14,7 +13,6 @@ class HttpService {
     return await http.put(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
-          //'Authorization': 'Bearer ${AuthService.instance.accessToken}',
         },
         body: body);
   }
@@ -24,7 +22,6 @@ class HttpService {
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        //'Authorization': 'Bearer ${AuthService.instance.accessToken}',
       },
     );
   }

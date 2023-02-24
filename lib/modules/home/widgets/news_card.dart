@@ -1,20 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/data/models/article.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 class NewsCard extends StatelessWidget {
-  NewsCard({super.key, required this.imageUrl, required this.title});
-  String imageUrl;
-  String title;
+  const NewsCard({super.key, required this.article});
+  final Article article;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          print("Clicked on news!");
+          Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: article);
         },
         child: SizedBox(
           width: 170,
@@ -34,14 +32,14 @@ class NewsCard extends StatelessWidget {
                       height: 120,
                       width: 180,
                       child: Image(
-                        image: NetworkImage(imageUrl),
+                        image: NetworkImage(article.displayImage),
                         fit: BoxFit.cover,
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        title,
+                        article.title,
                         style: CustomTextStyle.link(AppColors.onBg),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,

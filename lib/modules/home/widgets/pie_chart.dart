@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
@@ -48,7 +46,8 @@ class PieChart extends StatelessWidget {
                         ),
                         Text(
                           e['category'],
-                          style: CustomTextStyle.normal(Color(0xFF747474)),
+                          style:
+                              CustomTextStyle.normal(const Color(0xFF747474)),
                         )
                       ],
                     ),

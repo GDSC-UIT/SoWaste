@@ -1,20 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 
 class QuizCard extends StatelessWidget {
-  QuizCard({
+  const QuizCard({
     super.key,
     required this.title,
     required this.subTitle,
     required this.percentage,
   });
-  double percentage;
-  String title;
-  String subTitle;
+  final double percentage;
+  final String title;
+  final String subTitle;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,6 +42,8 @@ class QuizCard extends StatelessWidget {
             ),
             Text(
               subTitle,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: CustomTextStyle.normal(AppColors.onBg),
             ),
             const Spacer(),

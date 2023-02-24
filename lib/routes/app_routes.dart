@@ -10,4 +10,8 @@ class AppRoutes {
   static const questionsPage = '/questions';
   static const detailPage = '/detail';
   static const detectPage = '/detect';
+  // env news route
+  static const envNewsDonePage = '/env_news/done';
+  static const envNewsSearchPage = '/env_news/search';
+  static const envNewsDetailedPage = '/env_news/detailed';
 }

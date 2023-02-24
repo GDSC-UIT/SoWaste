@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 
 class OptionButton extends StatelessWidget {
-  OptionButton(
+  const OptionButton(
       {super.key,
       required this.answer,
       this.isRightAnswer,
       required this.isAble});
   final String answer;
-  bool? isRightAnswer;
-  bool isAble;
+  final bool? isRightAnswer;
+  final bool isAble;
 
   @override
   Widget build(BuildContext context) {

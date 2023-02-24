@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LearnMoreButton extends StatelessWidget {
   const LearnMoreButton({super.key});
@@ -26,7 +24,7 @@ class LearnMoreButton extends StatelessWidget {
                 width: 8,
               ),
               Row(
-                children: [
+                children: const [
                   Text("Learn more"),
                   SizedBox(
                     width: 5,

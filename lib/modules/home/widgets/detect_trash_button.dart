@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
@@ -10,7 +7,7 @@ import 'package:sowaste/modules/home/home_controller.dart';
 
 class CameraButton extends StatelessWidget {
   CameraButton({super.key});
-  HomeController _homeController = Get.find();
+  final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +35,7 @@ class CameraButton extends StatelessWidget {
                   size: 56,
                   color: Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Text(

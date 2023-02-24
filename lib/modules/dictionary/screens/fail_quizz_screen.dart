@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/global_widget/app_button.dart';
@@ -24,7 +22,7 @@ class FailQuizScreen extends StatelessWidget {
                     'You failed!',
                     style: CustomTextStyle.h3(AppColors.onBg),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Text(
@@ -40,7 +38,7 @@ class FailQuizScreen extends StatelessWidget {
                       onPressedFunction: () {
                         print("Try again");
                       }),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   AppButton(

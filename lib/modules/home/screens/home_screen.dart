@@ -10,105 +10,130 @@ import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
 import 'package:sowaste/modules/home/widgets/quiz_card.dart';
 import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  int _count = 0;
-  Row title(String text, [bool seeAllBtn = false]) {
+
+  Row title(String text, [final VoidCallback? seeAll, isShowSeeAll = false]) {
     return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(text,
               style: CustomTextStyle.sub(AppColors.onBg).copyWith(height: 1.5)),
-          seeAllBtn
-              ? Text(
-                  "See All",
-                  style: CustomTextStyle.normal(AppColors.primary),
+          isShowSeeAll
+              ? GestureDetector(
+                  onTap: seeAll,
+                  child: Row(
+                    children: [
+                      Text(
+                        "See All",
+                        style: CustomTextStyle.normal(AppColors.primary),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: AppColors.primaryDark,
+                      )
+                    ],
+                  ),
                 )
               : Container()
         ]);
   }
 
-  final HomeController _homeController = Get.find();
+  final HomeController _homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(
+          selectedIndex: 0,
+        ),
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
           backgroundColor: AppColors.background,
           elevation: 0,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              title("Overview"),
-              // OptionCard(
-              //   answer: "Choice",
-              //   isRightAnswer: false,
-              //   isAble: true,
-              // ),
-              Obx(
-                () => (_homeController.count.value == 0 &&
-                        _homeController.check.value == false)
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "You haven’t done any trash detecting yet.",
-                            style: CustomTextStyle.bodyBold(AppColors.onBg)
-                                .copyWith(height: 1.5),
+        body: Obx(() => _homeController.isLoading.value == true
+            ? const Center(child: CircularProgressIndicator())
+            : Padding(
+                padding: const EdgeInsets.all(16),
+                child: SingleChildScrollView(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        title("Overview"),
+                        Obx(
+                          () => (_homeController.count.value == 0)
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "You haven’t done any trash detecting yet.",
+                                      style: CustomTextStyle.bodyBold(
+                                              AppColors.onBg)
+                                          .copyWith(height: 1.5),
+                                    ),
+                                    CameraButton(),
+                                    title("Your Quizzes"),
+                                    const ToDicButton(),
+                                  ],
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "This week, you have detected [count] times ",
+                                      style: CustomTextStyle.bodyBold(
+                                              AppColors.onBg)
+                                          .copyWith(height: 1.5),
+                                    ),
+                                    PieChart(),
+                                    const LearnMoreButton(),
+                                    title(
+                                        "Your Quizzes",
+                                        () => {
+                                              Get.toNamed(
+                                                  AppRoutes.quizzesPage),
+                                            },
+                                        true),
+                                    SizedBox(
+                                      height: 180,
+                                      child: ListView.builder(
+                                        itemBuilder: ((context, index) =>
+                                            QuizCard(
+                                                title: _homeController
+                                                    .dictionary[index].name,
+                                                subTitle: _homeController
+                                                    .dictionary[index]
+                                                    .description,
+                                                percentage: 0.6)),
+                                        itemCount:
+                                            _homeController.dictionary.length,
+                                        scrollDirection: Axis.horizontal,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                        ),
+                        title(
+                            "Environment News",
+                            () => {Get.toNamed(AppRoutes.envNewsSearchPage)},
+                            true),
+                        SizedBox(
+                          height: 200,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => NewsCard(
+                                article: _homeController.articlesList[index]),
+                            itemCount: _homeController.articlesList.length,
                           ),
-                          CameraButton(),
-                          title("Your Quizzes"),
-                          const ToDicButton(),
-                        ],
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "This week, you have detected [count] times ",
-                            style: CustomTextStyle.bodyBold(AppColors.onBg)
-                                .copyWith(height: 1.5),
-                          ),
-                          PieChart(),
-                          const LearnMoreButton(),
-                          title("Your Quizzes", true),
-                          SizedBox(
-                            height: 180,
-                            child: ListView.builder(
-                              itemBuilder: ((context, index) => QuizCard(
-                                  title: 'Plastic',
-                                  subTitle: 'Hello',
-                                  percentage: 0.6)),
-                              itemCount: 4,
-                              scrollDirection: Axis.horizontal,
-                            ),
-                          )
-                        ],
-                      ),
-              ),
-              title("Environment News", true),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => NewsCard(
-                    imageUrl: 'https://picsum.photos/id/237/200/300',
-                    title:
-                        'Study reveals links between UK air pollution and mental ill-health',
-                  ),
-                  itemCount: 4,
+                        ),
+                      ]),
                 ),
-              ),
-            ]),
-          ),
-        ));
+              )));
   }
 }

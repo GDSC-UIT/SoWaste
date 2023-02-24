@@ -7,6 +7,9 @@ import 'package:sowaste/modules/dictionary/screens/questions_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/screens/recent_types.dart';
 import 'package:sowaste/modules/dictionary/screens/saved_types_screen.dart';
+import 'package:sowaste/modules/env_news/env_news_binding.dart';
+import 'package:sowaste/modules/env_news/screens/env_news_detailed_screen.dart';
+import 'package:sowaste/modules/env_news/screens/env_news_search_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
@@ -33,32 +36,32 @@ class AppPages {
         binding: OnBoardingBinding()),
     GetPage(
         name: AppRoutes.dictionaryPage,
-        page: () => DictionaryOverviewScreen(),
+        page: () => const DictionaryOverviewScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.failedQuizPage,
-        page: () => FailQuizScreen(),
+        page: () => const FailQuizScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.passedQuizPage,
-        page: () => CongratulationScreen(),
+        page: () => const CongratulationScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.savedTypesPage,
-        page: () => SavedTypesScreen(),
+        page: () => const SavedTypesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.recentTypesPage,
-        page: () => RecentTypesScreen(),
+        page: () => const RecentTypesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.quizzesPage,
-        page: () => QuizzesScreen(),
+        page: () => const QuizzesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -73,8 +76,21 @@ class AppPages {
         binding: DictionaryBinding()),
     GetPage(
         name: AppRoutes.detectPage,
-        page: () => TrashDetectingScreen(),
+        page: () => const TrashDetectingScreen(),
         transition: Transition.cupertino,
         binding: TrashDetectingBinding()),
+
+    // env news page
+
+    GetPage(
+        name: AppRoutes.envNewsSearchPage,
+        page: () => EnvNewsSearchScreen(),
+        transition: Transition.cupertino,
+        binding: EnvironmentBinding()),
+    GetPage(
+        name: AppRoutes.envNewsDetailedPage,
+        page: () => EnvsNewsDetailtedScreen(),
+        transition: Transition.cupertino,
+        binding: EnvironmentBinding()),
   ];
 }

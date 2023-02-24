@@ -11,7 +11,17 @@ class ImageServices {
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {
-      print("Failed to pick image!");
+      print("Failed to pick image! : $e");
+    }
+  }
+
+  static Future<void> getImageFormGallery() async {
+    try {
+      final image = await ImagePicker().getImage(source: ImageSource.gallery);
+      if (image == null) return;
+      pickedImage = File(image.path);
+    } on PlatformException catch (e) {
+      print("Failed to pick image from gallery : $e");
     }
   }
 }

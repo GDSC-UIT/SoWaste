@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
@@ -24,7 +22,7 @@ class CongratulationScreen extends StatelessWidget {
                     'Congratulations!',
                     style: CustomTextStyle.h3(AppColors.onBg),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Text(

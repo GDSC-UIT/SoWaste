@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
-import 'package:sowaste/global_widget/bottom_navbar.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
+
 import '../../../core/themes/app_colors.dart';
 import '../widgets/card_big_news.dart';
 import '../widgets/news_item.dart';
@@ -18,9 +18,6 @@ class EnvNewsSearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      bottomNavigationBar: const BottomNavBar(
-        selectedIndex: 1,
-      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -54,8 +51,14 @@ class EnvNewsSearchScreen extends StatelessWidget {
                         ],
                       ),
                       child: TextField(
-                        onChanged: (_) =>
-                            {_environmentNewsController.filterArticle()},
+                        onChanged: (value) {
+                          if (value == "")
+                            _environmentNewsController.showBigCard.value = true;
+                          else
+                            _environmentNewsController.showBigCard.value =
+                                false;
+                          _environmentNewsController.filterArticle();
+                        },
                         controller:
                             _environmentNewsController.searchInput.value,
                         decoration: InputDecoration.collapsed(
@@ -69,7 +72,7 @@ class EnvNewsSearchScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: context.height * 0.045),
-            Obx(() => _environmentNewsController.searchInput.value.text == ""
+            Obx(() => _environmentNewsController.showBigCard.value
                 ? CardBigNews(
                     article: DataCenter.news[DataCenter.news.length - 1])
                 : Container()),

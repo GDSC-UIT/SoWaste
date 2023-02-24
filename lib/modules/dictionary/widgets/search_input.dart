@@ -67,8 +67,11 @@ class SearchInput extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GestureDetector(
-                      child: Text(
-                          _dictionaryController.foundWords.value[index].name),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                            _dictionaryController.foundWords.value[index].name),
+                      ),
                       onTap: () => {
                         Get.toNamed(AppRoutes.detailPage,
                             arguments:

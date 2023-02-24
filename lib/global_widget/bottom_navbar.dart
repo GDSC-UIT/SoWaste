@@ -5,33 +5,37 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
+import '../modules/base/base_controller.dart';
+
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key, required this.selectedIndex});
-  final int selectedIndex;
+  BottomNavBar({super.key, this.selectedIndex});
+  final int? selectedIndex;
+  final BaseController _baseController = Get.put(BaseController());
 
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar(
       initialActiveIndex: selectedIndex,
       cornerRadius: 10,
-      onTap: (index) {
-        switch (index) {
-          case 0:
-            Get.toNamed(AppRoutes.homePage);
-            break;
-          case 1:
-            Get.toNamed(AppRoutes.envNewsSearchPage);
-            break;
-          case 2:
-            Get.toNamed(AppRoutes.detectPage);
-            break;
-          case 3:
-            Get.toNamed(AppRoutes.dictionaryPage);
-            break;
-          default:
-            Get.toNamed('/home');
-        }
-      },
+      // onTap: (index) {
+      //   switch (index) {
+      //     case 0:
+      //       Get.toNamed(AppRoutes.homeScreen);
+      //       break;
+      //     case 1:
+      //       Get.toNamed(AppRoutes.envNewsSearchPage);
+      //       break;
+      //     case 2:
+      //       Get.toNamed(AppRoutes.detectPage);
+      //       break;
+      //     case 3:
+      //       Get.toNamed(AppRoutes.dictionaryPage);
+      //       break;
+      //     default:
+      //       Get.toNamed('/home');
+      //   }
+      // },
+      onTap: (index) => _baseController.currentIndex.value = index,
       items: [
         const TabItem(icon: Icons.home),
         const TabItem(icon: Icons.newspaper),

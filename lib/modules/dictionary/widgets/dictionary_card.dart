@@ -1,22 +1,24 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
+
+import '../../../data/models/trash.dart';
 
 class DictionaryCard extends StatelessWidget {
   DictionaryCard({
     super.key,
-    required this.imageUrl,
-    required this.label,
-    required this.type,
-    required this.description,
   });
-  final String imageUrl;
-  final String label;
-  final String type;
-  final String description;
+
+  final _index = Random().nextInt(DataCenter.dictionary.length);
 
   @override
   Widget build(BuildContext context) {
+    final Trash trash = DataCenter.dictionary[_index];
     return SizedBox(
       height: 250,
       child: Card(
@@ -42,15 +44,15 @@ class DictionaryCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          label,
+                          trash.name,
                           style: CustomTextStyle.bodyBold(AppColors.onSur),
                         ),
                         Text(
-                          type,
+                          trash.isOrganic ? "Organic" : "",
                           style: CustomTextStyle.medium(AppColors.onBg),
                         ),
                         Text(
-                          description,
+                          trash.description,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: CustomTextStyle.normal(AppColors.onBg),
@@ -64,6 +66,8 @@ class DictionaryCard extends StatelessWidget {
                               ),
                               onPressed: () {
                                 print("Clicked readmore");
+                                Get.to(() => TrashDetailScreen(),
+                                    arguments: trash);
                               },
                               child: Row(
                                 children: const [
@@ -79,7 +83,7 @@ class DictionaryCard extends StatelessWidget {
             child: FadeInImage(
               fit: BoxFit.cover,
               placeholder: const AssetImage('assets/images/placeholder.png'),
-              image: NetworkImage(imageUrl),
+              image: NetworkImage(trash.displayImage),
             ),
           ),
         ),

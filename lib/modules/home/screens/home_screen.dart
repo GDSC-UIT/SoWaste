@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
-import 'package:sowaste/global_widget/bottom_navbar.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
@@ -12,6 +11,7 @@ import 'package:sowaste/modules/home/widgets/quiz_card.dart';
 import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
+import '../../../global_widget/bottom_navbar.dart';
 import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,9 +49,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: const BottomNavBar(
-          selectedIndex: 0,
-        ),
+        // bottomNavigationBar: BottomNavBar(
+        //   selectedIndex: 0,
+        // ),
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
           backgroundColor: AppColors.background,

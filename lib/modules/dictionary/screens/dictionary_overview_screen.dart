@@ -33,13 +33,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 style: CustomTextStyle.bodyBold(AppColors.secondary),
               ),
               gap(),
-              DictionaryCard(
-                  imageUrl:
-                      'https://1.bp.blogspot.com/-WKwzc-bXVpo/WR1SDIgSZ1I/AAAAAAAAAMg/siBVq8UdtD4IhLzpET2RRlj3Zgd2ZR-oQCLcB/s1600/n%25C6%25B0%25E1%25BB%259Bc%2Bkho%25C3%25A1ng.jpeg',
-                  label: 'Plastic',
-                  type: 'Recycleable',
-                  description:
-                      'There are different types of plastic that you need to know'),
+              DictionaryCard(),
               AppCardButton(
                 onTapFunction: () {
                   print("Clicked!");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_time_ago/get_time_ago.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/article.dart';
@@ -22,47 +23,37 @@ class EnvsNewsDetailtedScreen extends StatelessWidget {
             onPressed: () => {Get.back()},
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: context.height * 0.2,
-                width: double.infinity,
-                child: Image.network(
-                  article.displayImage,
-                  fit: BoxFit.cover,
-                ),
+        body: ListView(
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 8),
+          children: [
+            SizedBox(
+              height: context.height * 0.2,
+              width: double.infinity,
+              child: Image.network(
+                article.displayImage,
+                fit: BoxFit.cover,
               ),
-              Text(
-                article.title,
-                style: CustomTextStyle.sub(AppColors.onBg),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "3 hours ago",
-                style: CustomTextStyle.normal(AppColors.onBg),
-              ),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  children: [
-                    const SizedBox(height: 16),
-                    Text(
-                      article.shortDescription,
-                      style: CustomTextStyle.bodyBold(AppColors.onBg),
-                    ),
-                    const SizedBox(height: 16),
-                    MarkdownText(
-                      text: article.description,
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+            Text(
+              article.title,
+              style: CustomTextStyle.sub(AppColors.onBg),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              GetTimeAgo.parse(article.createAt),
+              style: CustomTextStyle.normal(AppColors.onBg),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              article.shortDescription,
+              style: CustomTextStyle.bodyBold(AppColors.onBg),
+            ),
+            const SizedBox(height: 16),
+            MarkdownText(
+              text: article.description,
+            )
+          ],
         ),
       ),
     );

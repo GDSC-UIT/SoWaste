@@ -7,6 +7,7 @@ import 'package:sowaste/core/values/app_url.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/http_service.dart';
+import 'package:sowaste/modules/env_news/env_news_controller.dart';
 
 import '../../data/models/trash.dart';
 
@@ -18,13 +19,15 @@ class HomeController extends GetxController {
   var dictionary = <Trash>[].obs;
 
   @override
-  void onInit() async {
+  void onInit() {
     fetchArticles();
     fetchDictionary();
     super.onInit();
   }
 
   Future<void> fetchArticles() async {
+    final EnvironmentNewsController environmentNewsController =
+        Get.put(EnvironmentNewsController());
     try {
       isLoading.value = true;
       final response = await HttpService.getRequest(UrlValue.articlesUrl);
@@ -33,6 +36,7 @@ class HomeController extends GetxController {
         articlesList.add(Article.fromJson(article));
       });
       DataCenter.news = [...articlesList];
+      environmentNewsController.news.value = [...articlesList];
     } catch (error) {
       print("Error when fetch articles $error");
     } finally {

@@ -6,9 +6,13 @@ import 'package:sowaste/data/services/data_center.dart';
 class EnvironmentNewsController extends GetxController {
   Rx<TextEditingController> searchInput = TextEditingController(text: "").obs;
   RxList<Article> news = <Article>[].obs;
+  RxBool showBigCard = true.obs;
   @override
   void onInit() {
-    news.value = [...DataCenter.news];
+    if (DataCenter.news.isNotEmpty)
+      news.value = [...DataCenter.news];
+    else
+      print("Environment news: $news");
     super.onInit();
   }
 

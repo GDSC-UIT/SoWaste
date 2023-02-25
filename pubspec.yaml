@@ -48,6 +48,11 @@ dependencies:
   shared_preferences: ^2.0.17
   path_provider: ^2.0.12
   get_time_ago: ^1.2.2
+  google_maps_flutter: ^2.2.4
+  google_maps_flutter_web: ^0.4.0+6
+  flutter_polyline_points: ^1.0.0
+  dio: ^5.0.1
+  location: ^4.4.0
 
 flutter_icons:
   android: true

@@ -18,4 +18,6 @@ class AppRoutes {
   static const envNewsDetailedPage = '/env_news/detailed';
 
   static const base = "/base";
+
+  static const mapPage = '/map';
 }

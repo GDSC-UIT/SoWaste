@@ -8,8 +8,8 @@ class BaseController extends GetxController {
 
   var pages = [
     HomeScreen(),
-    EnvNewsSearchScreen(),
-    EnvNewsSearchScreen(),
+    EnvironmentNewsOverviewScreen(),
+    EnvironmentNewsOverviewScreen(),
     const DictionaryOverviewScreen(),
     HomeScreen(),
   ].obs;

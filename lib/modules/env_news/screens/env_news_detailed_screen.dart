@@ -4,6 +4,7 @@ import 'package:get_time_ago/get_time_ago.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/article.dart';
+import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/global_widget/markdown_text.dart';
 
 class EnvsNewsDetailtedScreen extends StatelessWidget {
@@ -13,16 +14,7 @@ class EnvsNewsDetailtedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.background,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: AppColors.secondary,
-            ),
-            onPressed: () => {Get.back()},
-          ),
-        ),
+        appBar: const ArrowBackAppBar(),
         body: ListView(
           padding:
               const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 8),
@@ -51,7 +43,7 @@ class EnvsNewsDetailtedScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             MarkdownText(
-              text: article.description,
+              text: article.description!,
             )
           ],
         ),

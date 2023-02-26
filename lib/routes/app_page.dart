@@ -5,7 +5,7 @@ import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/screens/recent_types.dart';
-import 'package:sowaste/modules/dictionary/screens/saved_types_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/saved_trashes_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 import 'package:sowaste/modules/env_news/env_news_binding.dart';
 import 'package:sowaste/modules/env_news/screens/env_news_detailed_screen.dart';
@@ -41,7 +41,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.savedTypesPage,
-        page: () => const SavedTypesScreen(),
+        page: () => SavedTrashesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -70,7 +70,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.envNewsSearchPage,
-        page: () => EnvNewsSearchScreen(),
+        page: () => EnvironmentNewsOverviewScreen(),
         transition: Transition.cupertino,
         binding: EnvironmentBinding()),
     GetPage(

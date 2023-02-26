@@ -52,7 +52,7 @@ class DictionaryCard extends StatelessWidget {
                           style: CustomTextStyle.medium(AppColors.onBg),
                         ),
                         Text(
-                          trash.description,
+                          trash.shortDescription,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: CustomTextStyle.normal(AppColors.onBg),
@@ -64,10 +64,10 @@ class DictionaryCard extends StatelessWidget {
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.zero),
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 print("Clicked readmore");
-                                Get.to(() => TrashDetailScreen(),
-                                    arguments: trash);
+                                final t = await Trash.getTrash(trash.id);
+                                Get.to(() => TrashDetailScreen(), arguments: t);
                               },
                               child: Row(
                                 children: const [

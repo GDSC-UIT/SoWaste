@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
+import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
@@ -10,8 +11,6 @@ import 'package:sowaste/modules/home/widgets/pie_chart.dart';
 import 'package:sowaste/modules/home/widgets/quiz_card.dart';
 import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
-
-import '../../../global_widget/bottom_navbar.dart';
 import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,9 +48,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // bottomNavigationBar: BottomNavBar(
-        //   selectedIndex: 0,
-        // ),
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
           backgroundColor: AppColors.background,
@@ -67,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         title("Overview"),
                         Obx(
-                          () => (_homeController.count.value == 0)
+                          () => (DataCenter.localQuizList.isEmpty)
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -101,21 +97,20 @@ class HomeScreen extends StatelessWidget {
                                             },
                                         true),
                                     SizedBox(
-                                      height: 180,
-                                      child: ListView.builder(
-                                        itemBuilder: ((context, index) =>
-                                            QuizCard(
-                                                title: _homeController
-                                                    .dictionary[index].name,
-                                                subTitle: _homeController
-                                                    .dictionary[index]
-                                                    .description,
-                                                percentage: 0.6)),
-                                        itemCount:
-                                            _homeController.dictionary.length,
-                                        scrollDirection: Axis.horizontal,
-                                      ),
-                                    )
+                                        height: 180,
+                                        child: Obx(
+                                          () => ListView.builder(
+                                            itemBuilder: ((context, index) {
+                                              return QuizCard(
+                                                quiz: DataCenter
+                                                    .localQuizList[index],
+                                              );
+                                            }),
+                                            itemCount:
+                                                DataCenter.localQuizList.length,
+                                            scrollDirection: Axis.horizontal,
+                                          ),
+                                        ))
                                   ],
                                 ),
                         ),

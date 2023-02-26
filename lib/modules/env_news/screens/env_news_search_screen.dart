@@ -8,8 +8,8 @@ import '../../../core/themes/app_colors.dart';
 import '../widgets/card_big_news.dart';
 import '../widgets/news_item.dart';
 
-class EnvNewsSearchScreen extends StatelessWidget {
-  EnvNewsSearchScreen({
+class EnvironmentNewsOverviewScreen extends StatelessWidget {
+  EnvironmentNewsOverviewScreen({
     super.key,
   });
   final EnvironmentNewsController _environmentNewsController = Get.find();
@@ -18,26 +18,32 @@ class EnvNewsSearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        elevation: 0.5,
+        backgroundColor: AppColors.background,
+        title: Text(
+          "Environment News",
+          style: CustomTextStyle.sub(AppColors.secondary),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: context.height * 0.05),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.all(4),
               child: Row(
                 children: [
                   IconButton(
                     icon: const Icon(
-                      Icons.arrow_back_ios,
+                      Icons.search,
                       color: AppColors.secondary,
                     ),
                     onPressed: () => {Get.back()},
                   ),
-                  const SizedBox(width: 10),
                   Expanded(
                     child: Container(
-                      height: 44,
+                      height: 50,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22),
@@ -52,11 +58,12 @@ class EnvNewsSearchScreen extends StatelessWidget {
                       ),
                       child: TextField(
                         onChanged: (value) {
-                          if (value == "")
+                          if (value == "") {
                             _environmentNewsController.showBigCard.value = true;
-                          else
+                          } else {
                             _environmentNewsController.showBigCard.value =
                                 false;
+                          }
                           _environmentNewsController.filterArticle();
                         },
                         controller:

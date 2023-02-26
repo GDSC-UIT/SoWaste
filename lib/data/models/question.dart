@@ -5,7 +5,7 @@ class Question {
   String title;
   String trashId;
   int point;
-  List<Option>? options;
+  List<Option> options;
   Question(
       {required this.id,
       required this.title,
@@ -14,10 +14,9 @@ class Question {
       required this.options});
   factory Question.fromJson(Map<String, dynamic> json) {
     List<Option> tempOptions = <Option>[];
-    if (json["options"] != null) {
-      json["options"]
-          .forEach((option) => tempOptions.add(Option.fromJson(option)));
-    }
+    json["options"]
+        .forEach((option) => tempOptions.add(Option.fromJson(option)));
+
     return Question(
         id: json["_id"],
         title: json["title"],

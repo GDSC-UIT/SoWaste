@@ -10,9 +10,10 @@ import 'routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var response = await LocalData.readFile("app");
+  DataCenter.appFilePath = await LocalService.getFilePath;
+  var response = await LocalService.readFile("app");
   if (response == null) {
-    LocalData.saveContent({"isTheFirstTime": true}, AppFilePath.app);
+    LocalService.saveContent({"isTheFirstTime": true}, AppFilePath.app);
     DataCenter.isFirstTime = true;
   }
   runApp(const MyApp());

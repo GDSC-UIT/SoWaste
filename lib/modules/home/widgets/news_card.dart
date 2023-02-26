@@ -11,8 +11,9 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: article);
+        onTap: () async {
+          final a = await Article.getArticle(article.id);
+          Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: a);
         },
         child: SizedBox(
           width: 170,

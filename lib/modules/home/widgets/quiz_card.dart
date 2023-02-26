@@ -4,6 +4,7 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/quiz_local.dart';
 import 'package:sowaste/data/models/trash.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
 class QuizCard extends StatelessWidget {
@@ -12,13 +13,11 @@ class QuizCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final percentage = quiz.point! / quiz.totalQuizPoint!;
+    final DictionaryController dictionaryController = Get.find();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () async {
-          final trash = await Trash.getTrash(quiz.quizId!);
-          Get.to(() => TrashDetailScreen(), arguments: trash);
-        },
+        onTap: () => {dictionaryController.getDetailTrash(quiz.quizId!)},
         child: Container(
           width: 160,
           height: 180,

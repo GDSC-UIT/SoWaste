@@ -15,5 +15,5 @@ class DataCenter extends GetxController {
   static RxList<LocalQuiz> localQuizList = <LocalQuiz>[].obs;
   static List<Question> questionList = [];
   static RxList<dynamic> savedTrashList = [].obs;
-  static List<Quiz> allQuizzes = <Quiz>[].obs;
+  static RxList<Quiz> allQuizzes = <Quiz>[].obs;
 }

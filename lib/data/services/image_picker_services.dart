@@ -7,7 +7,9 @@ class ImageServices {
   static File? pickedImage;
   static Future<void> getImageFormCamera() async {
     try {
-      final image = await ImagePicker().getImage(source: ImageSource.camera);
+      final image = await ImagePicker().getImage(
+        source: ImageSource.camera,
+      );
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {

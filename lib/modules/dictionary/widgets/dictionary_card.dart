@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
 import '../../../data/models/trash.dart';
@@ -19,6 +20,7 @@ class DictionaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Trash trash = DataCenter.dictionary[_index];
+    final DictionaryController dictionaryController = Get.find();
     return SizedBox(
       height: 250,
       child: Card(
@@ -64,11 +66,10 @@ class DictionaryCard extends StatelessWidget {
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.zero),
                               ),
-                              onPressed: () async {
-                                print("Clicked readmore");
-                                final t = await Trash.getTrash(trash.id);
-                                Get.to(() => TrashDetailScreen(), arguments: t);
-                              },
+                              onPressed: () => {
+                                    dictionaryController
+                                        .getDetailTrash(trash.id)
+                                  },
                               child: Row(
                                 children: const [
                                   Text("Read more"),

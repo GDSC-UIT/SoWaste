@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
+import 'package:sowaste/modules/env_news/env_news_controller.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
@@ -12,9 +13,11 @@ class NewsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final EnvironmentNewsController environmentNewsController = Get.find();
     return GestureDetector(
-      onTap: () =>
-          {Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: article)},
+      onTap: () async {
+        environmentNewsController.getDetailArticle(article);
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),

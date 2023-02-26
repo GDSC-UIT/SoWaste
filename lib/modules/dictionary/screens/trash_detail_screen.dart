@@ -13,97 +13,95 @@ import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
 import '../../../data/models/trash.dart';
 
 class TrashDetailScreen extends StatelessWidget {
-  TrashDetailScreen({super.key});
-  final DictionaryController _dictionaryController = Get.find();
-  final Trash _trash = Get.arguments;
+  const TrashDetailScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    _dictionaryController.isSaved.value = false;
-    _dictionaryController.initCurrentQuiz(_trash.id);
-    _dictionaryController.currentTrashName.value = _trash.name;
-    _dictionaryController.currentTrashShortDescription.value =
-        _trash.shortDescription;
+    final DictionaryController dictionaryController = Get.find();
+
+    dictionaryController.isSaved.value = false;
+
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton:
-            Obx(() => _dictionaryController.currentQuiz.isNotEmpty
+            Obx(() => dictionaryController.currentQuiz.isNotEmpty
                 ? AppButton(
                     buttonText: "START QUIZ",
                     onPressedFunction: () async {
-                      // update quiz id
-                      _dictionaryController.currentQuizId.value = _trash.id;
                       //get DONE quiz from LOCAL
-                      await _dictionaryController.getQuizFromLocal();
+                      await dictionaryController.getQuizFromLocal();
                       //If the user has completed the quiz, then navigate to result screen
-                      _dictionaryController.isFinishedQuiz.value
+                      dictionaryController.isFinishedQuiz.value
                           ? Get.to(() => QuizResultScreen())
                           : Get.to(() => QuestionScreen());
                     })
                 : Container()),
         appBar: const ArrowBackAppBar(),
-        body: Obx(
-          () => _dictionaryController.isLoading.value
-              ? const Center(
-                  child: CircularProgressIndicator(color: AppColors.primary),
-                )
-              : Padding(
-                  padding: const EdgeInsets.only(
-                      left: 16, right: 16, bottom: 80, top: 0),
-                  child: ListView(
+        body: Obx(() {
+          if (dictionaryController.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(color: AppColors.primary),
+            );
+          } else {
+            final Trash trash = dictionaryController.currentTrash.value;
+            return Padding(
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, bottom: 80, top: 0),
+              child: ListView(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                _trash.name,
-                                style:
-                                    CustomTextStyle.h3(AppColors.primaryDark),
-                                textAlign: TextAlign.start,
-                              ),
-                              IconButton(
-                                onPressed: () =>
-                                    {_dictionaryController.saveTrash(_trash)},
-                                icon: Obx(() {
-                                  for (int i = 0;
-                                      i < DataCenter.savedTrashList.length;
-                                      ++i) {
-                                    if (DataCenter.savedTrashList[i].values
-                                        .contains(_trash.id)) {
-                                      _dictionaryController
-                                          .indexTrashToRemove.value = i;
-                                      _dictionaryController.isSaved.value =
-                                          true;
-                                      break;
-                                    }
-                                  }
-                                  return _dictionaryController.isSaved.value
-                                      ? const Icon(
-                                          Icons.bookmark,
-                                          size: 32,
-                                          color: AppColors.secondary,
-                                        )
-                                      : const Icon(
-                                          Icons.bookmark_outline,
-                                          size: 32,
-                                        );
-                                }),
-                              )
-                            ],
+                          Text(
+                            trash.name,
+                            style: CustomTextStyle.h3(AppColors.primaryDark),
+                            textAlign: TextAlign.start,
                           ),
-                          SizedBox(
-                            child: MarkdownText(
-                              text: _trash.description!,
-                            ),
-                          ),
+                          IconButton(
+                            onPressed: () =>
+                                {dictionaryController.saveTrash(trash)},
+                            icon: Obx(() {
+                              for (int i = 0;
+                                  i < DataCenter.savedTrashList.length;
+                                  ++i) {
+                                if (DataCenter.savedTrashList[i].values
+                                    .contains(trash.id)) {
+                                  dictionaryController
+                                      .indexTrashToRemove.value = i;
+                                  dictionaryController.isSaved.value = true;
+                                  break;
+                                }
+                              }
+                              return dictionaryController.isSaved.value
+                                  ? const Icon(
+                                      Icons.bookmark,
+                                      size: 32,
+                                      color: AppColors.secondary,
+                                    )
+                                  : const Icon(
+                                      Icons.bookmark_outline,
+                                      size: 32,
+                                    );
+                            }),
+                          )
                         ],
+                      ),
+                      SizedBox(
+                        child: MarkdownText(
+                          text: trash.description!,
+                        ),
                       ),
                     ],
                   ),
-                ),
-        ));
+                ],
+              ),
+            );
+          }
+        }));
   }
 }

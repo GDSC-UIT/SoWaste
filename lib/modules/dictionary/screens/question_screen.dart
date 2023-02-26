@@ -19,7 +19,7 @@ class QuestionScreen extends StatelessWidget {
     print("OptionLength: $_dictionaryController");
     return Scaffold(
         appBar: ArrowBackAppBar(
-          title: _dictionaryController.currentTrashName.value,
+          title: _dictionaryController.currentTrash.value.name,
         ),
         body: Obx(() {
           final index = _dictionaryController.currentQuestionIndex.value;
@@ -62,7 +62,8 @@ class QuestionScreen extends StatelessWidget {
                       .toList(),
                 );
               })),
-              AppButton(
+              Obx(() => AppButton(
+                  ignore: _dictionaryController.userAnswer.value == 0,
                   buttonText:
                       index + 1 < _dictionaryController.currentQuiz.length
                           ? "CONTINUE"
@@ -74,7 +75,7 @@ class QuestionScreen extends StatelessWidget {
                     } else {
                       Get.off(() => QuizResultScreen());
                     }
-                  })
+                  }))
             ],
           );
         }));

@@ -5,14 +5,14 @@ import 'package:sowaste/modules/base/base_controller.dart';
 import '../../global_widget/bottom_navbar.dart';
 
 class BaseScreen extends StatelessWidget {
-  const BaseScreen({super.key});
-
+  BaseScreen({super.key});
+  final BaseController _baseController = Get.find();
   @override
   Widget build(BuildContext context) {
-    final baseController = Get.put(BaseController());
     return SafeArea(
         child: Scaffold(
-      body: Obx(() => baseController.pages[baseController.currentIndex.value]),
+      body:
+          Obx(() => _baseController.pages[_baseController.currentIndex.value]),
       bottomNavigationBar: BottomNavBar(),
     ));
   }

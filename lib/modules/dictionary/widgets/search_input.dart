@@ -71,13 +71,12 @@ class SearchInput extends StatelessWidget {
                     GestureDetector(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: Text(
-                            _dictionaryController.foundWords.value[index].name),
+                        child:
+                            Text(_dictionaryController.foundWords[index].name),
                       ),
-                      onTap: () async {
-                        final trash = await Trash.getTrash(
-                            _dictionaryController.foundWords.value[index].id);
-                        Get.to(() => TrashDetailScreen(), arguments: trash);
+                      onTap: () => {
+                        _dictionaryController.getDetailTrash(
+                            _dictionaryController.foundWords[index].id)
                       },
                     ),
                     const Divider(

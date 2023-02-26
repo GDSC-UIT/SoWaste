@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sowaste/core/values/app_file_path.dart';
 import 'package:sowaste/core/values/app_url.dart';
 import 'package:sowaste/data/models/article.dart';
@@ -70,6 +69,7 @@ class HomeController extends GetxController {
       for (var trash in DataCenter.dictionary) {
         DataCenter.allQuizzes.add(Quiz.init(trash.id, trash.name));
       }
+      print("All Quizzes: ${DataCenter.allQuizzes.length}");
     } catch (error) {
       print("Has Error when fetch all questions: $error");
       isLoading.value = false;

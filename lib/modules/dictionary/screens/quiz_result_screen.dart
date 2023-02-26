@@ -47,7 +47,7 @@ class QuizResultScreen extends StatelessWidget {
                   buttonText: "TRY AGAIN",
                   onPressedFunction: () async {
                     await LocalService.clearContent(
-                        "${AppFilePath.quizzes}_${_dictionaryController.currentQuizId}");
+                        "${AppFilePath.quizzes}_${_dictionaryController.currentTrash.value.id}");
 
                     await _dictionaryController.getQuizFromLocal();
                     Get.to(() => QuestionScreen());

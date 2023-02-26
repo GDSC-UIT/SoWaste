@@ -7,21 +7,30 @@ import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
 
 import '../../data/models/trash.dart';
+import '../../routes/app_routes.dart';
 
 class DictionaryController extends GetxController {
-  TextEditingController searchInput = TextEditingController();
   RxBool isLoading = false.obs;
-  Rx<List<Trash>> foundWords = Rx<List<Trash>>([]);
 
-  RxString currentQuizId = ''.obs;
+  TextEditingController searchInput = TextEditingController();
+  RxList<Trash> foundWords = <Trash>[].obs;
+
   RxList<Question> currentQuiz = <Question>[].obs; // quiz fetch from api
   RxInt currentQuestionIndex = 0.obs;
   RxInt userAnswer = 0.obs;
   RxInt currentPoint = 0.obs;
   RxBool isFinishedQuiz = false.obs;
-  RxString currentTrashName = "".obs;
-  RxString currentTrashShortDescription = "".obs;
 
+  //Trash
+  Rx<Trash> currentTrash = Trash(
+          id: "",
+          name: "",
+          isOrganic: false,
+          isRecyable: false,
+          displayImage: "",
+          uri: "",
+          shortDescription: "")
+      .obs;
   //For local logic
   RxList<LocalQuestion> doneQuestions = <LocalQuestion>[].obs;
   LocalQuiz localQuiz = LocalQuiz(doneQuestions: []);
@@ -34,6 +43,14 @@ class DictionaryController extends GetxController {
   void onInit() {
     foundWords.value = [];
     super.onInit();
+  }
+
+  Future<void> getDetailTrash(String id) async {
+    isLoading.value = true;
+    Get.toNamed(AppRoutes.trashDetailPage, arguments: id);
+    currentTrash.value = (await Trash.getTrash(id))!;
+    initCurrentQuiz(id);
+    isLoading.value = false;
   }
 
   void filterWord(String word) {
@@ -65,6 +82,7 @@ class DictionaryController extends GetxController {
 
   RxInt count = 0.obs;
   void initAllValuesForCurrentQuiz([point = 0, index = 0]) {
+    isFinishedQuiz.value = false;
     currentPoint.value = point;
     currentQuestionIndex.value = index;
     if (currentPoint.value == 0 && currentQuestionIndex.value == 0) {
@@ -73,13 +91,13 @@ class DictionaryController extends GetxController {
   }
 
   Future<void> postQuizToLocal() async {
-    localQuiz.quizId = currentQuizId.value;
+    localQuiz.quizId = currentTrash.value.id;
     localQuiz.numberOfDoneQues = currentQuestionIndex.value + 1;
     localQuiz.point = currentPoint.value;
     localQuiz.totalQuizPoint = getTotalPoint();
     localQuiz.doneQuestions = doneQuestions;
-    localQuiz.name = currentTrashName.value;
-    localQuiz.shortDescription = currentTrashShortDescription.value;
+    localQuiz.name = currentTrash.value.name;
+    localQuiz.shortDescription = currentTrash.value.shortDescription;
 
     print("LocalQuiz: ${localQuiz.toJson()}");
     await LocalService.saveContent(
@@ -88,11 +106,12 @@ class DictionaryController extends GetxController {
         .removeWhere((quiz) => quiz.quizId == localQuiz.quizId);
     DataCenter.localQuizList.add(localQuiz);
     DataCenter.localQuizList.value = [...DataCenter.localQuizList];
+    DataCenter.allQuizzes.value = [...DataCenter.allQuizzes];
   }
 
   Future<void> getQuizFromLocal() async {
     final response = await LocalService.readFile(
-        "${AppFilePath.quizzes}_${currentQuizId.value}");
+        "${AppFilePath.quizzes}_${currentTrash.value.id}");
     if (response != null) {
       localQuiz = LocalQuiz.fromJson(response);
       initAllValuesForCurrentQuiz(localQuiz.point, localQuiz.numberOfDoneQues);

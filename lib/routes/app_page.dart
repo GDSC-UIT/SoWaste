@@ -56,7 +56,7 @@ class AppPages {
         binding: DictionaryBinding()),
 
     GetPage(
-        name: AppRoutes.detailPage,
+        name: AppRoutes.trashDetailPage,
         page: () => TrashDetailScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
@@ -80,7 +80,7 @@ class AppPages {
         binding: EnvironmentBinding()),
     GetPage(
         name: AppRoutes.base,
-        page: () => const BaseScreen(),
+        page: () => BaseScreen(),
         transition: Transition.cupertino,
         binding: BaseBinding()),
   ];

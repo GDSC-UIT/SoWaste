@@ -23,7 +23,7 @@ class SavedTrashesScreen extends StatelessWidget {
           title: "Saved types of trash",
         ),
         body: Obx(() => DataCenter.savedTrashList.isEmpty
-            ? Empty(text: "save any trash!")
+            ? const Empty(text: "saved any trash yet!")
             : ListView.builder(
                 itemBuilder: (context, index) => AppCardButton(
                     onTapFunction: () async {

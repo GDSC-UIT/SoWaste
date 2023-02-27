@@ -61,7 +61,6 @@ class DictionaryOverviewScreen extends StatelessWidget {
               ),
               AppCardButton(
                 onTapFunction: () async {
-                  await LocalService.clearContent(AppFilePath.recentTrashes);
                   Get.toNamed(AppRoutes.recentTypesPage);
                 },
                 title: "Recent types of trash ",

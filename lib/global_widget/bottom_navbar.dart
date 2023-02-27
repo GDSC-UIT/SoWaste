@@ -42,7 +42,7 @@ class BottomNavBar extends StatelessWidget {
         TabItem(
             icon: RawMaterialButton(
           onPressed: () async {
-            await ImageServices.getImageFormCamera();
+            await ImageServices.getImageFromCamera();
             Get.toNamed(AppRoutes.detectPage);
           },
           elevation: 2.0,

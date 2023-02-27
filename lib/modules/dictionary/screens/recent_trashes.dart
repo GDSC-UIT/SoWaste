@@ -19,7 +19,7 @@ class RecentTypesScreen extends StatelessWidget {
           title: "Recent types of trash",
         ),
         body: Obx(() => DataCenter.recentTrashes.isEmpty
-            ? const Empty(text: "searched or detectd any trash!")
+            ? const Empty(text: "searched or detectd any trash yet!")
             : ListView.builder(
                 itemBuilder: (context, index) => AppCardButton(
                   onTapFunction: () {

@@ -24,11 +24,11 @@ class BottomNavBar extends StatelessWidget {
         TabItem(
             icon: RawMaterialButton(
           onPressed: () async {
-            try {
-              await ImageServices.getImageFromCamera();
+            await ImageServices.getImageFromCamera();
+            if (ImageServices.pickedImage != null) {
               _baseController.currentIndex.value = 2;
-              // Get.toNamed(AppRoutes.detectPage);
-            } catch (error) {}
+            }
+            // Get.toNamed(AppRoutes.detectPage);
           },
           elevation: 2.0,
           fillColor: AppColors.primaryDark,

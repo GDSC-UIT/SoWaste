@@ -12,8 +12,12 @@ class TrashDetectingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final BaseController baseController = Get.find();
     return Scaffold(
-      appBar: const ArrowBackAppBar(
+      appBar: ArrowBackAppBar(
         title: "Detect Trash",
+        onTap: () {
+          ImageServices.pickedImage = null;
+          baseController.currentIndex.value = 0;
+        },
       ),
       body: Stack(
         alignment: AlignmentDirectional.bottomEnd,

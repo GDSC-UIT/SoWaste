@@ -8,10 +8,10 @@ import '../core/themes/app_themes.dart';
 
 class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ArrowBackAppBar(
-      {super.key, this.title, this.isShowArrowBackIcon = true});
+      {super.key, this.title, this.isShowArrowBackIcon = true, this.onTap});
   final String? title;
   final bool isShowArrowBackIcon;
-
+  final VoidCallback? onTap;
   @override
   AppBar build(BuildContext context) {
     return AppBar(
@@ -27,7 +27,7 @@ class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Icons.arrow_back_ios,
                 color: AppColors.secondary,
               ),
-              onPressed: () => {Get.back()})
+              onPressed: onTap ?? () => {Get.back()})
           : null,
     );
   }

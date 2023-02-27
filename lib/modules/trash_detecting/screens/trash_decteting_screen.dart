@@ -17,8 +17,7 @@ class TrashDetectingScreen extends StatelessWidget {
           style: CustomTextStyle.sub(AppColors.primary),
         ),
       ),
-      body: //Obx(() =>
-          Stack(
+      body: Stack(
         alignment: AlignmentDirectional.bottomEnd,
         children: [
           Image.file(ImageServices.pickedImage!),

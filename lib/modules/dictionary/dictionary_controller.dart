@@ -50,6 +50,7 @@ class DictionaryController extends GetxController {
     Get.toNamed(AppRoutes.trashDetailPage, arguments: id);
     currentTrash.value = (await Trash.getTrash(id))!;
     initCurrentQuiz(id);
+    postRecentTrashToLocalStorage();
     isLoading.value = false;
   }
 
@@ -142,5 +143,31 @@ class DictionaryController extends GetxController {
 
   int getNumberOfQuestion() {
     return currentQuiz.length;
+  }
+
+  void printRecentTrash() async {
+    for (var element in DataCenter.recentTrashes) {
+      print("${element["name"]}: ${element["count"]}");
+    }
+  }
+
+  Future<void> postRecentTrashToLocalStorage() async {
+    final int index = DataCenter.recentTrashes.indexWhere(
+        (recentTrash) => recentTrash["id"] == currentTrash.value.id);
+    if (index >= 0) {
+      // ++DataCenter.recentTrashes[index]["count"];
+      DataCenter.recentTrashes[index]["date"];
+    } else {
+      DataCenter.recentTrashes.add({
+        "id": currentTrash.value.id,
+        "name": currentTrash.value.name,
+        "count": 0, // number of times that user detect trash
+        "date": DateTime.now().toString()
+      });
+    }
+    DataCenter.recentTrashes.value = [...DataCenter.recentTrashes];
+    await LocalService.saveContent(
+        {"data": DataCenter.recentTrashes}, AppFilePath.recentTrashes);
+    printRecentTrash();
   }
 }

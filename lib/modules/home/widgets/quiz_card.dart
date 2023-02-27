@@ -49,7 +49,7 @@ class QuizCard extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              "${(percentage * 100).toStringAsFixed(2)}%",
+              "${(percentage * 100).toStringAsFixed(0)}%",
               style: CustomTextStyle.normal(AppColors.onBg),
             ),
             Stack(
@@ -59,19 +59,9 @@ class QuizCard extends StatelessWidget {
                   width: 120,
                   height: 10,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.onBg.withOpacity(0.5),
-                          offset: const Offset(
-                            0,
-                            5.0,
-                          ),
-                          blurRadius: 10.0,
-                          spreadRadius: 2.0,
-                        ),
-                      ]),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
                 ),
                 Container(
                   width: percentage * 120,

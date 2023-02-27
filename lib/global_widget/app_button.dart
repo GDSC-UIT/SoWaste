@@ -8,7 +8,7 @@ class AppButton extends StatelessWidget {
       {super.key,
       required this.buttonText,
       required this.onPressedFunction,
-      this.color = AppColors.primary,
+      this.color = AppColors.primaryDark,
       this.textColor = AppColors.background,
       this.ignore = false});
   final String buttonText;
@@ -25,9 +25,9 @@ class AppButton extends StatelessWidget {
         ignoring: ignore,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: color,
+                backgroundColor: (ignore ? color.withOpacity(0.3) : color),
                 side: color == AppColors.background
-                    ? const BorderSide(width: 0.5, color: AppColors.info)
+                    ? const BorderSide(width: 0.3, color: AppColors.info)
                     : BorderSide.none,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50))),

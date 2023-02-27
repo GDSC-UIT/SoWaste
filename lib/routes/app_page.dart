@@ -4,7 +4,7 @@ import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
-import 'package:sowaste/modules/dictionary/screens/recent_types.dart';
+import 'package:sowaste/modules/dictionary/screens/recent_trashes.dart';
 import 'package:sowaste/modules/dictionary/screens/saved_trashes_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 import 'package:sowaste/modules/env_news/env_news_binding.dart';

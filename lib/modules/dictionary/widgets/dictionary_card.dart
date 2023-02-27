@@ -48,6 +48,8 @@ class DictionaryCard extends StatelessWidget {
                         Text(
                           trash.name,
                           style: CustomTextStyle.bodyBold(AppColors.onSur),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           trash.isOrganic ? "Organic" : "",

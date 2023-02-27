@@ -35,13 +35,39 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  void getDate() {}
+
+  bool isWithinAWeekBeforeToday(String date) {
+    DateTime d = DateTime.parse(date);
+    var lastWeek = DateTime.now().add(const Duration(days: -7));
+    if (d.compareTo(lastWeek) == 1) return true;
+    return false;
+  }
+
+  void filterRecentTrash() {
+    DataCenter.recentTrashes.value = DataCenter.recentTrashes
+        .where((trash) => isWithinAWeekBeforeToday(trash["date"]))
+        .toList();
+  }
+
+  Future<void> fetchRecentTrash() async {
+    try {
+      final response = await LocalService.readFile(AppFilePath.recentTrashes);
+      if (response == null) return;
+      DataCenter.recentTrashes = response["data"];
+      filterRecentTrash();
+    } catch (error) {
+      print("Has error when fetching recent trashes: $error");
+    }
+  }
+
   Future<void> fetchAllUserQuizzes() async {
     for (var quiz in DataCenter.allQuizzes) {
       try {
         final response = await LocalService.readFile(
             "${AppFilePath.quizzes}_${quiz.quizId}");
         DataCenter.localQuizList.add(LocalQuiz.fromJson(response!));
-        DataCenter.localQuizList.value = [...DataCenter.localQuizList];
+        // DataCenter.localQuizList.value = [...DataCenter.localQuizList];
       } catch (error) {}
     }
   }

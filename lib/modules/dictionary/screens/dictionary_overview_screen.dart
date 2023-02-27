@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_file_path.dart';
+import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/widgets/search_input.dart';
 import 'package:sowaste/routes/app_routes.dart';
@@ -58,8 +60,9 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 ),
               ),
               AppCardButton(
-                onTapFunction: () {
-                  print("Clicked!");
+                onTapFunction: () async {
+                  await LocalService.clearContent(AppFilePath.recentTrashes);
+                  Get.toNamed(AppRoutes.recentTypesPage);
                 },
                 title: "Recent types of trash ",
                 leading: const Icon(

@@ -20,7 +20,6 @@ class TrashDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final DictionaryController dictionaryController = Get.find();
-
     dictionaryController.isSaved.value = false;
 
     return Scaffold(
@@ -47,8 +46,12 @@ class TrashDetailScreen extends StatelessWidget {
           } else {
             final Trash trash = dictionaryController.currentTrash.value;
             return Padding(
-              padding: const EdgeInsets.only(
-                  left: 16, right: 16, bottom: 80, top: 0),
+              padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom:
+                      (dictionaryController.currentQuiz.isNotEmpty ? 78 : 8),
+                  top: 0),
               child: ListView(
                 children: [
                   Column(

@@ -45,7 +45,7 @@ class QuizzesScreen extends StatelessWidget {
                       animation: true,
                       percent: percentage,
                       center: Text(
-                        '${(percentage * 100).toStringAsFixed(2)}%',
+                        '${(percentage * 100).toStringAsFixed(0)}%',
                         style: percentage == 1.0
                             ? CustomTextStyle.link(AppColors.primary)
                             : CustomTextStyle.link(AppColors.secondary),

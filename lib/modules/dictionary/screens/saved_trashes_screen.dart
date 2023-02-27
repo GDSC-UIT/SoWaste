@@ -27,8 +27,8 @@ class SavedTrashesScreen extends StatelessWidget {
             : ListView.builder(
                 itemBuilder: (context, index) => AppCardButton(
                     onTapFunction: () async {
-                      _dictionaryController
-                          .getDetailTrash(DataCenter.dictionary[index].id);
+                      _dictionaryController.getDetailTrash(
+                          DataCenter.savedTrashList[index]["id"]);
                     },
                     title: DataCenter.savedTrashList[index]["name"]),
                 itemCount: DataCenter.savedTrashList.length,

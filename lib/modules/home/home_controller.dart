@@ -31,6 +31,7 @@ class HomeController extends GetxController {
     await fetchQuestions();
     await fetchSavedTrashList();
     await fetchAllUserQuizzes();
+    await fetchRecentTrash();
     isLoading.value = false;
     super.onInit();
   }
@@ -54,7 +55,7 @@ class HomeController extends GetxController {
     try {
       final response = await LocalService.readFile(AppFilePath.recentTrashes);
       if (response == null) return;
-      DataCenter.recentTrashes = response["data"];
+      DataCenter.recentTrashes.value = response["data"];
       filterRecentTrash();
     } catch (error) {
       print("Has error when fetching recent trashes: $error");

@@ -60,10 +60,17 @@ class TrashDetailScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            trash.name,
-                            style: CustomTextStyle.h3(AppColors.primaryDark),
-                            textAlign: TextAlign.start,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Text(
+                                trash.name,
+                                style:
+                                    CustomTextStyle.h3(AppColors.primaryDark),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
                           ),
                           IconButton(
                             onPressed: () =>

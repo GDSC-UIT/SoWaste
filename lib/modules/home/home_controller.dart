@@ -26,12 +26,14 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     isLoading.value = true;
-    await fetchArticles();
     await fetchDictionary();
     await fetchQuestions();
-    await fetchSavedTrashList();
-    await fetchAllUserQuizzes();
-    await fetchRecentTrash();
+    await Future.wait([
+      fetchArticles(),
+      fetchSavedTrashList(),
+      fetchAllUserQuizzes(),
+      fetchRecentTrash(),
+    ]);
     isLoading.value = false;
     super.onInit();
   }
@@ -63,12 +65,13 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchAllUserQuizzes() async {
+    print("Fetch user quiz");
     for (var quiz in DataCenter.allQuizzes) {
       try {
         final response = await LocalService.readFile(
             "${AppFilePath.quizzes}_${quiz.quizId}");
         DataCenter.localQuizList.add(LocalQuiz.fromJson(response!));
-        // DataCenter.localQuizList.value = [...DataCenter.localQuizList];
+        print("Local quiz list length: ${DataCenter.localQuizList.length}");
       } catch (error) {}
     }
   }
@@ -126,7 +129,6 @@ class HomeController extends GetxController {
     try {
       final response = await HttpService.getRequest(UrlValue.dictionaryUrl);
       final temp = await json.decode(utf8.decode(response.bodyBytes))["data"];
-      print("Dictionary: $temp");
       temp.forEach((trash) {
         id = trash["_id"];
         dictionary.add(Trash.fromJson(trash));

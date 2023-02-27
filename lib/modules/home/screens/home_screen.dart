@@ -122,9 +122,9 @@ class HomeScreen extends StatelessWidget {
                           height: 200,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => NewsCard(
-                                article: _homeController.articlesList[index]),
-                            itemCount: _homeController.articlesList.length,
+                            itemBuilder: (context, index) =>
+                                NewsCard(article: DataCenter.news[index]),
+                            itemCount: DataCenter.news.length,
                           ),
                         ),
                       ]),

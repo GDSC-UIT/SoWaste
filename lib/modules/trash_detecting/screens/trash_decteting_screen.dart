@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/data/services/image_picker_services.dart';
+import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
+import 'package:sowaste/modules/base/base_controller.dart';
 import 'package:sowaste/modules/trash_detecting/widgets/trash_button.dart';
-
-import '../../../core/themes/app_colors.dart';
-import '../../../core/themes/app_themes.dart';
 
 class TrashDetectingScreen extends StatelessWidget {
   const TrashDetectingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final BaseController baseController = Get.find();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Trash Detecting Camera",
-          style: CustomTextStyle.sub(AppColors.primary),
-        ),
+      appBar: const ArrowBackAppBar(
+        title: "Detect Trash",
       ),
       body: Stack(
         alignment: AlignmentDirectional.bottomEnd,

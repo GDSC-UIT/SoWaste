@@ -7,8 +7,10 @@ import '../core/themes/app_colors.dart';
 import '../core/themes/app_themes.dart';
 
 class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ArrowBackAppBar({super.key, this.title});
+  const ArrowBackAppBar(
+      {super.key, this.title, this.isShowArrowBackIcon = true});
   final String? title;
+  final bool isShowArrowBackIcon;
 
   @override
   AppBar build(BuildContext context) {
@@ -19,13 +21,14 @@ class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
         title ?? "",
         style: CustomTextStyle.sub(AppColors.secondary),
       ),
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios,
-          color: AppColors.secondary,
-        ),
-        onPressed: () => {Get.back()},
-      ),
+      leading: isShowArrowBackIcon
+          ? IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: AppColors.secondary,
+              ),
+              onPressed: () => {Get.back()})
+          : null,
     );
   }
 

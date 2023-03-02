@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sowaste/core/values/app_file_path.dart';
+import 'package:sowaste/core/values/app_file_name.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
@@ -9,6 +9,7 @@ import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
+import '../../../data/services/data_center.dart';
 import '../../../global_widget/app_button.dart';
 
 class QuizResultScreen extends StatelessWidget {
@@ -47,7 +48,7 @@ class QuizResultScreen extends StatelessWidget {
                   buttonText: "TRY AGAIN",
                   onPressedFunction: () async {
                     await LocalService.clearContent(
-                        "${AppFilePath.quizzes}_${_dictionaryController.currentTrash.value.id}");
+                        "${DataCenter.doneQuizzesFolder}/${_dictionaryController.currentTrash.value.id}.json");
 
                     await _dictionaryController.getQuizFromLocal();
                     Get.to(() => QuestionScreen());

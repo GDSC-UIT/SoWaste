@@ -1,19 +1,20 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:d_chart/d_chart.dart';
 
 class PieChart extends StatelessWidget {
   PieChart({super.key});
   final HomeController _homeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
-    _homeController.setColorForPieChart(_homeController.indexHasColor.value);
-    List<Map<String, dynamic>> data = [..._homeController.dummy_data];
     return SizedBox(
       height: 220,
       child: Row(
@@ -24,9 +25,9 @@ class PieChart extends StatelessWidget {
             width: 120,
             height: min(200, _homeController.colors.length * 30),
             child: ListView.builder(
-                itemCount: data.length,
+                itemCount: DataCenter.recentDetectedTrash.length,
                 itemBuilder: ((context, index) {
-                  final e = data[index];
+                  final e = DataCenter.recentDetectedTrash[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: Row(
@@ -35,8 +36,8 @@ class PieChart extends StatelessWidget {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: _homeController.colors
-                                  .elementAt(data.indexOf(e)),
+                              color: _homeController.colors.elementAt(
+                                  DataCenter.recentDetectedTrash.indexOf(e)),
                               borderRadius: BorderRadius.circular(4)),
                           width: 32,
                           height: 16,
@@ -44,10 +45,14 @@ class PieChart extends StatelessWidget {
                         const SizedBox(
                           width: 12,
                         ),
-                        Text(
-                          e['category'],
-                          style:
-                              CustomTextStyle.normal(const Color(0xFF747474)),
+                        SizedBox(
+                          width: 70,
+                          child: Text(
+                            e['name'],
+                            overflow: TextOverflow.ellipsis,
+                            style:
+                                CustomTextStyle.normal(const Color(0xFF747474)),
+                          ),
                         )
                       ],
                     ),
@@ -66,11 +71,13 @@ class PieChart extends StatelessWidget {
                   pieLabel: (pieData, index) => '${pieData['measure']}%',
                   fillColor: (pieData, index) =>
                       _homeController.colors.elementAt(index!),
-                  data: data
+                  data: DataCenter.recentDetectedTrash
                       .map((e) => {
-                            'domain': e['category'],
-                            'measure':
-                                (e['times'] / _homeController.count.value * 100)
+                            'domain': e['name'],
+                            'measure': ((e['count'] as int) /
+                                    _homeController.totalTimesDetecting.value *
+                                    100)
+                                .toInt()
                           })
                       .toList()),
             ),

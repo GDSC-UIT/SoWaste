@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
 import '../../global_widget/bottom_navbar.dart';
@@ -13,10 +12,12 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: null,
       body: Obx(() {
         return _baseController.pages[_baseController.currentIndex.value];
       }),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: Obx(() =>
+          BottomNavBar(selectedScreen: _baseController.currentIndex.value)),
     ));
   }
 }

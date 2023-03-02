@@ -8,14 +8,16 @@ import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/global_widget/markdown_text.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
 
-class EnvsNewsDetailtedScreen extends StatelessWidget {
-  EnvsNewsDetailtedScreen({super.key});
+class EnvsNewsDetailScreen extends StatelessWidget {
+  EnvsNewsDetailScreen({super.key});
   final EnvironmentNewsController _environmentNewsController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: const ArrowBackAppBar(),
+            appBar: const ArrowBackAppBar(
+              isShowArrowBackIcon: false,
+            ),
             body: Obx(() {
               if (_environmentNewsController.isLoading.value) {
                 return const Center(

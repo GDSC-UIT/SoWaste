@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:sowaste/core/values/app_file_path.dart';
+import 'package:sowaste/core/values/app_file_name.dart';
 import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/data/models/quiz_local.dart';
 import 'package:sowaste/data/services/data_center.dart';
@@ -58,8 +58,9 @@ class DictionaryController extends GetxController {
     List<Trash> result = [];
     if (word.isNotEmpty) {
       result = DataCenter.dictionary
-          .where((e) =>
-              e.name.toLowerCase().contains(searchInput.text.toLowerCase()))
+          .where((e) => e.name
+              .toLowerCase()
+              .contains(searchInput.value.text.toLowerCase()))
           .toList();
     }
     foundWords.value = result;
@@ -75,7 +76,8 @@ class DictionaryController extends GetxController {
       print("Data after remove: ${DataCenter.savedTrashList}");
     }
     final response = await LocalService.saveContent(
-        {"data": DataCenter.savedTrashList}, AppFilePath.savedTrashes);
+        {"data": DataCenter.savedTrashList},
+        "${DataCenter.AppFilePath}/${AppFileName.savedTrashes}");
     isSaved.value = !isSaved.value;
     print("Data after clicked Save! $response");
     DataCenter.savedTrashList.value = [...DataCenter.savedTrashList];
@@ -101,8 +103,9 @@ class DictionaryController extends GetxController {
     localQuiz.shortDescription = currentTrash.value.shortDescription;
 
     print("LocalQuiz: ${localQuiz.toJson()}");
-    await LocalService.saveContent(
-        localQuiz.toJson(), "${AppFilePath.quizzes}_${localQuiz.quizId}");
+
+    await LocalService.saveContent(localQuiz.toJson(),
+        "${DataCenter.doneQuizzesFolder}/${localQuiz.quizId}.json");
     DataCenter.localQuizList
         .removeWhere((quiz) => quiz.quizId == localQuiz.quizId);
     DataCenter.localQuizList.add(localQuiz);
@@ -112,7 +115,7 @@ class DictionaryController extends GetxController {
 
   Future<void> getQuizFromLocal() async {
     final response = await LocalService.readFile(
-        "${AppFilePath.quizzes}_${currentTrash.value.id}");
+        "${DataCenter.doneQuizzesFolder}/${currentTrash.value.id}.json");
     if (response != null) {
       localQuiz = LocalQuiz.fromJson(response);
       initAllValuesForCurrentQuiz(localQuiz.point, localQuiz.numberOfDoneQues);
@@ -166,8 +169,8 @@ class DictionaryController extends GetxController {
       });
     }
     DataCenter.recentTrashes.value = [...DataCenter.recentTrashes];
-    await LocalService.saveContent(
-        {"data": DataCenter.recentTrashes}, AppFilePath.recentTrashes);
+    await LocalService.saveContent({"data": DataCenter.recentTrashes},
+        "${DataCenter.AppFilePath}/${AppFileName.recentTrashes}");
     printRecentTrash();
   }
 }

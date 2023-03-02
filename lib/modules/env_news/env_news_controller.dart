@@ -1,16 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/data/services/data_center.dart';
 
-import '../../core/values/app_url.dart';
-import '../../data/services/http_service.dart';
 import '../../routes/app_routes.dart';
 
 class EnvironmentNewsController extends GetxController {
-  Rx<TextEditingController> searchInput = TextEditingController(text: "").obs;
+  Rx<TextEditingController> searchInput = TextEditingController().obs;
+
   RxList<Article> news = <Article>[].obs;
   RxBool showBigCard = true.obs;
   Rx<Article> currentArticle = Article(
@@ -40,7 +37,7 @@ class EnvironmentNewsController extends GetxController {
 
   Future<void> getDetailArticle(Article article) async {
     isLoading.value = true;
-    Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: article.id);
+    Get.toNamed(AppRoutes.detailNewsPage, arguments: article.id);
     currentArticle.value = await Article.getArticle(article.id);
     isLoading.value = false;
   }

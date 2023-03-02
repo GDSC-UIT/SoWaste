@@ -9,12 +9,12 @@ import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
 import 'package:sowaste/modules/home/widgets/quiz_card.dart';
-import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
+
 import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   Row title(String text, [final VoidCallback? seeAll, isShowSeeAll = false]) {
     return Row(
@@ -44,91 +44,91 @@ class HomeScreen extends StatelessWidget {
         ]);
   }
 
-  final HomeController _homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
+    final HomeController homeController = Get.find();
     return Scaffold(
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
           backgroundColor: AppColors.background,
           elevation: 0,
         ),
-        body: Obx(() => _homeController.isLoading.value == true
-            ? const Center(child: CircularProgressIndicator())
-            : Padding(
-                padding: const EdgeInsets.all(16),
-                child: SingleChildScrollView(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        title("Overview"),
-                        Obx(
-                          () => (DataCenter.localQuizList.isEmpty)
-                              ? Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "You haven’t done any trash detecting yet.",
-                                      style: CustomTextStyle.bodyBold(
-                                              AppColors.onBg)
-                                          .copyWith(height: 1.5),
-                                    ),
-                                    CameraButton(),
-                                    title("Your Quizzes"),
-                                    const ToDicButton(),
-                                  ],
-                                )
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "This week, you have detected [count] times ",
-                                      style: CustomTextStyle.bodyBold(
-                                              AppColors.onBg)
-                                          .copyWith(height: 1.5),
-                                    ),
-                                    PieChart(),
-                                    const LearnMoreButton(),
-                                    title(
-                                        "Your Quizzes",
-                                        () => {
-                                              Get.toNamed(
-                                                  AppRoutes.quizzesPage),
-                                            },
-                                        true),
-                                    SizedBox(
-                                        height: 180,
-                                        child: Obx(
-                                          () => ListView.builder(
-                                            itemBuilder: ((context, index) {
-                                              return QuizCard(
-                                                quiz: DataCenter
-                                                    .localQuizList[index],
-                                              );
-                                            }),
-                                            itemCount:
-                                                DataCenter.localQuizList.length,
-                                            scrollDirection: Axis.horizontal,
-                                          ),
-                                        ))
-                                  ],
-                                ),
-                        ),
-                        title(
-                            "Environment News",
-                            () => {Get.toNamed(AppRoutes.envNewsSearchPage)},
-                            true),
-                        SizedBox(
-                          height: 200,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) =>
-                                NewsCard(article: DataCenter.news[index]),
-                            itemCount: DataCenter.news.length,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              title("Overview"),
+
+              // Piechart
+              Obx(
+                () => (DataCenter.recentDetectedTrash.isEmpty)
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "You haven’t done any trash detecting yet.",
+                            style: CustomTextStyle.bodyBold(AppColors.onBg)
+                                .copyWith(height: 1.5),
                           ),
-                        ),
-                      ]),
+                          const CameraButton(),
+                        ],
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "This week, you have detected ${homeController.totalTimesDetecting} times ",
+                            style: CustomTextStyle.bodyBold(AppColors.onBg)
+                                .copyWith(height: 1.5),
+                          ),
+                          PieChart(),
+                          const LearnMoreButton(),
+                        ],
+                      ),
+              ),
+
+              //Your Quizzes
+              title(
+                  "Your Quizzes",
+                  () => {
+                        Get.toNamed(AppRoutes.quizzesPage),
+                      },
+                  true),
+              Obx(() => DataCenter.localQuizList.isNotEmpty
+                  ? Column(
+                      children: [
+                        SizedBox(
+                            height: 180,
+                            child: Obx(
+                              () => ListView.builder(
+                                itemBuilder: ((context, index) {
+                                  return QuizCard(
+                                    quiz: DataCenter.localQuizList[index],
+                                  );
+                                }),
+                                itemCount: DataCenter.localQuizList.length,
+                                scrollDirection: Axis.horizontal,
+                              ),
+                            )),
+                      ],
+                    )
+                  : Container()),
+
+              //Environment News
+              title("Environment News",
+                  () => {Get.toNamed(AppRoutes.environmentNewsPage)}, true),
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) =>
+                      NewsCard(article: DataCenter.news[index]),
+                  itemCount: DataCenter.news.length,
                 ),
-              )));
+              ),
+            ]),
+          ),
+        ));
   }
 }

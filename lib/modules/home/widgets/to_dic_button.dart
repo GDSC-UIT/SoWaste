@@ -3,15 +3,18 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_icons.dart';
 import 'package:get/get.dart';
+import 'package:sowaste/modules/base/base_controller.dart';
 
 class ToDicButton extends StatelessWidget {
   const ToDicButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final BaseController baseController = Get.find();
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/dictionary');
+        baseController.currentIndex.value = 3;
+        print(baseController.currentIndex.value);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

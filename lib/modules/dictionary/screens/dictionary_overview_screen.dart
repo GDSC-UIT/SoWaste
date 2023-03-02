@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
-import 'package:sowaste/core/values/app_file_path.dart';
-import 'package:sowaste/data/services/local_data.dart';
-import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
-import 'package:sowaste/modules/dictionary/widgets/search_input.dart';
+import 'package:sowaste/modules/dictionary/widgets/search_trash.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../global_widget/app_card_button.dart';
@@ -41,7 +38,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
               DictionaryCard(),
               AppCardButton(
                 onTapFunction: () {
-                  Get.to(() => QuizzesScreen());
+                  Get.toNamed(AppRoutes.quizzesPage);
                 },
                 title: "Quiz time",
                 leading: const Icon(
@@ -72,9 +69,8 @@ class DictionaryOverviewScreen extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: SearchInput(),
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: SearchTrash()),
         ]));
   }
 }

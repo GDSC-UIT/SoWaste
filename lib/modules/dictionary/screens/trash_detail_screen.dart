@@ -22,8 +22,34 @@ class TrashDetailScreen extends StatelessWidget {
     final DictionaryController dictionaryController = Get.find();
     dictionaryController.isSaved.value = false;
 
+    IconButton save(Trash trash) {
+      return IconButton(
+        onPressed: () => {dictionaryController.saveTrash(trash)},
+        icon: Obx(() {
+          for (int i = 0; i < DataCenter.savedTrashList.length; ++i) {
+            if (DataCenter.savedTrashList[i].values.contains(trash.id)) {
+              dictionaryController.indexTrashToRemove.value = i;
+              dictionaryController.isSaved.value = true;
+              break;
+            }
+          }
+          return dictionaryController.isSaved.value
+              ? const Icon(
+                  Icons.bookmark,
+                  size: 32,
+                  color: AppColors.secondary,
+                )
+              : const Icon(
+                  Icons.bookmark_outline,
+                  size: 32,
+                );
+        }),
+      );
+    }
+
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        appBar: const ArrowBackAppBar(),
         floatingActionButton:
             Obx(() => dictionaryController.currentQuiz.isNotEmpty
                 ? AppButton(
@@ -37,7 +63,6 @@ class TrashDetailScreen extends StatelessWidget {
                           : Get.to(() => QuestionScreen());
                     })
                 : Container()),
-        appBar: const ArrowBackAppBar(),
         body: Obx(() {
           if (dictionaryController.isLoading.value) {
             return const Center(
@@ -62,43 +87,15 @@ class TrashDetailScreen extends StatelessWidget {
                         children: [
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.7,
-                            child: FittedBox(
-                              fit: BoxFit.fitWidth,
-                              child: Text(
-                                trash.name,
-                                style:
-                                    CustomTextStyle.h3(AppColors.primaryDark),
-                                textAlign: TextAlign.start,
-                              ),
+                            child: Text(
+                              trash.name,
+                              style: CustomTextStyle.h2(AppColors.primaryDark)
+                                  .copyWith(height: 1.2),
+                              textAlign: TextAlign.start,
+                              maxLines: 3,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () =>
-                                {dictionaryController.saveTrash(trash)},
-                            icon: Obx(() {
-                              for (int i = 0;
-                                  i < DataCenter.savedTrashList.length;
-                                  ++i) {
-                                if (DataCenter.savedTrashList[i].values
-                                    .contains(trash.id)) {
-                                  dictionaryController
-                                      .indexTrashToRemove.value = i;
-                                  dictionaryController.isSaved.value = true;
-                                  break;
-                                }
-                              }
-                              return dictionaryController.isSaved.value
-                                  ? const Icon(
-                                      Icons.bookmark,
-                                      size: 32,
-                                      color: AppColors.secondary,
-                                    )
-                                  : const Icon(
-                                      Icons.bookmark_outline,
-                                      size: 32,
-                                    );
-                            }),
-                          )
+                          save(trash)
                         ],
                       ),
                       SizedBox(

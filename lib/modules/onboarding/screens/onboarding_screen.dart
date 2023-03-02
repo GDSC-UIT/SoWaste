@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/global_widget/app_button.dart';
 import 'package:sowaste/modules/onboarding/onboarding_controller.dart';
 import 'package:sowaste/routes/app_routes.dart';
@@ -35,9 +36,6 @@ class OnboardingScreen extends StatelessWidget {
       activeSize: const Size(30, 10),
       activeShape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)));
-  void gotoHomeScreen() {
-    Get.toNamed(AppRoutes.base);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,19 +48,19 @@ class OnboardingScreen extends StatelessWidget {
           child: IntroductionScreen(
             pages: [
               PageViewModel(
-                  image: customImage('assets/images/dustbin.png'),
+                  image: customImage(AppImages.dustbin),
                   title: "Raise awareness",
                   body:
                       "Garbage pollution threatens the environment and public health.",
                   decoration: pageDecoration()),
               PageViewModel(
-                  image: customImage('assets/images/recycle.png'),
+                  image: customImage(AppImages.recycle),
                   title: "Reduce waste",
                   body:
                       "Reducing trash by recycling is crucial for preserving our planet's health.",
                   decoration: pageDecoration()),
               PageViewModel(
-                  image: customImage('assets/images/sort.png'),
+                  image: customImage(AppImages.sort),
                   title: "Sorting trash",
                   body:
                       "Effective trash management can help address the garbage pollution.",
@@ -72,15 +70,12 @@ class OnboardingScreen extends StatelessWidget {
               _controller.pageIndex.value = index,
             },
             dotsDecorator: getDotDecoration(),
-            // done: const Text("Done"),
             showNextButton: false,
             showDoneButton: false,
             showSkipButton: false,
             skip: const Text(
               'Skip',
             ),
-
-            // onDone: gotoHomeScreen,
             next: const Icon(Icons.arrow_forward),
           ),
         ),
@@ -91,7 +86,8 @@ class OnboardingScreen extends StatelessWidget {
             () => (_controller.pageIndex.value == 2)
                 ? AppButton(
                     buttonText: "GET STARTED",
-                    onPressedFunction: gotoHomeScreen)
+                    onPressedFunction: () =>
+                        {Get.offAndToNamed(AppRoutes.base)})
                 : Container(),
           ),
         ),

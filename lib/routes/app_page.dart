@@ -13,6 +13,7 @@ import 'package:sowaste/modules/env_news/screens/env_news_search_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
 import '../modules/home/screens/home_screen.dart';
@@ -24,7 +25,7 @@ class AppPages {
     //home page
     GetPage(
       name: AppRoutes.homeScreen,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
       transition: Transition.cupertino,
       binding: HomeBinding(),
     ),
@@ -41,7 +42,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.savedTypesPage,
-        page: () => SavedTrashesScreen(),
+        page: () => const SavedTrashesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -57,7 +58,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.trashDetailPage,
-        page: () => TrashDetailScreen(),
+        page: () => const TrashDetailScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -66,22 +67,29 @@ class AppPages {
         transition: Transition.cupertino,
         binding: TrashDetectingBinding()),
 
-    // env news page
-
+    // env news
     GetPage(
-        name: AppRoutes.envNewsSearchPage,
+        name: AppRoutes.environmentNewsPage,
         page: () => EnvironmentNewsOverviewScreen(),
         transition: Transition.cupertino,
         binding: EnvironmentBinding()),
     GetPage(
-        name: AppRoutes.envNewsDetailedPage,
-        page: () => EnvsNewsDetailtedScreen(),
+        name: AppRoutes.detailNewsPage,
+        page: () => EnvsNewsDetailScreen(),
         transition: Transition.cupertino,
         binding: EnvironmentBinding()),
+
+    //base
     GetPage(
         name: AppRoutes.base,
         page: () => BaseScreen(),
         transition: Transition.cupertino,
         binding: BaseBinding()),
+    //image
+    GetPage(
+      name: AppRoutes.pickImageScreen,
+      page: () => const PickImageScreen(),
+      transition: Transition.cupertino,
+    ),
   ];
 }

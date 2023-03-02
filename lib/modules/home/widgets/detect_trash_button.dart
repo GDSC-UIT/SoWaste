@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
-import 'package:sowaste/data/services/image_picker_services.dart';
-import 'package:sowaste/modules/home/home_controller.dart';
+import 'package:sowaste/modules/base/base_controller.dart';
 
 class CameraButton extends StatelessWidget {
-  CameraButton({super.key});
-  final HomeController _homeController = Get.find();
+  const CameraButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final BaseController baseController = Get.find();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: InkWell(
           onTap: () async {
-            _homeController.count.value += 1;
-            await ImageServices.getImageFromCamera();
-            Get.toNamed('/detect');
+            baseController.currentIndex.value = 2;
           },
           borderRadius: BorderRadius.circular(24),
           child: Container(

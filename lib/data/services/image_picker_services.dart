@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 class ImageServices {
   static File? pickedImage;
   static Future<void> getImageFromCamera() async {
+    pickedImage = null;
     try {
       final image = await ImagePicker().getImage(
         source: ImageSource.camera,
@@ -18,6 +19,7 @@ class ImageServices {
   }
 
   static Future<void> getImageFromGallery() async {
+    pickedImage = null;
     try {
       final image = await ImagePicker().getImage(source: ImageSource.gallery);
       if (image == null) return;

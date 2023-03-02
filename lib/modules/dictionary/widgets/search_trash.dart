@@ -1,53 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
-import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/global_widget/search_input.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
-import '../../../data/models/trash.dart';
-
-class SearchInput extends StatelessWidget {
-  SearchInput({super.key});
+class SearchTrash extends StatelessWidget {
+  SearchTrash({super.key});
   final DictionaryController _dictionaryController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            elevation: 5,
-            shadowColor: AppColors.onBg.withOpacity(0.3),
-            child: TextField(
-              controller: _dictionaryController.searchInput,
-              onChanged: ((value) => _dictionaryController
-                  .filterWord(_dictionaryController.searchInput.value.text)),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(16)),
-                contentPadding: const EdgeInsets.symmetric(vertical: 16),
-                hintText: 'Search type of trash',
-                hintStyle: CustomTextStyle.normal(AppColors.info),
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: 24,
-                ),
-                suffixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.clear,
-                    size: 24,
-                  ),
-                  onPressed: () {
-                    _dictionaryController.searchInput.text = '';
-                    _dictionaryController.filterWord('');
-                  },
-                ),
-                border: InputBorder.none,
-              ),
-            )),
+        AppSearchInput(
+            onChangeFunction: (String value) => {
+                  _dictionaryController
+                      .filterWord(_dictionaryController.searchInput.value.text)
+                },
+            deleteInput: () {
+              _dictionaryController.searchInput.text = '';
+              _dictionaryController.filterWord('');
+            },
+            controller: _dictionaryController.searchInput),
         Container(
           constraints: const BoxConstraints(maxHeight: 250),
           decoration: BoxDecoration(
@@ -85,7 +59,7 @@ class SearchInput extends StatelessWidget {
                   ],
                 ),
               ),
-              itemCount: _dictionaryController.foundWords.value.length,
+              itemCount: _dictionaryController.foundWords.length,
             ),
           ),
         )

@@ -25,17 +25,20 @@ class AppCardButton extends StatelessWidget {
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            elevation: 5,
-            shadowColor: AppColors.onBg.withOpacity(0.3),
+            elevation: 7,
+            shadowColor: AppColors.onBg.withOpacity(0.1),
             child: SizedBox(
               height: 72,
               child: Center(
                 child: ListTile(
                     leading: leading,
                     trailing: trailing,
-                    title: Text(
-                      title,
-                      style: CustomTextStyle.bodyBold(AppColors.onBg),
+                    title: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        title,
+                        style: CustomTextStyle.bodyBold(AppColors.onBg),
+                      ),
                     )),
               ),
             ),

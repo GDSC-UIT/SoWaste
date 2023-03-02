@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
-
 import '../core/themes/app_themes.dart';
 
 class AppButton extends StatelessWidget {
@@ -8,7 +7,7 @@ class AppButton extends StatelessWidget {
       {super.key,
       required this.buttonText,
       required this.onPressedFunction,
-      this.color = AppColors.primaryDark,
+      this.color = AppColors.primary,
       this.textColor = AppColors.background,
       this.ignore = false});
   final String buttonText;

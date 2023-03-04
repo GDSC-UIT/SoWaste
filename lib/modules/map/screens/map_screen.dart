@@ -66,8 +66,8 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   }
 
   double distance = 0;
-  bool join = false;
   Directions? destination;
+  bool joined = false;
 
   @override
   void initState() {
@@ -75,6 +75,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     _getUserLocation().then((value) async {
       mapController = MapController();
       await initMarkers();
+      setState(() {});
     });
     super.initState();
   }
@@ -149,20 +150,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                               builder: (_) {
                                 return GestureDetector(
                                   onTap: () async {
-                                    join && selectedIndex == 0
-                                        ? pageController.animateToPage(
-                                            i,
-                                            duration: const Duration(
-                                                milliseconds: 500),
-                                            curve: Curves.easeInOut,
-                                          )
+                                    joined = true;
+                                    selectedIndex == i
+                                        ? _animatedMapMove(
+                                            mapMarkers[selectedIndex]
+                                                    .location ??
+                                                currentLocation,
+                                            11.5)
                                         : null;
-                                    selectedIndex = i;
-                                    _animatedMapMove(
-                                        mapMarkers[i].location ??
-                                            currentLocation,
-                                        11.5);
-                                    join = true;
                                     await mapHelper
                                         .getDirections(
                                             currentLocation,
@@ -172,8 +167,18 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                       distance = value;
                                     });
                                     await getPolyline(mapMarkers[i].location ??
-                                        currentLocation);
-                                    setState(() {});
+                                            currentLocation)
+                                        .then((value) {
+                                      setState(() {
+                                        selectedIndex = i;
+                                      });
+                                      pageController.animateToPage(
+                                        selectedIndex,
+                                        duration:
+                                            const Duration(milliseconds: 50),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    });
                                   },
                                   child: AnimatedScale(
                                     duration: const Duration(milliseconds: 500),
@@ -204,7 +209,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                       ],
                     ),
                   ),
-                  join
+                  joined
                       ? Positioned(
                           left: 0,
                           right: 0,
@@ -353,7 +358,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                         alignment: Alignment
                                                             .bottomRight,
                                                         child: Text(
-                                                            '${distance.toStringAsFixed(2)} km')),
+                                                            '${destination != null ? destination!.totalDistance : 0}')),
                                                   ]),
                                             ],
                                           ),
@@ -361,7 +366,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                             onPressed: () async {
                                               String url = MAP_PLACE +
                                                   (item.placeId ?? '');
-                                              print(url);
                                               final uri = Uri.parse(url);
                                               await launchUrl(uri,
                                                       mode: LaunchMode
@@ -461,7 +465,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   Future<void> getPolyline(LatLng des) async {
     await DirectionsRepository()
         .getDirections(origin: currentLocation, destination: des)
-        .then((value) => {setState(() => destination = value)});
+        .then((value) => {destination = value});
   }
 
   Future<void> onRadiusChanged(int value) async {
@@ -486,9 +490,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       });
       return Future.error(e);
     });
-    setState(() {
-      mapMarkers = places;
-    });
+    mapMarkers = places;
     return Future.value('success');
   }
 }

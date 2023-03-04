@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:geocoding/geocoding.dart' as geo;
+import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
-import 'package:sowaste/modules/map/directions_model.dart';
-import 'package:sowaste/modules/map/directions_repository.dart';
+import 'package:sowaste/modules/map/helpers/map_place.dart';
+import 'package:sowaste/modules/map/map_constants.dart';
+import 'package:sowaste/modules/map/map_model.dart';
+import 'package:sowaste/modules/map/map_repository.dart';
 import 'package:sowaste/modules/map/widgets/around_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -14,32 +20,18 @@ class MapScreen extends StatefulWidget {
   _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
-  late GoogleMapController _googleMapController;
-  Marker? _origin;
-  Marker? _destination;
-  Directions? _info;
-  MapType? _mapType;
-  static const _initialCameraPosition = CameraPosition(
-    target: LatLng(10.82302, 106.62965),
-    zoom: 11,
-  );
-
-  @override
-  void dispose() {
-    _googleMapController.dispose();
-    super.dispose();
-  }
-
-  Future<LatLng> findDirectionsByAddress(String destinationAddress) async {
-    final directions =
-        await DirectionsRepository().getLatLngFromAddress(destinationAddress);
-    return directions;
-  }
-
+class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
+  late List<LatLng> latlngList;
+  List<MapMarker> mapMarkers = [];
+  final mapHelper = MapHelper();
+  final pageController = PageController();
+  int selectedIndex = 0;
+  late final MapController mapController;
+  late LatLng currentLocation;
   late bool _serviceEnabled;
   LocationData? _userLocation;
   late PermissionStatus _permissionGranted;
+  int radius = 5000;
   Future<void> _getUserLocation() async {
     Location location = Location();
 
@@ -62,264 +54,440 @@ class _MapScreenState extends State<MapScreen> {
     final _locationData = await location.getLocation();
     setState(() {
       _userLocation = _locationData;
+      currentLocation =
+          LatLng(_locationData.latitude!, _locationData.longitude!);
+      geo
+          .placemarkFromCoordinates(
+              _locationData.latitude!, _locationData.longitude!)
+          .catchError((e) {
+        return null;
+      });
     });
   }
 
-  void _onMapCreated(GoogleMapController controller) async {
-    _googleMapController = controller;
-    await _getUserLocation().then((value) {
-      _googleMapController.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(
-              _userLocation?.latitude ?? 0,
-              _userLocation?.longitude ?? 0,
-            ),
-            zoom: 11,
-          ),
-        ),
-      );
-      _addMarker(LatLng(
-        _userLocation?.latitude ?? 0,
-        _userLocation?.longitude ?? 0,
-      ));
+  double distance = 0;
+  bool join = false;
+  Directions? destination;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getUserLocation().then((value) async {
+      mapController = MapController();
+      await initMarkers();
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        // leading: const Icon(
-        //   Icons.arrow_back_ios,
-        //   color: AppColors.secondary,
-        // ),
-        title: const Text('Scrap Locations'),
-        backgroundColor: Colors.white,
-        titleTextStyle: const TextStyle(
-          color: AppColors.primary,
-          fontSize: 18.0,
-          fontWeight: FontWeight.w600,
-        ),
-        actions: [
-          if (_origin != null)
-            TextButton(
-              onPressed: () => _googleMapController.animateCamera(
-                CameraUpdate.newCameraPosition(
-                  CameraPosition(
-                    target: _origin!.position,
-                    zoom: 18,
-                    tilt: 50.0,
-                  ),
-                ),
-              ),
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.error,
-                textStyle: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              child: const Text('ORIGIN'),
-            ),
-          if (_destination != null)
-            TextButton(
-              onPressed: () => _googleMapController.animateCamera(
-                CameraUpdate.newCameraPosition(
-                  CameraPosition(
-                    target: _destination!.position,
-                    zoom: 18,
-                    tilt: 50.0,
-                  ),
-                ),
-              ),
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.primary,
-                textStyle: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              child: const Text('DEST'),
-            ),
-        ],
-      ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          GoogleMap(
-            zoomGesturesEnabled: true,
-            buildingsEnabled: true,
-            mapType: _mapType ?? MapType.hybrid,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
-            initialCameraPosition: _initialCameraPosition,
-            onMapCreated: (controller) => _onMapCreated(controller),
-            markers: {
-              if (_origin != null) _origin as Marker,
-              if (_destination != null) _destination as Marker,
-            },
-            polylines: {
-              if (_info != null)
-                Polyline(
-                  polylineId: const PolylineId('overview_polyline'),
-                  color: AppColors.primaryLight,
-                  width: 8,
-                  points: _info!.polylinePoints
-                      .map((e) => LatLng(e.latitude, e.longitude))
-                      .toList(),
-                ),
-            },
-            onTap: _addMarker,
-          ),
-          if (_info != null)
-            Positioned(
-              bottom: 30.0,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 6.0,
-                  horizontal: 12.0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.yellowAccent,
-                  borderRadius: BorderRadius.circular(20.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(0, 2),
-                      blurRadius: 6.0,
-                    )
-                  ],
-                ),
-                child: Text(
-                  '${_info!.totalDistance}, ${_info!.totalDuration}',
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          Positioned(
-            bottom: 120.0,
-            right: 16.0,
-            child: FloatingActionButton(
-              backgroundColor: Colors.white,
-              onPressed: () {
-                setState(() {
-                  _mapType = _mapType == MapType.normal
-                      ? MapType.hybrid
-                      : MapType.normal;
-                });
-              },
-              child: const Icon(
-                Icons.map,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Positioned(
-              top: 10.0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 50.0,
-                width: 300.0,
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(100.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      offset: Offset(0, 2),
-                      blurRadius: 6.0,
-                    )
-                  ],
-                ),
-                child: TextField(
-                  style: const TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Find your scrap locations',
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(left: 15.0, top: 15.0),
-                    // set fontsize
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15.0,
-                    ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 24.0,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    // write search input onChanged function
-                  },
-                  onSubmitted: (value) => findDirectionsByAddress(value),
-                ),
-              )),
-          Positioned(
-              top: 70,
-              left: 10,
-              right: 10,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Around(distance: 3),
-                  Around(distance: 5),
-                  Around(distance: 10),
-                ],
-              )),
-          Positioned(
-              bottom: 60.0,
-              right: 16.0,
-              child: FloatingActionButton(
-                  backgroundColor: Colors.white,
-                  onPressed: () => _googleMapController.animateCamera(
-                        _info != null
-                            ? CameraUpdate.newLatLngBounds(_info!.bounds, 100.0)
-                            : CameraUpdate.newCameraPosition(CameraPosition(
-                                target: _origin!.position, zoom: 11)),
+        body: _userLocation != null
+            ? Stack(
+                children: [
+                  Center(
+                    child: FlutterMap(
+                      mapController: mapController,
+                      options: MapOptions(
+                        center: currentLocation,
+                        zoom: 12.0,
                       ),
-                  child: const Icon(Icons.center_focus_strong))),
-        ],
-      ),
-    );
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              "https://api.mapbox.com/styles/v1/tuankietcoder/{mapStyleId}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}",
+                          additionalOptions: const {
+                            'mapStyleId': MAPBOX_STYLE_ID,
+                            'accessToken': MAPBOX_ACCESS_TOKEN,
+                          },
+                        ),
+                        PolylineLayer(
+                          polylines: [
+                            Polyline(
+                              points: destination != null
+                                  ? destination!.polylinePoints
+                                      .map((e) =>
+                                          LatLng(e.latitude, e.longitude))
+                                      .toList()
+                                  : [],
+                              strokeWidth: 4.0,
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
+                        MarkerLayer(markers: [
+                          Marker(
+                            height: 40,
+                            width: 40,
+                            point: currentLocation,
+                            builder: (_) {
+                              return GestureDetector(
+                                onTap: () {
+                                  _animatedMapMove(currentLocation, 11.5);
+                                },
+                                child: const AnimatedScale(
+                                  duration: Duration(milliseconds: 500),
+                                  scale: 1,
+                                  child: AnimatedOpacity(
+                                    duration: Duration(milliseconds: 500),
+                                    opacity: 1,
+                                    child: Icon(
+                                      Icons.my_location_sharp,
+                                      color: Colors.red,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          for (int i = 0; i < mapMarkers.length; i++)
+                            Marker(
+                              height: 40,
+                              width: 40,
+                              point: mapMarkers[i].location ?? currentLocation,
+                              builder: (_) {
+                                return GestureDetector(
+                                  onTap: () async {
+                                    join && selectedIndex == 0
+                                        ? pageController.animateToPage(
+                                            i,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.easeInOut,
+                                          )
+                                        : null;
+                                    selectedIndex = i;
+                                    _animatedMapMove(
+                                        mapMarkers[i].location ??
+                                            currentLocation,
+                                        11.5);
+                                    join = true;
+                                    await mapHelper
+                                        .getDirections(
+                                            currentLocation,
+                                            mapMarkers[i].location ??
+                                                currentLocation)
+                                        .then((value) {
+                                      distance = value;
+                                    });
+                                    await getPolyline(mapMarkers[i].location ??
+                                        currentLocation);
+                                    setState(() {});
+                                  },
+                                  child: AnimatedScale(
+                                    duration: const Duration(milliseconds: 500),
+                                    scale: selectedIndex == i ? 1 : 0.7,
+                                    child: AnimatedOpacity(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      opacity: selectedIndex == i ? 1 : 0.5,
+                                      child: const Icon(
+                                        Icons.location_on,
+                                        color: AppColors.primaryDark,
+                                        size: 40,
+                                        shadows: [
+                                          BoxShadow(
+                                            color: AppColors.primaryLight,
+                                            blurRadius: 5,
+                                            spreadRadius: 1,
+                                            offset: Offset(0, 0),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                        ]),
+                      ],
+                    ),
+                  ),
+                  join
+                      ? Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 20,
+                          height: MediaQuery.of(context).size.height * 0.35,
+                          child: PageView.builder(
+                            controller: pageController,
+                            onPageChanged: (value) async {
+                              selectedIndex = value;
+                              _animatedMapMove(
+                                  mapMarkers[value].location ?? currentLocation,
+                                  11.5);
+                              await mapHelper
+                                  .getDirections(
+                                      currentLocation,
+                                      mapMarkers[value].location ??
+                                          currentLocation)
+                                  .then((value) {
+                                distance = value;
+                              });
+                              await getPolyline(mapMarkers[value].location ??
+                                  currentLocation);
+                              setState(() {});
+                            },
+                            itemCount: mapMarkers.length,
+                            itemBuilder: (_, index) {
+                              final item = mapMarkers[index];
+
+                              // setState(() {});
+                              return Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Container(
+                                      padding: const EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.5),
+                                                spreadRadius: 1,
+                                                blurRadius: 5,
+                                                offset: const Offset(0, 3))
+                                          ],
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                  child: RatingBar.builder(
+                                                initialRating:
+                                                    item.rating.toDouble(),
+                                                minRating: 0,
+                                                direction: Axis.horizontal,
+                                                itemCount: 5,
+                                                itemPadding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 4.0),
+                                                itemBuilder: (context, _) =>
+                                                    const Icon(
+                                                  Icons.star,
+                                                  color: Colors.yellow,
+                                                ),
+                                                unratedColor:
+                                                    const Color.fromRGBO(
+                                                        240, 240, 240, 1),
+                                                ignoreGestures: true,
+                                                onRatingUpdate:
+                                                    (double value) {},
+                                              )),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Flexible(
+                                                child: Container(
+                                                  width: 240,
+                                                  child: Text(item.title ?? '',
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      )),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Flexible(
+                                                  child: Container(
+                                                      width: 200,
+                                                      child: Text(
+                                                        item.vicinity ?? '',
+                                                        style: const TextStyle(
+                                                          fontSize: 15,
+                                                        ),
+                                                      ))),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Flexible(
+                                                  child: Container(
+                                                      width: 200,
+                                                      child: Text(
+                                                        item.isOpenNow!
+                                                            ? 'Openning'
+                                                            : 'Closed',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 18,
+                                                          color: item.isOpenNow!
+                                                              ? AppColors
+                                                                  .primaryDark
+                                                              : Colors.red,
+                                                        ),
+                                                      ))),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.directions_outlined,
+                                                      color:
+                                                          AppColors.primaryDark,
+                                                      size: 20,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Align(
+                                                        alignment: Alignment
+                                                            .bottomRight,
+                                                        child: Text(
+                                                            '${distance.toStringAsFixed(2)} km')),
+                                                  ]),
+                                            ],
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              String url = MAP_PLACE +
+                                                  (item.placeId ?? '');
+                                              print(url);
+                                              final uri = Uri.parse(url);
+                                              await launchUrl(uri,
+                                                      mode: LaunchMode
+                                                          .externalApplication)
+                                                  .catchError((e) => print(e));
+                                            },
+                                            child: Text('Direct'),
+                                            style: TextButton.styleFrom(
+                                              foregroundColor: Colors.white,
+                                              backgroundColor:
+                                                  AppColors.primaryDark,
+                                              disabledForegroundColor:
+                                                  Colors.grey,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(5),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )));
+                            },
+                          ),
+                        )
+                      : const SizedBox(),
+                  Positioned(
+                      top: 20,
+                      left: 10,
+                      right: 10,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            child: const Around(distance: 3),
+                            onTap: () async {
+                              await onRadiusChanged(3000);
+                            },
+                          ),
+                          GestureDetector(
+                            child: const Around(distance: 5),
+                            onTap: () async {
+                              await onRadiusChanged(5000);
+                            },
+                          ),
+                          GestureDetector(
+                            child: const Around(distance: 10),
+                            onTap: () async {
+                              await onRadiusChanged(10000);
+                            },
+                          ),
+                        ],
+                      )),
+                ],
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              ));
   }
 
-  void _addMarker(LatLng pos) async {
-    if (_origin == null || (_origin != null && _destination != null)) {
-      // Origin is not set OR Origin/Destination are both set
-      // Set origin
-      setState(() {
-        _origin = Marker(
-          markerId: const MarkerId('origin'),
-          infoWindow: const InfoWindow(title: 'Origin'),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-          position: pos,
-        );
-        // Reset destination
-        _destination = null;
+  void _animatedMapMove(LatLng destLocation, double destZoom) {
+    // Create some tweens. These serve to split up the transition from one location to another.
+    // In our case, we want to split the transition be<tween> our current map center and the destination.
+    final latTween = Tween<double>(
+        begin: mapController.center.latitude, end: destLocation.latitude);
+    final lngTween = Tween<double>(
+        begin: mapController.center.longitude, end: destLocation.longitude);
+    final zoomTween = Tween<double>(begin: mapController.zoom, end: destZoom);
 
-        // Reset info
-        _info = null;
-      });
-    } else {
-      // Origin is already set
-      // Set destination
-      setState(() {
-        _destination = Marker(
-          markerId: const MarkerId('destination'),
-          infoWindow: const InfoWindow(title: 'Destination'),
-          icon:
-              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-          position: pos,
-        );
-      });
+    // Create a animation controller that has a duration and a TickerProvider.
+    var controller = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    // The animation determines what path the animation will take. You can try different Curves values, although I found
+    // fastOutSlowIn to be my favorite.
+    Animation<double> animation =
+        CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn);
 
-      // Get directions
-      await DirectionsRepository()
-          .getDirections(origin: _origin!.position, destination: pos)
-          .then((value) => {setState(() => _info = value)});
-    }
+    controller.addListener(() {
+      mapController.move(
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
+    });
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.dispose();
+      } else if (status == AnimationStatus.dismissed) {
+        controller.dispose();
+      }
+    });
+
+    controller.forward();
+  }
+
+  Future<void> getPolyline(LatLng des) async {
+    await DirectionsRepository()
+        .getDirections(origin: currentLocation, destination: des)
+        .then((value) => {setState(() => destination = value)});
+  }
+
+  Future<void> onRadiusChanged(int value) async {
+    await mapHelper
+        .getDirections(currentLocation,
+            mapMarkers[selectedIndex].location ?? currentLocation)
+        .then((value) => {distance = value})
+        .catchError((e) {});
+    destination = null;
+    radius = value;
+    setState(() {});
+    await initMarkers();
+  }
+
+  Future<String> initMarkers() async {
+    final List<MapMarker> places = await mapHelper
+        .searchPlaces('recycling center', radius, currentLocation)
+        .catchError((e) {
+      setState(() {
+        mapMarkers = [];
+      });
+      return Future.error(e);
+    });
+    setState(() {
+      mapMarkers = places;
+    });
+    return Future.value('success');
   }
 }

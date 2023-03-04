@@ -1,14 +1,44 @@
+// import 'package:latlong2/latlong.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
+
+class MapMarker {
+  final String? title;
+  final String? vicinity;
+  final LatLng location;
+  final int rating;
+  final String? placeId;
+  final bool? isOpenNow;
+  MapMarker({
+    required this.title,
+    required this.vicinity,
+    required this.location,
+    required this.rating,
+    required this.placeId,
+    required this.isOpenNow,
+  });
+}
+
+class MapDirect {
+  final String? weightName;
+  final double? weight;
+  final double? duration;
+  final double? distance;
+  MapDirect({
+    required this.weightName,
+    required this.weight,
+    required this.duration,
+    required this.distance,
+  });
+}
 
 class Directions {
-  final LatLngBounds bounds;
   final List<PointLatLng> polylinePoints;
   final String totalDistance;
   final String totalDuration;
 
   const Directions({
-    required this.bounds,
     required this.polylinePoints,
     required this.totalDistance,
     required this.totalDuration,
@@ -19,14 +49,6 @@ class Directions {
 
     final data = Map<String, dynamic>.from(map['routes'][0]);
 
-    final northeast = data['bounds']['northeast'];
-    final southwest = data['bounds']['southwest'];
-
-    final bounds = LatLngBounds(
-      northeast: LatLng(northeast['lat'], northeast['lng']),
-      southwest: LatLng(southwest['lat'], southwest['lng']),
-    );
-
     String distance = '';
     String duration = '';
 
@@ -36,7 +58,6 @@ class Directions {
     }
 
     return Directions(
-        bounds: bounds,
         polylinePoints: PolylinePoints()
             .decodePolyline(data['overview_polyline']['points']),
         totalDistance: distance,

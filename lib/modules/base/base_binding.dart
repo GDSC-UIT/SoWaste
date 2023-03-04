@@ -3,7 +3,6 @@ import 'package:sowaste/modules/base/base_controller.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
-import 'package:sowaste/modules/map/map_controller.dart';
 
 class BaseBinding extends Bindings {
   @override
@@ -12,6 +11,5 @@ class BaseBinding extends Bindings {
     Get.put<HomeController>(HomeController());
     Get.lazyPut<EnvironmentNewsController>(() => EnvironmentNewsController());
     Get.lazyPut<DictionaryController>(() => DictionaryController());
-    Get.lazyPut<MapController>(() => MapController());
   }
 }

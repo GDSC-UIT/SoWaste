@@ -27,14 +27,14 @@ class MapHelper {
     }
     return response.data['results']
         .map<MapMarker>((place) => MapMarker(
-              title: place['name'],
-              vicinity: place['vicinity'],
+              title: place['name'] ?? '',
+              vicinity: place['vicinity'] ?? '',
               location: LatLng(
-                place['geometry']['location']['lat'],
-                place['geometry']['location']['lng'],
+                place['geometry']['location']['lat'] ?? 0,
+                place['geometry']['location']['lng'] ?? 0,
               ),
-              rating: place['rating'],
-              placeId: place['place_id'],
+              rating: place['rating'] ?? 0,
+              placeId: place['place_id'] ?? '',
               isOpenNow: place['opening_hours'] != null
                   ? place['opening_hours']['open_now']
                   : false,

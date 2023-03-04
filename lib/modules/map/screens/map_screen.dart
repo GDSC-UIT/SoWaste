@@ -229,7 +229,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                   currentLocation);
                               setState(() {});
                             },
-                            itemCount: mapMarkers.length,
+                            itemCount: mapMarkers.length ?? 0,
                             itemBuilder: (_, index) {
                               final item = mapMarkers[index];
 
@@ -465,15 +465,16 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   }
 
   Future<void> onRadiusChanged(int value) async {
+    selectedIndex = 0;
+    destination = null;
+    radius = value;
+    await initMarkers();
     await mapHelper
         .getDirections(currentLocation,
             mapMarkers[selectedIndex].location ?? currentLocation)
         .then((value) => {distance = value})
         .catchError((e) {});
-    destination = null;
-    radius = value;
     setState(() {});
-    await initMarkers();
   }
 
   Future<String> initMarkers() async {

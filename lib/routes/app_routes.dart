@@ -21,4 +21,7 @@ class AppRoutes {
 
   //trash detect
   static const pickImageScreen = '/pick_image';
+
+  //test flite
+  static const tflite = '/tflite';
 }

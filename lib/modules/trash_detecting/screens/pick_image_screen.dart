@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';

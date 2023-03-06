@@ -14,6 +14,7 @@ import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
+import 'package:sowaste/modules/trash_detecting/screens/tflite_home.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
 import '../modules/home/screens/home_screen.dart';
@@ -89,6 +90,13 @@ class AppPages {
     GetPage(
       name: AppRoutes.pickImageScreen,
       page: () => const PickImageScreen(),
+      transition: Transition.cupertino,
+    ),
+
+    //Test tflite
+    GetPage(
+      name: AppRoutes.tflite,
+      page: () => TfliteHome(),
       transition: Transition.cupertino,
     ),
   ];

@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute:
-          DataCenter.isFirstTime ? AppRoutes.onboardingPage : AppRoutes.base,
+          // DataCenter.isFirstTime ? AppRoutes.onboardingPage : AppRoutes.base,
+          AppRoutes.tflite,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

@@ -4,7 +4,6 @@ import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 import 'package:sowaste/modules/trash_detecting/widgets/trash_button.dart';
-import 'package:sowaste/routes/app_routes.dart';
 
 class TrashDetectingScreen extends StatelessWidget {
   const TrashDetectingScreen({super.key});

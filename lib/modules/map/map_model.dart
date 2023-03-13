@@ -7,7 +7,7 @@ class MapMarker {
   final String? title;
   final String? vicinity;
   final LatLng location;
-  final int rating;
+  final double? rating;
   final String? placeId;
   final bool? isOpenNow;
   MapMarker({

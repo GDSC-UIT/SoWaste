@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/article.dart';
+import 'package:sowaste/modules/env_news/env_news_controller.dart';
+import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 class NewsCard extends StatelessWidget {
@@ -10,9 +12,11 @@ class NewsCard extends StatelessWidget {
   final Article article;
   @override
   Widget build(BuildContext context) {
+    final EnvironmentNewsController environmentNewsController =
+        Get.put(EnvironmentNewsController());
     return GestureDetector(
         onTap: () {
-          Get.toNamed(AppRoutes.envNewsDetailedPage, arguments: article);
+          environmentNewsController.getDetailArticle(article);
         },
         child: SizedBox(
           width: 170,

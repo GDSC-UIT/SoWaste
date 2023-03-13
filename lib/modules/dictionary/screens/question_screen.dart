@@ -4,6 +4,7 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/global_widget/app_button.dart';
+import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
 import 'package:sowaste/modules/dictionary/widgets/option_button.dart';
@@ -17,17 +18,8 @@ class QuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     print("OptionLength: $_dictionaryController");
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-          title: Text(
-            "Quiz: Plastic Bottle",
-            style: CustomTextStyle.sub(AppColors.primary),
-          ),
+        appBar: ArrowBackAppBar(
+          title: _dictionaryController.currentTrash.value.name,
         ),
         body: Obx(() {
           final index = _dictionaryController.currentQuestionIndex.value;
@@ -58,10 +50,10 @@ class QuestionScreen extends StatelessWidget {
               ),
               (Obx(() {
                 return Column(
-                  children: question.options!
+                  children: question.options
                       .map((e) => OptionButton(
                             point: question.point,
-                            optionIndex: question.options!.indexOf(e) + 1,
+                            optionIndex: question.options.indexOf(e) + 1,
                             option: e,
                             isAble: _dictionaryController.userAnswer.value == 0
                                 ? true
@@ -70,7 +62,8 @@ class QuestionScreen extends StatelessWidget {
                       .toList(),
                 );
               })),
-              AppButton(
+              Obx(() => AppButton(
+                  ignore: _dictionaryController.userAnswer.value == 0,
                   buttonText:
                       index + 1 < _dictionaryController.currentQuiz.length
                           ? "CONTINUE"
@@ -82,7 +75,7 @@ class QuestionScreen extends StatelessWidget {
                     } else {
                       Get.off(() => QuizResultScreen());
                     }
-                  })
+                  }))
             ],
           );
         }));

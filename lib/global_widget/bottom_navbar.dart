@@ -17,24 +17,6 @@ class BottomNavBar extends StatelessWidget {
     return ConvexAppBar(
       initialActiveIndex: selectedIndex,
       cornerRadius: 10,
-      // onTap: (index) {
-      //   switch (index) {
-      //     case 0:
-      //       Get.toNamed(AppRoutes.homeScreen);
-      //       break;
-      //     case 1:
-      //       Get.toNamed(AppRoutes.envNewsSearchPage);
-      //       break;
-      //     case 2:
-      //       Get.toNamed(AppRoutes.detectPage);
-      //       break;
-      //     case 3:
-      //       Get.toNamed(AppRoutes.dictionaryPage);
-      //       break;
-      //     default:
-      //       Get.toNamed('/home');
-      //   }
-      // },
       onTap: (index) => _baseController.currentIndex.value = index,
       items: [
         const TabItem(icon: Icons.home),
@@ -42,8 +24,11 @@ class BottomNavBar extends StatelessWidget {
         TabItem(
             icon: RawMaterialButton(
           onPressed: () async {
-            await ImageServices.getImageFormCamera();
-            Get.toNamed(AppRoutes.detectPage);
+            await ImageServices.getImageFromCamera();
+            if (ImageServices.pickedImage != null) {
+              _baseController.currentIndex.value = 2;
+            }
+            // Get.toNamed(AppRoutes.detectPage);
           },
           elevation: 2.0,
           fillColor: AppColors.primaryDark,

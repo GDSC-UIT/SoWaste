@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
+import 'package:sowaste/modules/env_news/env_news_controller.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../core/themes/app_colors.dart';
@@ -12,6 +13,7 @@ class CardBigNews extends StatelessWidget {
   final Article article;
   @override
   Widget build(BuildContext context) {
+    final EnvironmentNewsController environmentNewsController = Get.find();
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -62,8 +64,7 @@ class CardBigNews extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () => {
-                          Get.toNamed(AppRoutes.envNewsDetailedPage,
-                              arguments: article)
+                          environmentNewsController.getDetailArticle(article)
                         },
                         child: Text(
                           "Read more ",

@@ -23,7 +23,7 @@ class Around extends StatelessWidget {
         ],
       ),
       child: Text(
-        '${distance}km around you',
+        '${distance}km',
         style: const TextStyle(
           fontSize: 14.0,
           fontWeight: FontWeight.w500,

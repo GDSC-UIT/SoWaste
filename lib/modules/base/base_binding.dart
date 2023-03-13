@@ -10,6 +10,6 @@ class BaseBinding extends Bindings {
     Get.lazyPut<BaseController>(() => BaseController());
     Get.put<HomeController>(HomeController());
     Get.lazyPut<EnvironmentNewsController>(() => EnvironmentNewsController());
-    Get.lazyPut<DictionaryController>(() => DictionaryController());
+    Get.put<DictionaryController>(DictionaryController());
   }
 }

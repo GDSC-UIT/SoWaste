@@ -1,28 +1,30 @@
-import 'package:sowaste/data/models/question.dart';
+import 'dart:convert';
+
+import '../../core/values/app_url.dart';
+import '../services/http_service.dart';
 
 class Trash {
   String id;
   String name;
   bool isOrganic;
   bool isRecyable;
-  String description;
+  String? description;
   String displayImage;
   String uri;
-  List<Question> questions;
+  String shortDescription;
 
-  Trash(
-      {required this.id,
-      required this.description,
-      required this.name,
-      required this.isOrganic,
-      required this.isRecyable,
-      required this.displayImage,
-      required this.uri,
-      required this.questions});
+  Trash({
+    required this.id,
+    required this.name,
+    required this.isOrganic,
+    required this.isRecyable,
+    required this.displayImage,
+    required this.uri,
+    required this.shortDescription,
+    this.description,
+  });
 
   factory Trash.fromJson(Map<String, dynamic> json) {
-    List<Question> temp = [];
-    json["questions"].forEach((q) => temp.add(Question.fromJson(q)));
     return Trash(
         id: json["_id"],
         name: json["name"],
@@ -30,7 +32,20 @@ class Trash {
         isRecyable: json["recyable"] as bool,
         description: json["description"],
         uri: json["uri"],
-        questions: temp,
+        shortDescription: json["short_description"],
         displayImage: json["display_image"]);
+  }
+
+  static Future<Trash?> getTrash(String id) async {
+    try {
+      final response =
+          await HttpService.getRequest("${UrlValue.dictionaryUrl}/$id");
+      final trashJson = json.decode(utf8.decode(response.bodyBytes))["data"];
+      print("Trash json : $trashJson");
+      return Trash.fromJson(trashJson);
+    } catch (error) {
+      print("Failed to fetch a trash: $error");
+    } finally {}
+    return null;
   }
 }

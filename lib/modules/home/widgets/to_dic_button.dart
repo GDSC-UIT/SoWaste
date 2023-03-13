@@ -13,34 +13,45 @@ class ToDicButton extends StatelessWidget {
       onTap: () {
         Get.toNamed('/dictionary');
       },
-      child: Card(
-        elevation: 10,
-        child: Container(
-          height: 150,
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Flexible(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Go to Trash Dictionary to learn more",
-                    style: CustomTextStyle.bodyBold(AppColors.primary),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward,
-                    color: AppColors.primary,
-                    size: 40,
-                  )
-                ],
-              ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "You haven’t been learning any quizzes yet",
+            style:
+                CustomTextStyle.bodyBold(AppColors.onBg).copyWith(height: 1.5),
+          ),
+          Card(
+            elevation: 10,
+            child: Container(
+              height: 150,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "Go to Trash Dictionary to learn more",
+                            style: CustomTextStyle.bodyBold(AppColors.primary),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward,
+                            color: AppColors.primary,
+                            size: 40,
+                          )
+                        ],
+                      ),
+                    ),
+                    Flexible(child: Image.asset(AppIcons.dictionary))
+                  ]),
             ),
-            Flexible(child: Image.asset(AppIcons.dictionary))
-          ]),
-        ),
+          ),
+        ],
       ),
     );
   }

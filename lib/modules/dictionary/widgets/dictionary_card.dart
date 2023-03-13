@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
 import '../../../data/models/trash.dart';
@@ -19,6 +20,7 @@ class DictionaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Trash trash = DataCenter.dictionary[_index];
+    final DictionaryController dictionaryController = Get.find();
     return SizedBox(
       height: 250,
       child: Card(
@@ -46,13 +48,15 @@ class DictionaryCard extends StatelessWidget {
                         Text(
                           trash.name,
                           style: CustomTextStyle.bodyBold(AppColors.onSur),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           trash.isOrganic ? "Organic" : "",
                           style: CustomTextStyle.medium(AppColors.onBg),
                         ),
                         Text(
-                          trash.description,
+                          trash.shortDescription,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: CustomTextStyle.normal(AppColors.onBg),
@@ -64,11 +68,10 @@ class DictionaryCard extends StatelessWidget {
                                 padding: MaterialStateProperty.all<EdgeInsets>(
                                     EdgeInsets.zero),
                               ),
-                              onPressed: () {
-                                print("Clicked readmore");
-                                Get.to(() => TrashDetailScreen(),
-                                    arguments: trash);
-                              },
+                              onPressed: () => {
+                                    dictionaryController
+                                        .getDetailTrash(trash.id)
+                                  },
                               child: Row(
                                 children: const [
                                   Text("Read more"),

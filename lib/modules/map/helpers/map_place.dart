@@ -12,10 +12,11 @@ class MapHelper {
   Future<List<MapMarker>> searchPlaces(
       String searchText, int radius, LatLng location) async {
     final response = await _dio.get(_searchUrl, queryParameters: {
-      "radius": radius,
+      // "radius": radius,
       "location": "${location.latitude},${location.longitude}",
       "keyword": searchText,
-      "key": GOOGLE_PLACE_API_KEY
+      "key": GOOGLE_PLACE_API_KEY,
+      "rankby": "distance"
     }).catchError((e) {
       return throw Exception('Error getting directions');
     });
@@ -30,10 +31,10 @@ class MapHelper {
               title: place['name'] ?? '',
               vicinity: place['vicinity'] ?? '',
               location: LatLng(
-                place['geometry']['location']['lat'] ?? 0,
-                place['geometry']['location']['lng'] ?? 0,
+                place['geometry']['location']['lat'] ?? 0.0,
+                place['geometry']['location']['lng'] ?? 0.0,
               ),
-              rating: place['rating'] ?? 0,
+              rating: double.parse(place['rating'].toString()),
               placeId: place['place_id'] ?? '',
               isOpenNow: place['opening_hours'] != null
                   ? place['opening_hours']['open_now']

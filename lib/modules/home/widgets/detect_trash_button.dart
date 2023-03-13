@@ -16,7 +16,7 @@ class CameraButton extends StatelessWidget {
       child: InkWell(
           onTap: () async {
             _homeController.count.value += 1;
-            await ImageServices.getImageFormCamera();
+            await ImageServices.getImageFromCamera();
             Get.toNamed('/detect');
           },
           borderRadius: BorderRadius.circular(24),

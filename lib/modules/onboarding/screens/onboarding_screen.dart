@@ -36,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
       activeShape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)));
   void gotoHomeScreen() {
-    Get.toNamed(AppRoutes.homeScreen);
+    Get.toNamed(AppRoutes.base);
   }
 
   @override

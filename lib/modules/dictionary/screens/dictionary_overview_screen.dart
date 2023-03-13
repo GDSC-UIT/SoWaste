@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_file_path.dart';
+import 'package:sowaste/data/services/local_data.dart';
+import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/widgets/search_input.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../global_widget/app_card_button.dart';
 import '../widgets/dictionary_card.dart';
@@ -17,7 +22,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
           elevation: 1,
           title: Text(
             "Dictionary",
-            style: CustomTextStyle.sub(AppColors.primary),
+            style: CustomTextStyle.sub(AppColors.secondary),
           ),
         ),
         body: Stack(children: [
@@ -36,7 +41,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
               DictionaryCard(),
               AppCardButton(
                 onTapFunction: () {
-                  print("Clicked!");
+                  Get.to(() => QuizzesScreen());
                 },
                 title: "Quiz time",
                 leading: const Icon(
@@ -46,7 +51,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
               ),
               AppCardButton(
                 onTapFunction: () {
-                  print("Clicked!");
+                  Get.toNamed(AppRoutes.savedTypesPage);
                 },
                 title: "Saved types of trash",
                 leading: const Icon(
@@ -55,8 +60,8 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 ),
               ),
               AppCardButton(
-                onTapFunction: () {
-                  print("Clicked!");
+                onTapFunction: () async {
+                  Get.toNamed(AppRoutes.recentTypesPage);
                 },
                 title: "Recent types of trash ",
                 leading: const Icon(

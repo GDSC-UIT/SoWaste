@@ -10,7 +10,7 @@ class AppRoutes {
   static const savedTypesPage = '/saved';
   static const quizzesPage = '/quizzes';
   static const questionsPage = '/questions';
-  static const detailPage = '/detail';
+  static const trashDetailPage = '/detail';
   static const detectPage = '/detect';
   // env news route
   static const envNewsDonePage = '/env_news/done';

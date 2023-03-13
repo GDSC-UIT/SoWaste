@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/routes/app_routes.dart';
+import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
+
+import '../../../data/models/trash.dart';
 
 class SearchInput extends StatelessWidget {
   SearchInput({super.key});
@@ -69,13 +71,12 @@ class SearchInput extends StatelessWidget {
                     GestureDetector(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: Text(
-                            _dictionaryController.foundWords.value[index].name),
+                        child:
+                            Text(_dictionaryController.foundWords[index].name),
                       ),
                       onTap: () => {
-                        Get.toNamed(AppRoutes.detailPage,
-                            arguments:
-                                _dictionaryController.foundWords.value[index])
+                        _dictionaryController.getDetailTrash(
+                            _dictionaryController.foundWords[index].id)
                       },
                     ),
                     const Divider(

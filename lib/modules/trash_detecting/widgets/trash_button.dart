@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
+import 'package:sowaste/routes/app_routes.dart';
+
+import '../../../data/models/trash.dart';
 
 class TrashButton extends StatefulWidget {
-  const TrashButton({super.key});
+  const TrashButton({super.key, required this.trash});
+  final Trash? trash;
 
   @override
   State<TrashButton> createState() => _TrashButtonState();
@@ -12,17 +17,14 @@ class TrashButton extends StatefulWidget {
 
 class _TrashButtonState extends State<TrashButton> {
   bool isShowedDetail = false;
-  int index = 0;
-  Map<String, String> data = {
-    "name": "Metal bin",
-    "type": "Metal",
-    "category": "Recycling Trash",
-    "description":
-        "A metal bin is a container made of metal, typically used for storing and transporting waste or other materials...",
-  };
-
+  final DictionaryController _dictionaryController =
+      Get.put(DictionaryController());
   @override
   Widget build(BuildContext context) {
+    if (widget.trash == null) return Container();
+    String typeOfTrash = (widget.trash!.isOrganic ? "Organic" : "") +
+        (widget.trash!.isRecyable ? "Recyable" : "");
+
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -32,13 +34,13 @@ class _TrashButtonState extends State<TrashButton> {
         child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             decoration: BoxDecoration(
-                color: AppColors.background.withOpacity(0.7),
+                color: AppColors.onBg.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(24)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "($index) ${data["name"]}",
+                  widget.trash!.name,
                   style: CustomTextStyle.title(
                       isShowedDetail ? AppColors.primary : AppColors.onBg),
                 ),
@@ -47,24 +49,20 @@ class _TrashButtonState extends State<TrashButton> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Trash type: ${data["type"]}",
+                            typeOfTrash,
                             style: CustomTextStyle.normal(AppColors.onBg)
                                 .copyWith(height: 1.5),
                           ),
                           Text(
-                            '${data["category"]}',
-                            style: CustomTextStyle.normal(AppColors.secondary)
-                                .copyWith(height: 1.8),
-                          ),
-                          Text(
-                            "${data["description"]}",
+                            widget.trash!.shortDescription,
                             style: CustomTextStyle.normal(AppColors.info)
                                 .copyWith(height: 1.2),
                             maxLines: 2,
                           ),
                           GestureDetector(
                               onTap: () {
-                                Get.toNamed('/detail');
+                                _dictionaryController
+                                    .getDetailTrash(widget.trash!.id);
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 8),

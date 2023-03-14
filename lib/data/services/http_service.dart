@@ -1,7 +1,8 @@
 import 'package:http/http.dart' as http;
 
 class HttpService {
-  static Future<http.Response> postRequest({body, url}) async {
+  static Future<http.Response> postRequest(Set<Object?> set,
+      {body, url}) async {
     return await http.post(Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',

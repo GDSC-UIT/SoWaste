@@ -1,16 +1,20 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageServices {
   static File? pickedImage;
+  static double? imageWidth;
+  static double? imageHeight;
   static Future<void> getImageFromCamera() async {
     pickedImage = null;
     try {
       final image = await ImagePicker().getImage(
         source: ImageSource.camera,
       );
+
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {

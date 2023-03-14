@@ -5,6 +5,7 @@ import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.da
 import 'package:sowaste/modules/env_news/screens/env_news_search_screen.dart';
 import 'package:sowaste/modules/home/screens/home_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
+import 'package:sowaste/modules/map/screens/map_screen.dart';
 
 class BaseController extends GetxController {
   RxInt currentIndex = 0.obs;
@@ -22,8 +23,8 @@ class BaseController extends GetxController {
   var pages = [
     HomeScreen(),
     EnvironmentNewsOverviewScreen(),
-    const PickImageScreen(),
+    PickImageScreen(),
     const DictionaryOverviewScreen(),
-    HomeScreen(),
+    const MapScreen(),
   ].obs;
 }

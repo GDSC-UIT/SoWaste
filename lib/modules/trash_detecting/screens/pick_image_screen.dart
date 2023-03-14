@@ -1,15 +1,30 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
+import 'package:sowaste/core/values/app_url.dart';
+import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
+import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
+import 'package:sowaste/modules/trash_detecting/trash_detecting_controller.dart';
 
 class PickImageScreen extends StatelessWidget {
-  const PickImageScreen({super.key});
+  PickImageScreen({super.key});
+  final TrashDetectingController _trashDetectingController =
+      Get.put(TrashDetectingController());
+  final DictionaryController _dictionaryController =
+      Get.put(DictionaryController());
+  final HomeController _homeController = Get.put(HomeController());
+  List<Widget> stackChildren = [];
+
   Widget PickImageButton({required String img, required String text}) {
     return Card(
         elevation: 5,
@@ -29,6 +44,70 @@ class PickImageScreen extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  Future<void> uploadImage() async {
+    try {
+      var uri = Uri.parse(UrlValue.detectTrashUrl);
+      var request = http.MultipartRequest("POST", uri);
+      request.files.add(await http.MultipartFile.fromPath(
+        'img_file', // NOTE - this value must match the 'file=' at the start of -F
+        ImageServices.pickedImage!.path,
+        contentType: MediaType('image', 'png'),
+      ));
+      final response = await http.Response.fromStream(await request.send());
+      final temp = await json.decode(response.body);
+      _trashDetectingController.recognitions.value = temp["model_predict"];
+      _trashDetectingController.imgWidth = temp["width"];
+      _trashDetectingController.imgHeight = temp["height"];
+
+      print(response.statusCode);
+      print("Body: ${response.body}");
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<void> pickImageToDetect({bool camera = true}) async {
+    try {
+      ImageServices.pickedImage == null;
+      _trashDetectingController.recognitions.value = [];
+      _trashDetectingController.isLoading.value = true;
+      camera == true
+          ? await ImageServices.getImageFromCamera()
+          : await ImageServices.getImageFromGallery();
+      if (ImageServices.pickedImage != null) {
+        Get.to(() => TrashDetectingScreen());
+      }
+      await uploadImage();
+      // Post recent Trash
+      ++DataCenter.timesDeteted.value;
+      for (var object in _trashDetectingController.recognitions) {
+        print("Object: ${object["name"]}");
+        for (var trash in DataCenter.dictionary) {
+          String temp = object["name"]
+              .toLowerCase()
+              .substring(0, object["name"].length - 1);
+          if (trash.name.toLowerCase().contains(temp)) {
+            print("Detected Trash: ${trash.name}");
+            _dictionaryController.currentTrash.value = trash;
+            _homeController.indexHasColor.value =
+                DataCenter.recentDetectedTrash.length;
+            await _dictionaryController.postRecentTrashToLocalStorage(
+                isDetected: true);
+
+            _homeController.updateTotalDetectedObjects();
+            _homeController
+                .setColorForPieChart(_homeController.indexHasColor.value);
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      print(error);
+    } finally {
+      _trashDetectingController.isLoading.value = false;
+    }
   }
 
   @override
@@ -63,12 +142,7 @@ class PickImageScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () async {
-                              await ImageServices.getImageFromCamera();
-                              if (ImageServices.pickedImage != null) {
-                                Get.to(() => const TrashDetectingScreen());
-                              }
-                            },
+                            onTap: () => {pickImageToDetect()},
                             child: PickImageButton(
                                 img: AppImages.camera, text: "Camera"),
                           ),
@@ -76,12 +150,7 @@ class PickImageScreen extends StatelessWidget {
                             width: 24,
                           ),
                           GestureDetector(
-                            onTap: () async {
-                              await ImageServices.getImageFromGallery();
-                              if (ImageServices.pickedImage != null) {
-                                Get.to(() => const TrashDetectingScreen());
-                              }
-                            },
+                            onTap: () => {pickImageToDetect(camera: false)},
                             child: PickImageButton(
                                 img: AppImages.gallery, text: "Gallery"),
                           )

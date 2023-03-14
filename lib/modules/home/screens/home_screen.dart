@@ -9,6 +9,7 @@ import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
 import 'package:sowaste/modules/home/widgets/quiz_card.dart';
+import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 import '../widgets/detect_trash_button.dart';
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
 
               // Piechart
               Obx(
-                () => (DataCenter.recentDetectedTrash.isEmpty)
+                () => (DataCenter.timesDeteted.value == 0)
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -78,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "This week, you have detected ${homeController.totalTimesDetecting} times ",
+                            "This week, you have detected ${DataCenter.timesDeteted} times ",
                             style: CustomTextStyle.bodyBold(AppColors.onBg)
                                 .copyWith(height: 1.5),
                           ),
@@ -113,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                             )),
                       ],
                     )
-                  : Container()),
+                  : const ToDicButton()),
 
               //Environment News
               title("Environment News",

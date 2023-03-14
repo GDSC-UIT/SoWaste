@@ -28,6 +28,7 @@ class DataCenter extends GetxController {
   static String doneQuizzesFolder = "";
   static List<FileSystemEntity> listQuizFile = [];
   static RxList<dynamic> recentDetectedTrash = [].obs;
+  static RxInt timesDeteted = 0.obs;
 
   static List<Map<String, dynamic>> dummy_data = [
     {
@@ -90,8 +91,10 @@ class DataCenter extends GetxController {
           "${DataCenter.AppFilePath}/${AppFileName.recentTrashes}");
       if (response == null) return;
       DataCenter.recentTrashes.value = response["data"];
+      DataCenter.timesDeteted.value = response["times"];
       filterRecentTrash();
       print("Recent Trashes: ${DataCenter.recentTrashes}");
+      print("Times: ${DataCenter.timesDeteted.value}");
       DataCenter.recentDetectedTrash.value = getRecentDetectedTrashes();
     } catch (error) {
       print("Has error when fetching recent trashes: $error");
@@ -184,14 +187,4 @@ class DataCenter extends GetxController {
 
   RxInt indexHasColor = 0.obs;
   RxInt count = 1.obs;
-
-  Set<Color> colors = {};
-
-  void setColorForPieChart(int index) {
-    while (index != dummy_data.length) {
-      colors.add(Colors.primaries[Random().nextInt(Colors.primaries.length)]);
-      index = colors.length;
-      indexHasColor.value = index;
-    }
-  }
 }

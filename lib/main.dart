@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
-import 'package:sowaste/core/values/app_file_name.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/routes/app_page.dart';
@@ -38,8 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialRoute:
-          // DataCenter.isFirstTime ? AppRoutes.onboardingPage : AppRoutes.base,
-          AppRoutes.tflite,
+          DataCenter.isFirstTime ? AppRoutes.onboardingPage : AppRoutes.base,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

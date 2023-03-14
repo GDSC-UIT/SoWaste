@@ -154,23 +154,27 @@ class DictionaryController extends GetxController {
     }
   }
 
-  Future<void> postRecentTrashToLocalStorage() async {
+  Future<void> postRecentTrashToLocalStorage({bool isDetected = false}) async {
     final int index = DataCenter.recentTrashes.indexWhere(
         (recentTrash) => recentTrash["id"] == currentTrash.value.id);
     if (index >= 0) {
-      // ++DataCenter.recentTrashes[index]["count"];
+      if (isDetected) ++DataCenter.recentTrashes[index]["count"];
       DataCenter.recentTrashes[index]["date"];
     } else {
       DataCenter.recentTrashes.add({
         "id": currentTrash.value.id,
         "name": currentTrash.value.name,
-        "count": 0, // number of times that user detect trash
+        "count": isDetected ? 1 : 0, // number of times that user detect trash
         "date": DateTime.now().toString()
       });
     }
+    await LocalService.saveContent({
+      "times": DataCenter.timesDeteted.value,
+      "data": DataCenter.recentTrashes
+    }, "${DataCenter.AppFilePath}/${AppFileName.recentTrashes}");
     DataCenter.recentTrashes.value = [...DataCenter.recentTrashes];
-    await LocalService.saveContent({"data": DataCenter.recentTrashes},
-        "${DataCenter.AppFilePath}/${AppFileName.recentTrashes}");
+    DataCenter.recentDetectedTrash.value =
+        DataCenter.getRecentDetectedTrashes();
     printRecentTrash();
   }
 }

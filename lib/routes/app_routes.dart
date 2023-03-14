@@ -24,4 +24,5 @@ class AppRoutes {
 
   //test flite
   static const tflite = '/tflite';
+  static const mapPage = '/map';
 }

@@ -7,9 +7,8 @@ import 'package:sowaste/core/themes/app_themes.dart';
 import '../modules/base/base_controller.dart';
 
 class BottomNavBar extends StatelessWidget {
-  BottomNavBar({super.key, this.selectedScreen});
+  BottomNavBar({super.key});
   final BaseController _baseController = Get.find();
-  final int? selectedScreen;
 
   @override
   Widget build(BuildContext context) {

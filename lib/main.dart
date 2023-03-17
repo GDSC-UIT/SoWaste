@@ -21,11 +21,11 @@ void main() async {
   // fetch all data from local and api
   await Future.wait([
     DataCenter.fetchDictionary(),
-    DataCenter.fetchQuestions(),
-    DataCenter.fetchArticles(),
-    DataCenter.fetchSavedTrashList(),
+    DataCenter.fetchAllQuestions(),
+    DataCenter.fetchAllArticles(),
+    DataCenter.fetchSavedTrashes(),
     DataCenter.fetchAllUserQuizzes(),
-    DataCenter.fetchRecentTrash(),
+    DataCenter.fetchRecentTrashes(),
   ]);
 
   runApp(const MyApp());

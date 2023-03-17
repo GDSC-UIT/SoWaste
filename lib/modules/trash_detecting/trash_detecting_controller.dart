@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:get/get.dart';
 
 import '../../data/models/trash.dart';
@@ -18,5 +16,6 @@ class TrashDetectingController extends GetxController {
         return trash;
       }
     }
+    return null;
   }
 }

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sowaste/core/values/app_file_name.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
-import 'package:sowaste/modules/env_news/screens/env_news_detailed_screen.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../core/themes/app_colors.dart';
@@ -51,7 +48,7 @@ class QuizResultScreen extends StatelessWidget {
                         "${DataCenter.doneQuizzesFolder}/${_dictionaryController.currentTrash.value.id}.json");
 
                     await _dictionaryController.getQuizFromLocal();
-                    Get.to(() => QuestionScreen());
+                    Get.toNamed(AppRoutes.questionsPage);
                   }),
               AppButton(
                 buttonText: "QUIT",

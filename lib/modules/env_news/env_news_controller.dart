@@ -21,10 +21,9 @@ class EnvironmentNewsController extends GetxController {
   RxBool isLoading = false.obs;
   @override
   void onInit() {
-    if (DataCenter.news.isNotEmpty)
+    if (DataCenter.news.isNotEmpty) {
       news.value = [...DataCenter.news];
-    else
-      print("Environment news: $news");
+    }
     super.onInit();
   }
 

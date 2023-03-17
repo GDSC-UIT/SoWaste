@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
@@ -14,10 +16,10 @@ class TrashDetectingScreen extends StatelessWidget {
 
   List<Widget> renderBoxes(Size size) {
     final ratio = size.width / _trashDetectingController.imgWidth;
-    print("Ratio: $ratio");
+    // print("Ratio: $ratio");
     stackChildren.add(Image.file(ImageServices.pickedImage!));
 
-    print(_trashDetectingController.recognitions);
+    // print(_trashDetectingController.recognitions);
     if (_trashDetectingController.recognitions.isEmpty) return [];
 
     return _trashDetectingController.recognitions.map((re) {
@@ -63,18 +65,26 @@ class TrashDetectingScreen extends StatelessWidget {
                   Stack(
                       alignment: AlignmentDirectional.bottomEnd,
                       children: stackChildren),
-                  SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                        itemBuilder: ((context, index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TrashButton(
-                                  trash: _trashDetectingController
-                                      .getDetectedTrash(
-                                          _trashDetectingController
-                                              .recognitions[index]["name"])),
-                            )),
-                        itemCount: 3),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: SizedBox(
+                      height: min(MediaQuery.of(context).size.height * 0.8,
+                          _trashDetectingController.recognitions.length * 54),
+                      child: _trashDetectingController.recognitions.isNotEmpty
+                          ? ListView.builder(
+                              itemBuilder: ((context, index) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TrashButton(
+                                        trash: _trashDetectingController
+                                            .getDetectedTrash(
+                                                _trashDetectingController
+                                                        .recognitions[index]
+                                                    ["name"])),
+                                  )),
+                              itemCount:
+                                  _trashDetectingController.recognitions.length)
+                          : Container(),
+                    ),
                   ),
                 ]);
         }));

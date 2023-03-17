@@ -14,9 +14,6 @@ class MarkdownText extends StatelessWidget {
       selectable: true,
       shrinkWrap: true,
       data: text,
-      // onTapLink: (text, href, title) {
-      //   href != null ? launch(href) : null;
-      // },
       styleSheet: MarkdownStyleSheet(
           h1: CustomTextStyle.h1(AppColors.onBg),
           h2: CustomTextStyle.h2(AppColors.onBg),

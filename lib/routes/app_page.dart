@@ -3,6 +3,7 @@ import 'package:sowaste/modules/base/base_binding.dart';
 import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/screens/recent_trashes.dart';
 import 'package:sowaste/modules/dictionary/screens/saved_trashes_screen.dart';
@@ -15,7 +16,6 @@ import 'package:sowaste/modules/map/screens/map_screen.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
-import 'package:sowaste/modules/trash_detecting/screens/tflite_home.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
 import '../modules/home/screens/home_screen.dart';
@@ -80,7 +80,19 @@ class AppPages {
         page: () => EnvsNewsDetailScreen(),
         transition: Transition.cupertino,
         binding: EnvironmentBinding()),
-
+    //dictionary
+    GetPage(
+      name: AppRoutes.questionsPage,
+      page: () => QuestionScreen(),
+      transition: Transition.cupertino,
+      binding: DictionaryBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.questionsPage,
+      page: () => QuestionScreen(),
+      transition: Transition.cupertino,
+      binding: DictionaryBinding(),
+    ),
     //base
     GetPage(
         name: AppRoutes.base,
@@ -90,7 +102,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.mapPage,
-        page: () => MapScreen(),
+        page: () => const MapScreen(),
         transition: Transition.cupertino,
         binding: BaseBinding()),
     //image
@@ -101,10 +113,5 @@ class AppPages {
     ),
 
     //Test tflite
-    GetPage(
-      name: AppRoutes.tflite,
-      page: () => TfliteHome(),
-      transition: Transition.cupertino,
-    ),
   ];
 }

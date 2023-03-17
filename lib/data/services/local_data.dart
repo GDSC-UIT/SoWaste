@@ -16,10 +16,10 @@ class LocalService {
     try {
       String fileContent = await File(filePath).readAsString();
       Map jsonContent = json.decode(fileContent);
-      print("File content: $jsonContent");
+      // print("File content: $jsonContent");
       return jsonContent;
     } catch (error) {
-      print("Fail to load data from local storage, $error");
+      // print("Fail to load data from local storage, $error");
     }
     return null;
   }
@@ -35,19 +35,19 @@ class LocalService {
   static Future<String> createFolderInAppDocDir(String folderName) async {
     //Get this App Document Directory
 
-    final Directory _appDocDir = await getApplicationDocumentsDirectory();
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
     //App Document Directory + folder name
-    final Directory _appDocDirFolder =
-        Directory('${_appDocDir.path}/$folderName/');
+    final Directory appDocDirFolder =
+        Directory('${appDocDir.path}/$folderName/');
 
-    if (await _appDocDirFolder.exists()) {
+    if (await appDocDirFolder.exists()) {
       //if folder already exists return path
-      return _appDocDirFolder.path;
+      return appDocDirFolder.path;
     } else {
       //if folder not exists create folder and then return its path
-      final Directory _appDocDirNewFolder =
-          await _appDocDirFolder.create(recursive: true);
-      return _appDocDirNewFolder.path;
+      final Directory appDocDirNewFolder =
+          await appDocDirFolder.create(recursive: true);
+      return appDocDirNewFolder.path;
     }
   }
 

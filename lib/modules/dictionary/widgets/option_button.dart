@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/data/models/option.dart';
 import 'package:sowaste/data/models/quiz_local.dart';
-import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 
 class OptionButton extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +17,7 @@ class ImageServices {
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {
-      print("Failed to pick image! : $e");
+      // print("Failed to pick image! : $e");
     }
   }
 
@@ -29,7 +28,7 @@ class ImageServices {
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {
-      print("Failed to pick image from gallery : $e");
+      // print("Failed to pick image from gallery : $e");
     }
   }
 }

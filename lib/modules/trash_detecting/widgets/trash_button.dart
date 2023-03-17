@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../data/models/trash.dart';
 

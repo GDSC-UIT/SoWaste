@@ -55,7 +55,6 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_polyline_points: ^1.0.0
   url_launcher: ^6.1.10
-  tflite: ^1.1.2
 
 flutter_icons:
   android: true
@@ -88,10 +87,6 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/icons/
-    - assets/tflite/ssd_mobilenet.tflite
-    - assets/tflite/ssd_mobilenet.txt
-    - assets/tflite/yolov2_tiny.tflite
-    - assets/tflite/yolov2_tiny.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

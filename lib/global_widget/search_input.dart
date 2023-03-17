@@ -32,13 +32,6 @@ class AppSearchInput extends StatelessWidget {
               Icons.search,
               size: 24,
             ),
-            // suffixIcon: IconButton(
-            //   icon: const Icon(
-            //     Icons.clear,
-            //     size: 24,
-            //   ),
-            //   onPressed: deleteInput,
-            // ),
             border: InputBorder.none,
           ),
         ));

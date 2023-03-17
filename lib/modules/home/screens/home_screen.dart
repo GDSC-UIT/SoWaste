@@ -4,7 +4,6 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/data/services/data_center.dart';
-import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
@@ -47,7 +46,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController = Get.find();
     return Scaffold(
         appBar: AppBar(
           title: Image.asset(AppImages.appLogo),
@@ -84,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                                 .copyWith(height: 1.5),
                           ),
                           PieChart(),
-                          const LearnMoreButton(),
+                          LearnMoreButton(),
                         ],
                       ),
               ),

@@ -1,12 +1,12 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
-import 'package:sowaste/routes/app_routes.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
-import 'dart:math' as math;
 
 class CardBigNews extends StatelessWidget {
   const CardBigNews({super.key, required this.article});

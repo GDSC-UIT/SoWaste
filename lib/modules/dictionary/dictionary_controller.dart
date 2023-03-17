@@ -67,19 +67,19 @@ class DictionaryController extends GetxController {
   }
 
   Future<void> saveTrash(Trash t) async {
-    print("Trash is saved: ${isSaved.value}");
+    // print("Trash will be saved: ${isSaved.value}");
     if (!isSaved.value) {
       DataCenter.savedTrashList.add({"id": t.id, "name": t.name});
-      print("Data after add: ${DataCenter.savedTrashList}");
+      // print("Data after add: ${DataCenter.savedTrashList}");
     } else {
       DataCenter.savedTrashList.removeAt(indexTrashToRemove.value);
-      print("Data after remove: ${DataCenter.savedTrashList}");
+      // print("Data after remove: ${DataCenter.savedTrashList}");
     }
     final response = await LocalService.saveContent(
         {"data": DataCenter.savedTrashList},
         "${DataCenter.AppFilePath}/${AppFileName.savedTrashes}");
     isSaved.value = !isSaved.value;
-    print("Data after clicked Save! $response");
+    // print("Data after clicked Save! $response");
     DataCenter.savedTrashList.value = [...DataCenter.savedTrashList];
   }
 
@@ -102,7 +102,7 @@ class DictionaryController extends GetxController {
     localQuiz.name = currentTrash.value.name;
     localQuiz.shortDescription = currentTrash.value.shortDescription;
 
-    print("LocalQuiz: ${localQuiz.toJson()}");
+    // print("LocalQuiz: ${localQuiz.toJson()}");
 
     await LocalService.saveContent(localQuiz.toJson(),
         "${DataCenter.doneQuizzesFolder}/${localQuiz.quizId}.json");
@@ -148,12 +148,6 @@ class DictionaryController extends GetxController {
     return currentQuiz.length;
   }
 
-  void printRecentTrash() async {
-    for (var element in DataCenter.recentTrashes) {
-      print("${element["name"]}: ${element["count"]}");
-    }
-  }
-
   Future<void> postRecentTrashToLocalStorage({bool isDetected = false}) async {
     final int index = DataCenter.recentTrashes.indexWhere(
         (recentTrash) => recentTrash["id"] == currentTrash.value.id);
@@ -173,8 +167,7 @@ class DictionaryController extends GetxController {
       "data": DataCenter.recentTrashes
     }, "${DataCenter.AppFilePath}/${AppFileName.recentTrashes}");
     DataCenter.recentTrashes.value = [...DataCenter.recentTrashes];
-    DataCenter.recentDetectedTrash.value =
-        DataCenter.getRecentDetectedTrashes();
-    printRecentTrash();
+    DataCenter.recentDetectedTrashes.value =
+        DataCenter.getrecentDetectedTrasheses();
   }
 }

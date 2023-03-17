@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sowaste/core/themes/app_colors.dart';
-import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/global_widget/app_card_button.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';

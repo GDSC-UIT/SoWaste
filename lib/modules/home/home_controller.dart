@@ -28,9 +28,9 @@ class HomeController extends GetxController {
   Set<Color> colors = {};
 
   void setColorForPieChart(int index) {
-    print(
-        "Detected Trash List length: ${DataCenter.recentDetectedTrash.length}");
-    while (index != DataCenter.recentDetectedTrash.length) {
+    // print(
+    //     "Detected Trash List length: ${DataCenter.recentDetectedTrashes.length}");
+    while (index != DataCenter.recentDetectedTrashes.length) {
       colors.add(Colors.primaries[Random().nextInt(Colors.primaries.length)]);
       index = colors.length;
       indexHasColor.value = index;
@@ -39,7 +39,7 @@ class HomeController extends GetxController {
 
   void updateTotalDetectedObjects() {
     int sum = 0;
-    for (var trash in DataCenter.recentDetectedTrash) {
+    for (var trash in DataCenter.recentDetectedTrashes) {
       sum += trash["count"] as int;
     }
     totalDetectedObjects.value = sum;

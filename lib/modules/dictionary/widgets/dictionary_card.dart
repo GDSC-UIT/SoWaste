@@ -6,7 +6,6 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
 import '../../../data/models/trash.dart';
 
@@ -28,13 +27,13 @@ class DictionaryCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
         ),
         elevation: 5,
-        shadowColor: AppColors.onBg.withOpacity(0.5),
+        shadowColor: AppColors.onBg.withOpacity(0.7),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: GridTile(
             footer: Container(
               decoration: BoxDecoration(
-                color: AppColors.primaryLight.withOpacity(0.3),
+                color: AppColors.background.withOpacity(0.6),
               ),
               child: SizedBox(
                 height: 130,

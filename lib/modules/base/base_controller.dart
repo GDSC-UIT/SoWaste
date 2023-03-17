@@ -14,14 +14,11 @@ class BaseController extends GetxController {
     DataCenter.doneQuizzesFolder =
         await LocalService.createFolderInAppDocDir("quizzes");
     await LocalService.getAllFileDoneQuiz();
-    for (var element in DataCenter.listQuizFile) {
-      print(element.path);
-    }
     super.onInit();
   }
 
   var pages = [
-    HomeScreen(),
+    const HomeScreen(),
     EnvironmentNewsOverviewScreen(),
     PickImageScreen(),
     const DictionaryOverviewScreen(),

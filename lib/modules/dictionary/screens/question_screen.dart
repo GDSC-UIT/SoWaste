@@ -6,8 +6,8 @@ import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/global_widget/app_button.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
 import 'package:sowaste/modules/dictionary/widgets/option_button.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 class QuestionScreen extends StatelessWidget {
   QuestionScreen({
@@ -16,7 +16,7 @@ class QuestionScreen extends StatelessWidget {
   final DictionaryController _dictionaryController = Get.find();
   @override
   Widget build(BuildContext context) {
-    print("OptionLength: $_dictionaryController");
+    // print("OptionLength: $_dictionaryController");
     return Scaffold(
         appBar: ArrowBackAppBar(
           title: _dictionaryController.currentTrash.value.name,
@@ -73,7 +73,7 @@ class QuestionScreen extends StatelessWidget {
                     if (index + 1 < _dictionaryController.currentQuiz.length) {
                       _dictionaryController.currentQuestionIndex.value++;
                     } else {
-                      Get.off(() => QuizResultScreen());
+                      Get.offNamed(AppRoutes.resultQuizPage);
                     }
                   }))
             ],

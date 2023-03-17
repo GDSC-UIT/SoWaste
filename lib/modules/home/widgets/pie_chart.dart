@@ -25,9 +25,9 @@ class PieChart extends StatelessWidget {
                 width: 120,
                 height: min(200, _homeController.colors.length * 30),
                 child: ListView.builder(
-                    itemCount: DataCenter.recentDetectedTrash.length,
+                    itemCount: DataCenter.recentDetectedTrashes.length,
                     itemBuilder: ((context, index) {
-                      final e = DataCenter.recentDetectedTrash[index];
+                      final e = DataCenter.recentDetectedTrashes[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
@@ -37,7 +37,7 @@ class PieChart extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                   color: _homeController.colors.elementAt(
-                                      DataCenter.recentDetectedTrash
+                                      DataCenter.recentDetectedTrashes
                                           .indexOf(e)),
                                   borderRadius: BorderRadius.circular(4)),
                               width: 32,
@@ -72,7 +72,7 @@ class PieChart extends StatelessWidget {
                       pieLabel: (pieData, index) => '${pieData['measure']}%',
                       fillColor: (pieData, index) =>
                           _homeController.colors.elementAt(index!),
-                      data: DataCenter.recentDetectedTrash
+                      data: DataCenter.recentDetectedTrashes
                           .map((e) => {
                                 'domain': e['name'],
                                 'measure': ((e['count'] as int) /

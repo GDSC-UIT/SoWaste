@@ -16,6 +16,8 @@ import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 import 'package:sowaste/modules/trash_detecting/trash_detecting_controller.dart';
 
+import '../widgets/pick_image.dart';
+
 class PickImageScreen extends StatelessWidget {
   PickImageScreen({super.key});
   final TrashDetectingController _trashDetectingController =
@@ -24,27 +26,6 @@ class PickImageScreen extends StatelessWidget {
       Get.put(DictionaryController());
   final HomeController _homeController = Get.put(HomeController());
   List<Widget> stackChildren = [];
-
-  Widget PickImageButton({required String img, required String text}) {
-    return Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Image.asset(
-                img,
-                height: 60,
-                width: 60,
-              ),
-              Text(
-                text,
-                style: CustomTextStyle.normal(AppColors.onBg),
-              ),
-            ],
-          ),
-        ));
-  }
 
   Future<void> uploadImage() async {
     try {
@@ -61,10 +42,10 @@ class PickImageScreen extends StatelessWidget {
       _trashDetectingController.imgWidth = temp["width"];
       _trashDetectingController.imgHeight = temp["height"];
 
-      print(response.statusCode);
-      print("Body: ${response.body}");
+      // print(response.statusCode);
+      // print("Body: ${response.body}");
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -83,16 +64,16 @@ class PickImageScreen extends StatelessWidget {
       // Post recent Trash
       ++DataCenter.timesDeteted.value;
       for (var object in _trashDetectingController.recognitions) {
-        print("Object: ${object["name"]}");
+        // print("Object: ${object["name"]}");
         for (var trash in DataCenter.dictionary) {
           String temp = object["name"]
               .toLowerCase()
               .substring(0, object["name"].length - 1);
           if (trash.name.toLowerCase().contains(temp)) {
-            print("Detected Trash: ${trash.name}");
+            // print("Detected Trash: ${trash.name}");
             _dictionaryController.currentTrash.value = trash;
             _homeController.indexHasColor.value =
-                DataCenter.recentDetectedTrash.length;
+                DataCenter.recentDetectedTrashes.length;
             await _dictionaryController.postRecentTrashToLocalStorage(
                 isDetected: true);
 
@@ -104,7 +85,7 @@ class PickImageScreen extends StatelessWidget {
         }
       }
     } catch (error) {
-      print(error);
+      // print(error);
     } finally {
       _trashDetectingController.isLoading.value = false;
     }
@@ -143,7 +124,7 @@ class PickImageScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () => {pickImageToDetect()},
-                            child: PickImageButton(
+                            child: const PickImageButton(
                                 img: AppImages.camera, text: "Camera"),
                           ),
                           const SizedBox(
@@ -151,7 +132,7 @@ class PickImageScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () => {pickImageToDetect(camera: false)},
-                            child: PickImageButton(
+                            child: const PickImageButton(
                                 img: AppImages.gallery, text: "Gallery"),
                           )
                         ],

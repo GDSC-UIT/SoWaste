@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
-
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
-import '../../../routes/app_routes.dart';
 
 class NewsItem extends StatelessWidget {
   const NewsItem({super.key, required this.article});

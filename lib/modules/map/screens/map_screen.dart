@@ -293,7 +293,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 height: 10,
                                               ),
                                               Flexible(
-                                                child: Container(
+                                                child: SizedBox(
                                                   width: 240,
                                                   child: Text(item.title ?? '',
                                                       style: const TextStyle(
@@ -307,7 +307,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 height: 10,
                                               ),
                                               Flexible(
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       width: 200,
                                                       child: Text(
                                                         item.vicinity ?? '',
@@ -319,7 +319,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 height: 10,
                                               ),
                                               Flexible(
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       width: 200,
                                                       child: Text(
                                                         item.isOpenNow!
@@ -372,7 +372,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                           .externalApplication)
                                                   .catchError((e) => print(e));
                                             },
-                                            child: Text('Direct'),
                                             style: TextButton.styleFrom(
                                               foregroundColor: Colors.white,
                                               backgroundColor:
@@ -386,6 +385,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 ),
                                               ),
                                             ),
+                                            child: const Text('Direct'),
                                           ),
                                         ],
                                       )));

@@ -16,7 +16,7 @@ class EnvsNewsDetailScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             appBar: const ArrowBackAppBar(
-              isShowArrowBackIcon: false,
+              isShowArrowBackIcon: true,
             ),
             body: Obx(() {
               if (_environmentNewsController.isLoading.value) {

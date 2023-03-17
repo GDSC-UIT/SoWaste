@@ -1,5 +1,3 @@
-import 'package:sowaste/modules/base/base_screen.dart';
-
 class AppRoutes {
   //Home
   static const homeScreen = '/';
@@ -22,7 +20,6 @@ class AppRoutes {
   //trash detect
   static const pickImageScreen = '/pick_image';
 
-  //test flite
-  static const tflite = '/tflite';
+  //map
   static const mapPage = '/map';
 }

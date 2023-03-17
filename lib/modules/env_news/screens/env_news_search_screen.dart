@@ -47,7 +47,7 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
             Obx(
               () => _environmentNewsController.showBigCard.value
                   ? const SizedBox(height: 24)
-                  : SizedBox(),
+                  : const SizedBox(),
             ),
             Obx(() => _environmentNewsController.showBigCard.value
                 ? CardBigNews(
@@ -56,15 +56,18 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Container(
               constraints: BoxConstraints(maxHeight: context.height * 0.8),
-              child: Obx(
-                () => ListView.separated(
-                  itemBuilder: (_, index) => NewsItem(
-                    article: _environmentNewsController.news[index],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Obx(
+                  () => ListView.separated(
+                    itemBuilder: (_, index) => NewsItem(
+                      article: _environmentNewsController.news[index],
+                    ),
+                    separatorBuilder: (_, __) => const SizedBox(
+                      height: 16,
+                    ),
+                    itemCount: _environmentNewsController.news.length,
                   ),
-                  separatorBuilder: (_, __) => const SizedBox(
-                    height: 16,
-                  ),
-                  itemCount: _environmentNewsController.news.length,
                 ),
               ),
             ),

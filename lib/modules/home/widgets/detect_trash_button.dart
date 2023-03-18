@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
@@ -9,12 +8,11 @@ class CameraButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BaseController baseController = Get.find();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: InkWell(
           onTap: () async {
-            baseController.currentIndex.value = 2;
+            BaseController.changeIndexPage(2);
           },
           borderRadius: BorderRadius.circular(24),
           child: Container(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_icons.dart';
-import 'package:get/get.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
 class ToDicButton extends StatelessWidget {
@@ -10,11 +9,9 @@ class ToDicButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BaseController baseController = Get.find();
     return GestureDetector(
       onTap: () {
-        baseController.currentIndex.value = 3;
-        print(baseController.currentIndex.value);
+        BaseController.changeIndexPage(3);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

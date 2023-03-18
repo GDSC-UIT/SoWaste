@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
@@ -8,7 +9,15 @@ import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/map/screens/map_screen.dart';
 
 class BaseController extends GetxController {
-  RxInt currentIndex = 0.obs;
+  static final RxInt currentIndex = 0.obs;
+  static TabController? tabController;
+
+  /// change page from index
+  static void changeIndexPage(int index) {
+    currentIndex.value = index;
+    tabController!.animateTo(index);
+  }
+
   @override
   void onInit() async {
     DataCenter.doneQuizzesFolder =

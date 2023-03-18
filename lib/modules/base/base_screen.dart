@@ -14,10 +14,10 @@ class BaseScreen extends StatelessWidget {
         child: Scaffold(
       appBar: null,
       body: Obx(() => IndexedStack(
-            index: _baseController.currentIndex.value,
+            index: BaseController.currentIndex.value,
             children: _baseController.pages,
           )),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(),
     ));
   }
 }

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
 class LearnMoreButton extends StatelessWidget {
-  LearnMoreButton({super.key});
-  final BaseController _baseController = Get.put(BaseController());
+  const LearnMoreButton({super.key});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
-          _baseController.currentIndex.value = 3;
+          BaseController.changeIndexPage(3);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

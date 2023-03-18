@@ -59,30 +59,37 @@ class TrashDetectingScreen extends StatelessWidget {
           stackChildren.addAll(renderBoxes(size));
           return _trashDetectingController.isLoading.value
               ? const Center(child: CircularProgressIndicator())
-              : ListView(children: [
-                  Stack(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      children: stackChildren),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: SizedBox(
-                          child: _trashDetectingController
-                                  .recognitions.isNotEmpty
-                              ? Column(
-                                  children: _trashDetectingController
-                                      .recognitions
-                                      .map((trash) => Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 4),
-                                            child: TrashButton(
-                                                trash: _trashDetectingController
-                                                    .getDetectedTrash(
-                                                        trash["name"])),
-                                          ))
-                                      .toList())
-                              : Container()))
-                ]);
+              : Scrollbar(
+                  isAlwaysShown: true,
+                  thickness: 8.0,
+                  radius: const Radius.circular(10),
+                  child: ListView(children: [
+                    Stack(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        children: stackChildren),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        child: SizedBox(
+                            child: _trashDetectingController
+                                    .recognitions.isNotEmpty
+                                ? Column(
+                                    children: _trashDetectingController
+                                        .recognitions
+                                        .map((trash) => Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 4),
+                                              child: TrashButton(
+                                                  trash:
+                                                      _trashDetectingController
+                                                          .getDetectedTrash(
+                                                              trash["name"])),
+                                            ))
+                                        .toList())
+                                : Container()))
+                  ]),
+                );
         }));
   }
 }

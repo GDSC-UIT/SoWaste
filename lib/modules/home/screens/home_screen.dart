@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
@@ -11,6 +14,7 @@ import 'package:sowaste/modules/home/widgets/quiz_card.dart';
 import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
+import '../../base/base_controller.dart';
 import '../widgets/detect_trash_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -84,11 +88,11 @@ class HomeScreen extends StatelessWidget {
                           DataCenter.recentDetectedTrashes.isNotEmpty
                               ? PieChart()
                               : const CameraButton(),
-                          LearnMoreButton(),
+                          const LearnMoreButton(),
                         ],
                       ),
               ),
-
+              gap(),
               //Your Quizzes
               title(
                   "Your Quizzes",
@@ -115,17 +119,17 @@ class HomeScreen extends StatelessWidget {
                       ],
                     )
                   : const ToDicButton()),
-
+              gap(),
               //Environment News
               title("Environment News",
-                  () => {Get.toNamed(AppRoutes.environmentNewsPage)}, true),
+                  () => {BaseController.changeIndexPage(1)}, true),
               SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) =>
                       NewsCard(article: DataCenter.news[index]),
-                  itemCount: DataCenter.news.length,
+                  itemCount: min(DataCenter.news.length, 5),
                 ),
               ),
             ]),

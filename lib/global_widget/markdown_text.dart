@@ -15,9 +15,9 @@ class MarkdownText extends StatelessWidget {
       shrinkWrap: true,
       data: text,
       styleSheet: MarkdownStyleSheet(
-          h1: CustomTextStyle.h1(AppColors.onBg),
-          h2: CustomTextStyle.h2(AppColors.onBg),
-          h3: CustomTextStyle.h3(AppColors.onBg),
+          h1: CustomTextStyle.sub(AppColors.onBg),
+          h2: CustomTextStyle.title(AppColors.onBg),
+          h3: CustomTextStyle.bodyBold(AppColors.onBg),
           h4: CustomTextStyle.h4(AppColors.onBg),
           p: CustomTextStyle.normal(AppColors.onBg),
           blockquoteDecoration: BoxDecoration(

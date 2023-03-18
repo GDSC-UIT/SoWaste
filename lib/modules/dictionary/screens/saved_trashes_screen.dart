@@ -16,16 +16,19 @@ class SavedTrashesScreen extends StatelessWidget {
         appBar: const ArrowBackAppBar(
           title: "Saved types of trash",
         ),
-        body: Obx(() => DataCenter.savedTrashList.isEmpty
-            ? const Empty(text: "saved any trash yet!")
-            : ListView.builder(
-                itemBuilder: (context, index) => AppCardButton(
-                    onTapFunction: () async {
-                      dictionaryController.getDetailTrash(
-                          DataCenter.savedTrashList[index]["id"]);
-                    },
-                    title: DataCenter.savedTrashList[index]["name"]),
-                itemCount: DataCenter.savedTrashList.length,
-              )));
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Obx(() => DataCenter.savedTrashList.isEmpty
+              ? const Empty(text: "saved any trash yet!")
+              : ListView.builder(
+                  itemBuilder: (context, index) => AppCardButton(
+                      onTapFunction: () async {
+                        dictionaryController.getDetailTrash(
+                            DataCenter.savedTrashList[index]["id"]);
+                      },
+                      title: DataCenter.savedTrashList[index]["name"]),
+                  itemCount: DataCenter.savedTrashList.length,
+                )),
+        ));
   }
 }

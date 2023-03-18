@@ -4,6 +4,7 @@ import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
 import 'package:sowaste/modules/dictionary/screens/recent_trashes.dart';
 import 'package:sowaste/modules/dictionary/screens/saved_trashes_screen.dart';
@@ -88,8 +89,8 @@ class AppPages {
       binding: DictionaryBinding(),
     ),
     GetPage(
-      name: AppRoutes.questionsPage,
-      page: () => QuestionScreen(),
+      name: AppRoutes.resultQuizPage,
+      page: () => QuizResultScreen(),
       transition: Transition.cupertino,
       binding: DictionaryBinding(),
     ),

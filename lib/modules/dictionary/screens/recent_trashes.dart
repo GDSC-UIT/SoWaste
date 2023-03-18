@@ -16,17 +16,20 @@ class RecentTypesScreen extends StatelessWidget {
         appBar: const ArrowBackAppBar(
           title: "Recent types of trash",
         ),
-        body: Obx(() => DataCenter.recentTrashes.isEmpty
-            ? const Empty(text: "searched or detectd any trash yet!")
-            : ListView.builder(
-                itemBuilder: (context, index) => AppCardButton(
-                  onTapFunction: () {
-                    dictionaryController
-                        .getDetailTrash(DataCenter.recentTrashes[index]["id"]);
-                  },
-                  title: DataCenter.recentTrashes[index]["name"],
-                ),
-                itemCount: DataCenter.recentTrashes.length,
-              )));
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: Obx(() => DataCenter.recentTrashes.isEmpty
+              ? const Empty(text: "searched or detectd any trash yet!")
+              : ListView.builder(
+                  itemBuilder: (context, index) => AppCardButton(
+                    onTapFunction: () {
+                      dictionaryController.getDetailTrash(
+                          DataCenter.recentTrashes[index]["id"]);
+                    },
+                    title: DataCenter.recentTrashes[index]["name"],
+                  ),
+                  itemCount: DataCenter.recentTrashes.length,
+                )),
+        ));
   }
 }

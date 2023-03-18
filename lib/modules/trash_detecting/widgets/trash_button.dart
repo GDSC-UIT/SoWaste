@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-
 import '../../../data/models/trash.dart';
 
 class TrashButton extends StatefulWidget {
@@ -38,10 +37,26 @@ class _TrashButtonState extends State<TrashButton> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.trash!.name,
-                  style: CustomTextStyle.title(
-                       isShowedDetail ? AppColors.primary : AppColors.onBg),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.trash!.name,
+                      style: CustomTextStyle.title(
+                          isShowedDetail ? AppColors.primary : AppColors.onBg),
+                    ),
+                    isShowedDetail
+                        ? const Icon(
+                            Icons.keyboard_arrow_up,
+                            size: 20,
+                            color: AppColors.primaryDark,
+                          )
+                        : const Icon(
+                            Icons.keyboard_arrow_down,
+                            size: 20,
+                          ),
+                  ],
                 ),
                 isShowedDetail
                     ? Column(

@@ -11,7 +11,7 @@ class AppRoutes {
   static const questionsPage = '/dictionary/questions';
   static const trashDetailPage = '/dictionary/detail';
   static const detectPage = '/detect';
-  static const resultQuizPage = 'dictionary/quiz/result';
+  static const resultQuizPage = '/dictionary/quiz/result';
   // env news route
   static const environmentNewsPage = '/news';
   static const detailNewsPage = '/news/detail';

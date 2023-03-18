@@ -144,6 +144,6 @@ class DataCenter extends GetxController {
   }
 
   static void sortNews() {
-    DataCenter.news.sort((a, b) => a.createAt.compareTo(b.createAt));
+    DataCenter.news.sort((a, b) => b.createAt.compareTo(a.createAt));
   }
 }

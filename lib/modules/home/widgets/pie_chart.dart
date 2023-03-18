@@ -24,41 +24,43 @@ class PieChart extends StatelessWidget {
               SizedBox(
                 width: 120,
                 height: min(200, _homeController.colors.length * 30),
-                child: ListView.builder(
-                    itemCount: DataCenter.recentDetectedTrashes.length,
-                    itemBuilder: ((context, index) {
-                      final e = DataCenter.recentDetectedTrashes[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color:  _homeController.colors.elementAt(
-                                      DataCenter.recentDetectedTrashes
-                                          .indexOf(e)),
-                                  borderRadius: BorderRadius.circular(4)),
-                              width: 32,
-                              height: 16,
-                            ),
-                            const SizedBox(
-                              width: 12,
-                            ),
-                            SizedBox(
-                              width: 70,
-                              child: Text(
-                                e['name'],
-                                overflow: TextOverflow.ellipsis,
-                                style: CustomTextStyle.normal(
-                                    const Color(0xFF747474)),
+                child: Scrollbar(
+                  child: ListView.builder(
+                      itemCount: DataCenter.recentDetectedTrashes.length,
+                      itemBuilder: ((context, index) {
+                        final e = DataCenter.recentDetectedTrashes[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: _homeController.colors.elementAt(
+                                        DataCenter.recentDetectedTrashes
+                                            .indexOf(e)),
+                                    borderRadius: BorderRadius.circular(4)),
+                                width: 32,
+                                height: 16,
                               ),
-                            )
-                          ],
-                        ),
-                      );
-                    })),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              SizedBox(
+                                width: 70,
+                                child: Text(
+                                  e['name'],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: CustomTextStyle.normal(
+                                      const Color(0xFF747474)),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      })),
+                ),
               ),
               Expanded(
                 child: AspectRatio(

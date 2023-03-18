@@ -23,12 +23,12 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
         title: "Environment News",
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AppSearchInput(
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppSearchInput(
                 controller: _environmentNewsController.searchInput.value,
                 onChangeFunction: (String value) {
                   if (value == "") {
@@ -43,23 +43,38 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
                   _environmentNewsController.news.value = [...DataCenter.news];
                 },
               ),
-            ),
-            Obx(
-              () => _environmentNewsController.showBigCard.value
-                  ? const SizedBox(height: 24)
-                  : const SizedBox(),
-            ),
-            Obx(() => _environmentNewsController.showBigCard.value
-                ? CardBigNews(
-                    article: DataCenter.news[DataCenter.news.length - 1])
-                : Container()),
-            const SizedBox(height: 24),
-            Container(
-              constraints: BoxConstraints(maxHeight: context.height * 0.8),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Obx(
+              Obx(
+                () => _environmentNewsController.showBigCard.value
+                    ? const SizedBox(height: 24)
+                    : const SizedBox(),
+              ),
+              Obx(() => _environmentNewsController.showBigCard.value
+                  ? CardBigNews(
+                      article: DataCenter.news[DataCenter.news.length - 1])
+                  : Container()),
+              const SizedBox(height: 24),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: _environmentNewsController.news
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              child: NewsItem(article: e),
+                            ))
+                        .toList(),
+                  )),
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
+}
+
+/*
+Obx(
                   () => ListView.separated(
+                    
                     itemBuilder: (_, index) => NewsItem(
                       article: _environmentNewsController.news[index],
                     ),
@@ -69,11 +84,4 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
                     itemCount: _environmentNewsController.news.length,
                   ),
                 ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ));
-  }
-}
+ */

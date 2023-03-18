@@ -22,7 +22,8 @@ class ToDicButton extends StatelessWidget {
                 CustomTextStyle.bodyBold(AppColors.onBg).copyWith(height: 1.5),
           ),
           Card(
-            elevation: 10,
+            elevation: 5,
+            shadowColor: AppColors.onBg.withOpacity(0.3),
             child: Container(
               height: 150,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),

@@ -9,7 +9,6 @@ import 'package:sowaste/modules/map/helpers/map_place.dart';
 import 'package:sowaste/modules/map/map_constants.dart';
 import 'package:sowaste/modules/map/map_model.dart';
 import 'package:sowaste/modules/map/map_repository.dart';
-import 'package:sowaste/modules/map/widgets/around_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapScreen extends StatefulWidget {

@@ -12,11 +12,9 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: null,
-      body: Obx(() => IndexedStack(
-            index: _baseController.currentIndex.value,
-            children: _baseController.pages,
-          )),
+      body: Obx(() {
+        return _baseController.pages[_baseController.currentIndex.value];
+      }),
       bottomNavigationBar: BottomNavBar(),
     ));
   }

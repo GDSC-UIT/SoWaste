@@ -81,7 +81,9 @@ class HomeScreen extends StatelessWidget {
                             style: CustomTextStyle.bodyBold(AppColors.onBg)
                                 .copyWith(height: 1.5),
                           ),
-                          PieChart(),
+                          DataCenter.recentDetectedTrashes.isNotEmpty
+                              ? PieChart()
+                              : const CameraButton(),
                           LearnMoreButton(),
                         ],
                       ),

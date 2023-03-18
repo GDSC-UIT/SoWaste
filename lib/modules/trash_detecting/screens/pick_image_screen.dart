@@ -69,7 +69,7 @@ class PickImageScreen extends StatelessWidget {
           String temp = object["name"]
               .toLowerCase()
               .substring(0, object["name"].length - 1);
-          if (trash.name.toLowerCase().contains(temp)) {
+          if (trash.name.toLowerCase() == temp) {
             // print("Detected Trash: ${trash.name}");
             _dictionaryController.currentTrash.value = trash;
             _homeController.indexHasColor.value =

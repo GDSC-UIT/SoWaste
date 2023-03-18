@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
@@ -66,26 +64,24 @@ class TrashDetectingScreen extends StatelessWidget {
                       alignment: AlignmentDirectional.bottomEnd,
                       children: stackChildren),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: SizedBox(
-                      height: min(MediaQuery.of(context).size.height * 0.8,
-                          _trashDetectingController.recognitions.length * 54),
-                      child: _trashDetectingController.recognitions.isNotEmpty
-                          ? ListView.builder(
-                              itemBuilder: ((context, index) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TrashButton(
-                                        trash: _trashDetectingController
-                                            .getDetectedTrash(
-                                                _trashDetectingController
-                                                        .recognitions[index]
-                                                    ["name"])),
-                                  )),
-                              itemCount:
-                                  _trashDetectingController.recognitions.length)
-                          : Container(),
-                    ),
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      child: SizedBox(
+                          child: _trashDetectingController
+                                  .recognitions.isNotEmpty
+                              ? Column(
+                                  children: _trashDetectingController
+                                      .recognitions
+                                      .map((trash) => Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4),
+                                            child: TrashButton(
+                                                trash: _trashDetectingController
+                                                    .getDetectedTrash(
+                                                        trash["name"])),
+                                          ))
+                                      .toList())
+                              : Container()))
                 ]);
         }));
   }

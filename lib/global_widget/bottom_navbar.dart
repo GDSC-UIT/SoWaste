@@ -11,24 +11,24 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => ConvexAppBar(
-          initialActiveIndex: _baseController.currentIndex.value,
-          cornerRadius: 10,
-          onTap: (index) => _baseController.currentIndex.value = index,
-          items: const [
-            TabItem(
-              icon: Icons.home,
-              title: "Home",
-            ),
-            TabItem(icon: Icons.newspaper, title: "News"),
-            TabItem(icon: Icons.camera_alt),
-            TabItem(icon: Icons.book, title: "Dictionary"),
-            TabItem(icon: Icons.location_on, title: "Around"),
-          ],
-          color: AppColors.info,
-          style: TabStyle.fixedCircle,
-          backgroundColor: AppColors.background,
-          activeColor: AppColors.primary,
-        ));
+    return ConvexAppBar(
+      initialActiveIndex: _baseController.currentIndex.value,
+      cornerRadius: 10,
+      onTap: (index) => _baseController.currentIndex.value = index,
+      items: const [
+        TabItem(
+          icon: Icons.home,
+          title: "Home",
+        ),
+        TabItem(icon: Icons.newspaper, title: "News"),
+        TabItem(icon: Icons.camera_alt),
+        TabItem(icon: Icons.book, title: "Dictionary"),
+        TabItem(icon: Icons.location_on, title: "Around"),
+      ],
+      color: AppColors.info,
+      style: TabStyle.fixedCircle,
+      backgroundColor: AppColors.background,
+      activeColor: AppColors.primary,
+    );
   }
 }

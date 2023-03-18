@@ -36,7 +36,7 @@ class PieChart extends StatelessWidget {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                  color: _homeController.colors.elementAt(
+                                  color:  _homeController.colors.elementAt(
                                       DataCenter.recentDetectedTrashes
                                           .indexOf(e)),
                                   borderRadius: BorderRadius.circular(4)),

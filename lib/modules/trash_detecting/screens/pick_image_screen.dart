@@ -65,12 +65,13 @@ class PickImageScreen extends StatelessWidget {
       ++DataCenter.timesDeteted.value;
       for (var object in _trashDetectingController.recognitions) {
         // print("Object: ${object["name"]}");
+        String temp = object["name"]
+            .toLowerCase()
+            .substring(0, object["name"].length - 1);
         for (var trash in DataCenter.dictionary) {
-          String temp = object["name"]
-              .toLowerCase()
-              .substring(0, object["name"].length - 1);
-          if (trash.name.toLowerCase() == temp) {
-            // print("Detected Trash: ${trash.name}");
+          print("Temp: ${temp} - Trash: ${trash.name}");
+          if (trash.name.toLowerCase().contains(temp)) {
+            print("Detected Trash: ${trash.name}");
             _dictionaryController.currentTrash.value = trash;
             _homeController.indexHasColor.value =
                 DataCenter.recentDetectedTrashes.length;

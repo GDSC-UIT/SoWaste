@@ -55,7 +55,7 @@ class OnboardingScreen extends StatelessWidget {
                   decoration: pageDecoration()),
               PageViewModel(
                   image: customImage(AppImages.recycle),
-                  title: "Reduce waste",
+                  title: "Reduce trash",
                   body:
                       "Reducing trash by recycling is crucial for preserving our planet's health.",
                   decoration: pageDecoration()),

@@ -41,7 +41,7 @@ class _TrashButtonState extends State<TrashButton> {
                 Text(
                   widget.trash!.name,
                   style: CustomTextStyle.title(
-                      isShowedDetail ? AppColors.primary : AppColors.onBg),
+                       isShowedDetail ? AppColors.primary : AppColors.onBg),
                 ),
                 isShowedDetail
                     ? Column(

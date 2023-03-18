@@ -269,8 +269,9 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                             children: [
                                               Expanded(
                                                   child: RatingBar.builder(
-                                                initialRating:
-                                                    item.rating.toDouble(),
+                                                initialRating: item.rating!
+                                                    .ceil()
+                                                    .toDouble(),
                                                 minRating: 0,
                                                 direction: Axis.horizontal,
                                                 itemCount: 5,
@@ -393,36 +394,6 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           ),
                         )
                       : const SizedBox(),
-                  Positioned(
-                      top: 20,
-                      left: 10,
-                      right: 10,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              child: const Around(distance: 3),
-                              onTap: () async {
-                                await onRadiusChanged(3000);
-                              },
-                            ),
-                            GestureDetector(
-                              child: const Around(distance: 5),
-                              onTap: () async {
-                                await onRadiusChanged(5000);
-                              },
-                            ),
-                            GestureDetector(
-                              child: const Around(distance: 10),
-                              onTap: () async {
-                                await onRadiusChanged(100000);
-                              },
-                            ),
-                          ],
-                        ),
-                      )),
                 ],
               )
             : const Center(

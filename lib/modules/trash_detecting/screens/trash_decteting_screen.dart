@@ -29,14 +29,14 @@ class TrashDetectingScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
-            color: Colors.yellow,
+            color: AppColors.primaryLight,
             width: 3,
           )),
           child: Text(
             "${re["name"]} ${(re["confidence"] * 100).toStringAsFixed(0)}%",
             style: TextStyle(
-              background: Paint()..color = Colors.yellow,
-              color: AppColors.onBg,
+              background: Paint()..color = AppColors.primaryLight,
+              color: Colors.black,
               fontSize: 12,
             ),
           ),

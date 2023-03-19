@@ -1,5 +1,38 @@
 # Sowaste
 
+![](/assets/logo/logo_full.png)
+
+The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
+
+## Mobile Installation
+
+Download APK file [here](app-release.apk)!
+
+## Local Installation
+
+**Requirements**:
+
+- Flutter: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
+- Dart: [https://dart.dev/get-dart](https://dart.dev/get-dart)
+
+Follow the steps!
+
+```
+git clone <https://github.com/GDSC-UIT/sowaste.git>
+cd sowaste
+flutter pub get
+flutter run
+
+```
+
+**Note**: If you meet the problem from installation, you should:
+
+- Check your internet connection;
+- Run `flutter clean` and `flutter run`;
+- Delete `graddle-wrapper.jar` file from `android/gradle/wrapper/gradlle-wrapper.jar` and `flutter run`.
+
+Start using app!
+
 ```
 Using
     - MVVM Architecture

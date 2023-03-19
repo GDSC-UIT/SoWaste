@@ -19,7 +19,7 @@ class TrashDetectingScreen extends StatelessWidget {
 
     // print(_trashDetectingController.recognitions);
     if (_trashDetectingController.recognitions.isEmpty) return [];
-
+    print(_trashDetectingController.recognitions);
     return _trashDetectingController.recognitions.map((re) {
       return Positioned(
         left: re["xmin"] * ratio,
@@ -76,6 +76,8 @@ class TrashDetectingScreen extends StatelessWidget {
                                 ? Column(
                                     children: _trashDetectingController
                                         .recognitions
+                                        .map((trash) => trash["name"])
+                                        .toSet()
                                         .map((trash) => Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -84,7 +86,7 @@ class TrashDetectingScreen extends StatelessWidget {
                                                   trash:
                                                       _trashDetectingController
                                                           .getDetectedTrash(
-                                                              trash["name"])),
+                                                              trash)),
                                             ))
                                         .toList())
                                 : Container()))

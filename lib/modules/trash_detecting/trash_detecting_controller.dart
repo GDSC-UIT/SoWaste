@@ -10,9 +10,10 @@ class TrashDetectingController extends GetxController {
   int imgHeight = 0;
 
   Trash? getDetectedTrash(String name) {
+    String temp = name.toLowerCase().substring(0, name.length - 1);
     for (var trash in DataCenter.dictionary) {
-      String temp = name.toLowerCase().substring(0, name.length - 1);
-      if (trash.name.toLowerCase().contains(temp)) {
+      String trashName = trash.name.toLowerCase();
+      if (temp.contains(trashName)) {
         return trash;
       }
     }

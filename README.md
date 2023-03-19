@@ -6,7 +6,7 @@ The application aims to help users classify waste quickly and accurately, while 
 
 ## Mobile Installation
 
-Download APK file [here](app-release.apk)!
+Download APK file [here](https://drive.google.com/file/d/19HR-LDFGR2uPw28lokqIQmZx-9E7H_tT/view?usp=sharing)!
 
 ## Local Installation
 

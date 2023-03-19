@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_icons.dart';
+import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
 class ToDicButton extends StatelessWidget {
@@ -11,7 +12,7 @@ class ToDicButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BaseController.changeIndexPage(3);
+        BaseController.changeIndexPage(1);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,8 +23,9 @@ class ToDicButton extends StatelessWidget {
                 CustomTextStyle.bodyBold(AppColors.onBg).copyWith(height: 1.5),
           ),
           Card(
-            elevation: 5,
-            shadowColor: AppColors.onBg.withOpacity(0.3),
+            shape: RoundedRectangleBorder(borderRadius: AppConst.borderRadius),
+            elevation: 7,
+            shadowColor: AppConst.shadowColor,
             child: Container(
               height: 150,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),
@@ -37,7 +39,7 @@ class ToDicButton extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            "Go to Trash Dictionary to learn more",
+                            "Go to Waste Dictionary to learn more",
                             style: CustomTextStyle.bodyBold(AppColors.primary),
                           ),
                           const Icon(

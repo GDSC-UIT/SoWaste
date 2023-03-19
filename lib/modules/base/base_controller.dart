@@ -19,18 +19,11 @@ class BaseController extends GetxController {
   }
 
   @override
-  void onInit() async {
-    DataCenter.doneQuizzesFolder =
-        await LocalService.createFolderInAppDocDir("quizzes");
-    await LocalService.getAllFileDoneQuiz();
-    super.onInit();
-  }
-
   var pages = [
     const HomeScreen(),
-    EnvironmentNewsOverviewScreen(),
-    PickImageScreen(),
     const DictionaryOverviewScreen(),
+    PickImageScreen(),
+    EnvironmentNewsOverviewScreen(),
     const MapScreen(),
   ].obs;
 }

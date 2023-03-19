@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 
+import '../core/values/app_constant.dart';
+
 class AppCardButton extends StatelessWidget {
   const AppCardButton(
       {Key? key,
@@ -26,7 +28,7 @@ class AppCardButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 7,
-            shadowColor: AppColors.onBg.withOpacity(0.1),
+            shadowColor: AppConst.shadowColor,
             child: SizedBox(
               height: 72,
               child: Center(

@@ -4,7 +4,6 @@ import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/routes/app_page.dart';
-
 import 'routes/app_routes.dart';
 
 void main() async {
@@ -19,7 +18,10 @@ void main() async {
     DataCenter.isFirstTime = true;
   }
   // fetch all data from local and api
+  DataCenter.doneQuizzesFolder =
+      await LocalService.createFolderInAppDocDir("quizzes");
   await Future.wait([
+    LocalService.getAllFileDoneQuiz(),
     DataCenter.fetchDictionary(),
     DataCenter.fetchAllQuestions(),
     DataCenter.fetchAllArticles(),

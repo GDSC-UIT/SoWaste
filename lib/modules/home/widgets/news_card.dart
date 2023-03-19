@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
-import 'package:sowaste/modules/home/home_controller.dart';
-import 'package:sowaste/routes/app_routes.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({super.key, required this.article});
@@ -22,12 +21,12 @@ class NewsCard extends StatelessWidget {
           width: 170,
           height: 200,
           child: Card(
-              shadowColor: AppColors.onBg.withOpacity(0.25),
+              shadowColor: AppConst.shadowColor,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
               margin: const EdgeInsets.all(8),
-              elevation: 8,
+              elevation: 7,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: Column(

@@ -90,6 +90,7 @@ class _TrashButtonState extends State<TrashButton> {
                                     const Icon(
                                       Icons.arrow_forward_ios,
                                       color: AppColors.primaryDark,
+                                      size: 16,
                                     )
                                   ],
                                 ),

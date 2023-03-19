@@ -11,9 +11,8 @@ import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
 import 'package:sowaste/modules/home/widgets/news_card.dart';
 import 'package:sowaste/modules/home/widgets/pie_chart.dart';
 import 'package:sowaste/modules/home/widgets/quiz_card.dart';
-import 'package:sowaste/modules/home/widgets/to_dic_button.dart';
+import 'package:sowaste/modules/home/widgets/to_dict_button.dart';
 import 'package:sowaste/routes/app_routes.dart';
-
 import '../../base/base_controller.dart';
 import '../widgets/detect_trash_button.dart';
 
@@ -30,18 +29,22 @@ class HomeScreen extends StatelessWidget {
           isShowSeeAll
               ? GestureDetector(
                   onTap: seeAll,
-                  child: Row(
-                    children: [
-                      Text(
-                        "See All",
-                        style: CustomTextStyle.normal(AppColors.primary),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 16,
-                        color: AppColors.primaryDark,
-                      )
-                    ],
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    child: Row(
+                      children: [
+                        Text(
+                          "See All",
+                          style: CustomTextStyle.normal(AppColors.primary),
+                        ),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: AppColors.primaryDark,
+                        )
+                      ],
+                    ),
                   ),
                 )
               : Container()
@@ -52,12 +55,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset(AppImages.appLogo),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: SizedBox(
+              height: 44,
+              child: Image.asset(AppImages.appLogo),
+            ),
+          ),
           backgroundColor: AppColors.background,
           elevation: 0,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -121,17 +130,24 @@ class HomeScreen extends StatelessWidget {
                   : const ToDicButton()),
               gap(),
               //Environment News
-              title("Environment News",
-                  () => {BaseController.changeIndexPage(1)}, true),
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      NewsCard(article: DataCenter.news[index]),
-                  itemCount: min(DataCenter.news.length, 5),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: Column(
+                  children: [
+                    title("Environment News",
+                        () => {BaseController.changeIndexPage(1)}, true),
+                    SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) =>
+                            NewsCard(article: DataCenter.news[index]),
+                        itemCount: min(DataCenter.news.length, 5),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              )
             ]),
           ),
         ));

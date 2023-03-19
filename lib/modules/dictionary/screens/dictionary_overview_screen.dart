@@ -4,7 +4,6 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/widgets/search_trash.dart';
 import 'package:sowaste/routes/app_routes.dart';
-
 import '../../../global_widget/app_card_button.dart';
 import '../widgets/dictionary_card.dart';
 
@@ -18,7 +17,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
           backgroundColor: AppColors.background,
           elevation: 1,
           title: Text(
-            "Dictionary",
+            "Waste Dictionary",
             style: CustomTextStyle.sub(AppColors.secondary),
           ),
         ),
@@ -41,7 +40,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
                   onTapFunction: () {
                     Get.toNamed(AppRoutes.quizzesPage);
                   },
-                  title: "Quiz time",
+                  title: "All waste",
                   leading: const Icon(
                     Icons.import_contacts,
                     color: AppColors.primary,
@@ -51,7 +50,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
                   onTapFunction: () {
                     Get.toNamed(AppRoutes.savedTypesPage);
                   },
-                  title: "Saved types of trash",
+                  title: "Saved types of waste",
                   leading: const Icon(
                     Icons.bookmark_outline,
                     color: AppColors.primary,
@@ -61,7 +60,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
                   onTapFunction: () async {
                     Get.toNamed(AppRoutes.recentTypesPage);
                   },
-                  title: "Recent types of trash ",
+                  title: "Recent types of waste ",
                   leading: const Icon(
                     Icons.update_rounded,
                     color: AppColors.primary,

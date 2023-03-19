@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sowaste/core/values/app_constant.dart';
 
 import '../core/themes/app_colors.dart';
 import '../core/themes/app_themes.dart';
@@ -16,8 +17,8 @@ class AppSearchInput extends StatelessWidget {
   Card build(BuildContext context) {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 5,
-        shadowColor: AppColors.onBg.withOpacity(0.3),
+        elevation: 7,
+        shadowColor: AppConst.shadowColor,
         child: TextField(
           controller: controller,
           onChanged: ((value) => onChangeFunction(value)),

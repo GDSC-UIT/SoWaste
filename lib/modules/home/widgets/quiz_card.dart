@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/quiz_local.dart';
-import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
-import 'package:sowaste/modules/dictionary/screens/trash_detail_screen.dart';
 
 class QuizCard extends StatelessWidget {
   const QuizCard({super.key, required this.quiz});

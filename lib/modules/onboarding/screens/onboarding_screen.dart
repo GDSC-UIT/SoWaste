@@ -40,61 +40,64 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
-          child: IntroductionScreen(
-            pages: [
-              PageViewModel(
-                  image: customImage(AppImages.dustbin),
-                  title: "Raise awareness",
-                  body:
-                      "Garbage pollution threatens the environment and public health.",
-                  decoration: pageDecoration()),
-              PageViewModel(
-                  image: customImage(AppImages.recycle),
-                  title: "Reduce trash",
-                  body:
-                      "Reducing trash by recycling is crucial for preserving our planet's health.",
-                  decoration: pageDecoration()),
-              PageViewModel(
-                  image: customImage(AppImages.sort),
-                  title: "Sorting trash",
-                  body:
-                      "Effective trash management can help address the garbage pollution.",
-                  decoration: pageDecoration()),
-            ],
-            onChange: (index) => {
-              _controller.pageIndex.value = index,
-            },
-            dotsDecorator: getDotDecoration(),
-            showNextButton: false,
-            showDoneButton: false,
-            showSkipButton: false,
-            skip: const Text(
-              'Skip',
+        body: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.7,
+            child: IntroductionScreen(
+              pages: [
+                PageViewModel(
+                    image: customImage(AppImages.dustbin),
+                    title: "Raise awareness",
+                    body:
+                        "Garbage pollution threatens the environment and public health.",
+                    decoration: pageDecoration()),
+                PageViewModel(
+                    image: customImage(AppImages.recycle),
+                    title: "Reduce waste",
+                    body:
+                        "Reducing waste by recycling is crucial for preserving our planet's health.",
+                    decoration: pageDecoration()),
+                PageViewModel(
+                    image: customImage(AppImages.sort),
+                    title: "Sorting waste",
+                    body:
+                        "Effective waste management can help address the garbage pollution.",
+                    decoration: pageDecoration()),
+              ],
+              onChange: (index) => {
+                _controller.pageIndex.value = index,
+              },
+              dotsDecorator: getDotDecoration(),
+              showNextButton: false,
+              showDoneButton: false,
+              showSkipButton: false,
+              skip: const Text(
+                'Skip',
+              ),
+              next: const Icon(Icons.arrow_forward),
             ),
-            next: const Icon(Icons.arrow_forward),
           ),
-        ),
-        SizedBox(
-          height: 56,
-          width: 350,
-          child: Obx(
-            () => (_controller.pageIndex.value == 2)
-                ? AppButton(
-                    buttonText: "GET STARTED",
-                    onPressedFunction: () =>
-                        {Get.offAndToNamed(AppRoutes.base)})
-                : Container(),
+          SizedBox(
+            height: 56,
+            width: 350,
+            child: Obx(
+              () => (_controller.pageIndex.value == 2)
+                  ? AppButton(
+                      buttonText: "GET STARTED",
+                      onPressedFunction: () =>
+                          {Get.offAndToNamed(AppRoutes.base)})
+                  : Container(),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 30,
-        )
-      ],
+          const SizedBox(
+            height: 30,
+          )
+        ],
+      ),
     ));
   }
 }

@@ -30,9 +30,9 @@ class _BottomNavBarState extends State<BottomNavBar>
       onTap: (index) => BaseController.changeIndexPage(index),
       items: const [
         TabItem(icon: Icons.home, title: "Home"),
-        TabItem(icon: Icons.newspaper, title: "News"),
-        TabItem(icon: Icons.camera_alt),
         TabItem(icon: Icons.book, title: "Dictionary"),
+        TabItem(icon: Icons.camera_alt),
+        TabItem(icon: Icons.newspaper, title: "News"),
         TabItem(icon: Icons.location_on, title: "Around"),
       ],
       color: AppColors.info,

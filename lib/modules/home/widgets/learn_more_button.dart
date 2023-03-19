@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
 class LearnMoreButton extends StatelessWidget {
@@ -6,38 +7,50 @@ class LearnMoreButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              // Change your radius here
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
         onPressed: () {
-          BaseController.changeIndexPage(3);
+          BaseController.changeIndexPage(1);
         },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Flexible(
-                flex: 5,
-                child: Text(
-                  "Still not know how to sort or process your trash?",
-                  maxLines: 2,
-                ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Row(
-                children: const [
-                  Text("Learn more"),
-                  SizedBox(
-                    width: 5,
+        child: SizedBox(
+          height: 48,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Flexible(
+                  flex: 5,
+                  child: FittedBox(
+                    child: Text(
+                      "Don't know how to sort your waste?",
+                    ),
                   ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                  )
-                ],
-              )
-            ],
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Row(
+                  children: const [
+                    FittedBox(child: Text("Learn more")),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ));
   }

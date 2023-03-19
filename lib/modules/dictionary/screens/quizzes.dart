@@ -17,7 +17,7 @@ class QuizzesScreen extends StatelessWidget {
     final DictionaryController dictionaryController = Get.find();
     return Scaffold(
         appBar: const ArrowBackAppBar(
-          title: "Quizzes",
+          title: "All waste",
         ),
         body: Obx(() => ListView.builder(
               itemBuilder: (context, index) {

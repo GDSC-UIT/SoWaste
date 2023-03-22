@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -212,8 +214,8 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                       ? Positioned(
                           left: 0,
                           right: 0,
+                          height: 300,
                           bottom: 20,
-                          height: MediaQuery.of(context).size.height * 0.35,
                           child: PageView.builder(
                             controller: pageController,
                             onPageChanged: (value) async {
@@ -292,16 +294,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                               const SizedBox(
                                                 height: 10,
                                               ),
-                                              Flexible(
-                                                child: SizedBox(
-                                                  width: 240,
-                                                  child: Text(item.title ?? '',
-                                                      style: const TextStyle(
+                                              SizedBox(
+                                                width: 240,
+                                                child: Text(item.title ?? '',
+                                                    style: const TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                      )),
-                                                ),
+                                                        height: 1.2)),
                                               ),
                                               const SizedBox(
                                                 height: 10,

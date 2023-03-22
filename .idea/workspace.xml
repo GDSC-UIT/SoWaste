@@ -5,28 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8d81e30-2069-4a90-9c2c-bf3729b1aade" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/map/helpers/map_place.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/map/helpers/map_place.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/map/map_constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/map/map_constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/map/map_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/map/map_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/dictionary/screens/trash_detail_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/dictionary/screens/trash_detail_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/modules/map/screens/map_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/map/screens/map_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/map/widgets/around_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/map/widgets/around_widget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/onboarding/screens/onboarding_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/onboarding/screens/onboarding_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/modules/trash_detecting/screens/pick_image_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/trash_detecting/screens/pick_image_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/modules/trash_detecting/trash_detecting_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/trash_detecting/trash_detecting_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sowaste.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sowaste.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\HIEU NGAN\.android\avd\Pixel_3_API_30.avd]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -46,17 +39,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/duong/github/sowaste-frontend&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -84,5 +71,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

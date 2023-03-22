@@ -13,7 +13,8 @@ class TrashDetectingController extends GetxController {
     String temp = name.toLowerCase().substring(0, name.length - 1);
     for (var trash in DataCenter.dictionary) {
       String trashName = trash.name.toLowerCase();
-      if (temp.contains(trashName)) {
+      if (temp.contains(trashName) ||
+          (temp == "bottle" && trashName == "plastic bottle")) {
         return trash;
       }
     }

@@ -71,12 +71,7 @@ class TrashDetailScreen extends StatelessWidget {
           } else {
             final Trash trash = dictionaryController.currentTrash.value;
             return Padding(
-              padding: EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                  bottom:
-                      (dictionaryController.currentQuiz.isNotEmpty ? 78 : 8),
-                  top: 0),
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 0),
               child: ListView(
                 children: [
                   Column(
@@ -103,6 +98,11 @@ class TrashDetailScreen extends StatelessWidget {
                           text: trash.description!,
                         ),
                       ),
+                      SizedBox(
+                        height: dictionaryController.currentQuiz.isNotEmpty
+                            ? 78
+                            : 8,
+                      )
                     ],
                   ),
                 ],

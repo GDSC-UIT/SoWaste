@@ -6,34 +6,38 @@ import 'app_colors.dart';
 class CustomTextStyle extends TextStyle {
   static TextStyle h1(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 44,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 44,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 3));
   }
 
   static TextStyle h2(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 36,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 36,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 2.5));
   }
 
   static TextStyle h3(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 30,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 30,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 2));
   }
 
   static TextStyle h4(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 26,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 26,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle sub(Color color) {
@@ -41,47 +45,53 @@ class CustomTextStyle extends TextStyle {
       fontSize: 22,
       fontWeight: FontWeight.w600,
       color: color,
+      letterSpacing: 0.5,
     );
   }
 
   static TextStyle title(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle bodyBold(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle large(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      color: color,
-    );
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle medium(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: color,
-    );
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle normal(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
-      color: color,
-    );
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: color,
+        letterSpacing: 0.5,
+        textStyle: const TextStyle(height: 1.5));
   }
 
   static TextStyle boldButton(Color color) {
@@ -102,10 +112,10 @@ class CustomTextStyle extends TextStyle {
 
   static TextStyle link(Color color) {
     return GoogleFonts.roboto(
-      fontSize: 10,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.5);
   }
 
   static TextStyle tinyText(Color color) {

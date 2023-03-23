@@ -28,8 +28,6 @@ class HomeController extends GetxController {
   Set<Color> colors = {};
 
   void setColorForPieChart(int index) {
-    // print(
-    //     "Detected Trash List length: ${DataCenter.recentDetectedTrashes.length}");
     while (index != DataCenter.recentDetectedTrashes.length) {
       colors.add(Colors.primaries[Random().nextInt(Colors.primaries.length)]);
       index = colors.length;

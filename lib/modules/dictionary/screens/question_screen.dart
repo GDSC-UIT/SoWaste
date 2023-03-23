@@ -16,7 +16,6 @@ class QuestionScreen extends StatelessWidget {
   final DictionaryController _dictionaryController = Get.find();
   @override
   Widget build(BuildContext context) {
-    // print("OptionLength: $_dictionaryController");
     return Scaffold(
         appBar: ArrowBackAppBar(
           title: _dictionaryController.currentTrash.value.name,

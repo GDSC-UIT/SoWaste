@@ -32,7 +32,6 @@ class DataCenter extends GetxController {
     final list =
         DataCenter.recentTrashes.where((trash) => trash["count"] != 0).toList();
     list.sort((a, b) => b["count"].compareTo(a["count"]));
-    // print("List after filter: ${list.length}");
     return list;
   }
 
@@ -58,24 +57,17 @@ class DataCenter extends GetxController {
       DataCenter.recentTrashes.value = response["data"];
       DataCenter.timesDeteted.value = response["times"];
       filterRecentTrashes();
-      // print("Recent Trashes: ${DataCenter.recentTrashes}");
-      // print("Times: ${DataCenter.timesDeteted.value}");
       DataCenter.recentDetectedTrashes.value = getrecentDetectedTrasheses();
-    } catch (error) {
-      // print("Has error when fetching recent trashes: $error");
-    }
+    } catch (error) {}
   }
 
   static Future<void> fetchAllUserQuizzes() async {
-    // print("Fetch user quiz");
     await LocalService.getAllFileDoneQuiz();
     for (var quizFile in DataCenter.listQuizFile) {
-      // print(quizFile.path);
       {
         try {
           final response = await LocalService.readFile(quizFile.path);
           DataCenter.localQuizList.add(LocalQuiz.fromJson(response!));
-          // print("Local quiz list length: ${DataCenter.localQuizList.length}");
         } catch (error) {}
       }
     }
@@ -87,10 +79,7 @@ class DataCenter extends GetxController {
           "${DataCenter.AppFilePath}/${AppFileName.savedTrashes}");
       if (response == null) return;
       DataCenter.savedTrashList.value = response["data"];
-      // print("Save List: $response");
-    } catch (error) {
-      // print("Has error when fetch saved trash list from local: $error");
-    }
+    } catch (error) {}
   }
 
   static Future<void> fetchAllQuestions() async {
@@ -105,7 +94,6 @@ class DataCenter extends GetxController {
         DataCenter.allQuizzes.add(Quiz.init(trash.id, trash.name));
       }
     } catch (error) {
-      // print("Has Error when fetch all questions: $error");
       // isLoading.value = false;
     }
   }
@@ -123,7 +111,6 @@ class DataCenter extends GetxController {
       sortNews();
       environmentNewsController.news.value = [...DataCenter.news];
     } catch (error) {
-      // print("Error when fetch articles: $error");
       // isLoading.value = false;
     }
   }
@@ -135,12 +122,8 @@ class DataCenter extends GetxController {
       temp.forEach((trash) {
         dictionary.add(Trash.fromJson(trash));
       });
-      // print(dictionary);
       DataCenter.dictionary = [...dictionary];
-    } catch (error) {
-      // print("Error in fetch dictionary: $error - id :$id");
-
-    }
+    } catch (error) {}
   }
 
   static void sortNews() {

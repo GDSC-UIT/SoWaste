@@ -28,7 +28,7 @@ class EnvsNewsDetailScreen extends StatelessWidget {
                     _environmentNewsController.currentArticle.value;
                 return ListView(
                   padding: const EdgeInsets.only(
-                      left: 16, right: 16, top: 0, bottom: 8),
+                      left: 16, right: 16, top: 16, bottom: 8),
                   children: [
                     SizedBox(
                       height: context.height * 0.2,
@@ -36,6 +36,12 @@ class EnvsNewsDetailScreen extends StatelessWidget {
                       child: Image.network(
                         article.displayImage,
                         fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
                     Text(
@@ -44,7 +50,7 @@ class EnvsNewsDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      GetTimeAgo.parse(article.createAt),
+                      "Posted ${GetTimeAgo.parse(article.createAt)}",
                       style: CustomTextStyle.normal(AppColors.onBg),
                     ),
                     const SizedBox(height: 16),

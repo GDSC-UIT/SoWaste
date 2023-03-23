@@ -41,10 +41,8 @@ class Trash {
       final response =
           await HttpService.getRequest("${UrlValue.dictionaryUrl}/$id");
       final trashJson = json.decode(utf8.decode(response.bodyBytes))["data"];
-      // print("Trash json : $trashJson");
       return Trash.fromJson(trashJson);
     } catch (error) {
-      // print("Failed to fetch a trash: $error");
     } finally {}
     return null;
   }

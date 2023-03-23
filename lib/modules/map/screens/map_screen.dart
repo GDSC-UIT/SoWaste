@@ -238,7 +238,8 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                             itemCount: mapMarkers.length ?? 0,
                             itemBuilder: (_, index) {
                               final item = mapMarkers[index];
-
+                              bool isOpen =
+                                  item.isOpenNow == null ? false : true;
                               // setState(() {});
                               return Padding(
                                   padding: const EdgeInsets.all(16.0),
@@ -322,14 +323,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                   child: SizedBox(
                                                       width: 200,
                                                       child: Text(
-                                                        item.isOpenNow!
+                                                        isOpen
                                                             ? 'Openning'
                                                             : 'Closed',
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontSize: 18,
-                                                          color: item.isOpenNow!
+                                                          color: isOpen
                                                               ? AppColors
                                                                   .primaryDark
                                                               : Colors.red,
@@ -370,7 +371,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                               await launchUrl(uri,
                                                       mode: LaunchMode
                                                           .externalApplication)
-                                                  .catchError((e) => print(e));
+                                                  .catchError((e) {});
                                             },
                                             style: TextButton.styleFrom(
                                               foregroundColor: Colors.white,

@@ -16,9 +16,7 @@ class ImageServices {
 
       if (image == null) return;
       pickedImage = File(image.path);
-    } on PlatformException catch (e) {
-      // print("Failed to pick image! : $e");
-    }
+    } on PlatformException catch (e) {}
   }
 
   static Future<void> getImageFromGallery() async {
@@ -27,8 +25,6 @@ class ImageServices {
       final image = await ImagePicker().getImage(source: ImageSource.gallery);
       if (image == null) return;
       pickedImage = File(image.path);
-    } on PlatformException catch (e) {
-      // print("Failed to pick image from gallery : $e");
-    }
+    } on PlatformException catch (e) {}
   }
 }

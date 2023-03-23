@@ -56,8 +56,6 @@ class Directions {
       duration = data['legs'][0]['duration']['text'];
     }
 
-    print('distance: $distance');
-
     return Directions(
         polylinePoints: PolylinePoints()
             .decodePolyline(data['overview_polyline']['points']),

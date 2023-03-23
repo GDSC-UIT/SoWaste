@@ -67,19 +67,15 @@ class DictionaryController extends GetxController {
   }
 
   Future<void> saveTrash(Trash t) async {
-    // print("Trash will be saved: ${isSaved.value}");
     if (!isSaved.value) {
       DataCenter.savedTrashList.add({"id": t.id, "name": t.name});
-      // print("Data after add: ${DataCenter.savedTrashList}");
     } else {
       DataCenter.savedTrashList.removeAt(indexTrashToRemove.value);
-      // print("Data after remove: ${DataCenter.savedTrashList}");
     }
     final response = await LocalService.saveContent(
         {"data": DataCenter.savedTrashList},
         "${DataCenter.AppFilePath}/${AppFileName.savedTrashes}");
     isSaved.value = !isSaved.value;
-    // print("Data after clicked Save! $response");
     DataCenter.savedTrashList.value = [...DataCenter.savedTrashList];
   }
 
@@ -101,8 +97,6 @@ class DictionaryController extends GetxController {
     localQuiz.doneQuestions = doneQuestions;
     localQuiz.name = currentTrash.value.name;
     localQuiz.shortDescription = currentTrash.value.shortDescription;
-
-    // print("LocalQuiz: ${localQuiz.toJson()}");
 
     await LocalService.saveContent(localQuiz.toJson(),
         "${DataCenter.doneQuizzesFolder}/${localQuiz.quizId}.json");

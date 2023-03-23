@@ -14,12 +14,9 @@ class TrashDetectingScreen extends StatelessWidget {
 
   List<Widget> renderBoxes(Size size) {
     final ratio = size.width / _trashDetectingController.imgWidth;
-    // print("Ratio: $ratio");
     stackChildren.add(Image.file(ImageServices.pickedImage!));
 
-    // print(_trashDetectingController.recognitions);
     if (_trashDetectingController.recognitions.isEmpty) return [];
-    print(_trashDetectingController.recognitions);
     return _trashDetectingController.recognitions.map((re) {
       return Positioned(
         left: re["xmin"] * ratio,

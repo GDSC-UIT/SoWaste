@@ -10,20 +10,30 @@ class MarkdownText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MarkdownBody(
-      selectable: true,
-      shrinkWrap: true,
-      data: text,
-      styleSheet: MarkdownStyleSheet(
-          h1: CustomTextStyle.sub(AppColors.onBg),
-          h2: CustomTextStyle.title(AppColors.onBg),
-          h3: CustomTextStyle.bodyBold(AppColors.onBg),
-          h4: CustomTextStyle.h4(AppColors.onBg),
-          p: CustomTextStyle.normal(AppColors.onBg),
-          blockquoteDecoration: BoxDecoration(
-            color: AppColors.primaryLight.withOpacity(0.3),
-          ),
-          codeblockDecoration:
-              BoxDecoration(color: AppColors.primaryLight.withOpacity(0.5))),
-    );
+        selectable: true,
+        shrinkWrap: true,
+        data: text,
+        styleSheet: MarkdownStyleSheet(
+            h1: CustomTextStyle.sub(AppColors.onBg),
+            h2: CustomTextStyle.title(AppColors.onBg),
+            h3: CustomTextStyle.bodyBold(AppColors.onBg),
+            h4: CustomTextStyle.h4(AppColors.onBg),
+            p: CustomTextStyle.normal(AppColors.onBg),
+            blockquoteDecoration: BoxDecoration(
+              color: AppColors.primaryLight.withOpacity(0.3),
+            ),
+            codeblockDecoration:
+                BoxDecoration(color: AppColors.primaryLight.withOpacity(0.5))),
+        imageBuilder: (uri, title, alt) {
+          return Image.network(
+            uri.toString(),
+            frameBuilder: ((context, child, frame, wasSynchronouslyLoaded) =>
+                child),
+            loadingBuilder: ((context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(child: CircularProgressIndicator());
+            }),
+          );
+        });
   }
 }

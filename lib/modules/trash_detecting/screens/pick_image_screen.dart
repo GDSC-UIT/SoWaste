@@ -40,12 +40,7 @@ class PickImageScreen extends StatelessWidget {
       _trashDetectingController.recognitions.value = temp["model_predict"];
       _trashDetectingController.imgWidth = temp["width"];
       _trashDetectingController.imgHeight = temp["height"];
-
-      // print(response.statusCode);
-      // print("Body: ${response.body}");
-    } catch (error) {
-      // print(error);
-    }
+    } catch (error) {}
   }
 
   Future<void> pickImageToDetect({bool camera = true}) async {
@@ -63,7 +58,6 @@ class PickImageScreen extends StatelessWidget {
       // Post recent Trash
       ++DataCenter.timesDeteted.value;
       for (var object in _trashDetectingController.recognitions) {
-        // print("Object: ${object["name"]}");
         String temp = object["name"]
             .toLowerCase()
             .substring(0, object["name"].length - 1);
@@ -85,7 +79,6 @@ class PickImageScreen extends StatelessWidget {
         }
       }
     } catch (error) {
-      // print(error);
     } finally {
       _trashDetectingController.isLoading.value = false;
     }

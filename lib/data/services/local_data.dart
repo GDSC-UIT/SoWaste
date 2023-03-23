@@ -16,11 +16,8 @@ class LocalService {
     try {
       String fileContent = await File(filePath).readAsString();
       Map jsonContent = json.decode(fileContent);
-      // print("File content: $jsonContent");
       return jsonContent;
-    } catch (error) {
-      // print("Fail to load data from local storage, $error");
-    }
+    } catch (error) {}
     return null;
   }
 

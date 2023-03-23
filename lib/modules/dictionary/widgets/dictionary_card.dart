@@ -24,7 +24,7 @@ class DictionaryCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => {dictionaryController.getDetailTrash(trash.id)},
       child: SizedBox(
-        height: 250,
+        height: 280,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
@@ -36,10 +36,10 @@ class DictionaryCard extends StatelessWidget {
             child: GridTile(
               footer: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.background.withOpacity(0.6),
+                  color: AppColors.dropShadow.withOpacity(0.8),
                 ),
                 child: SizedBox(
-                  height: 130,
+                  height: 100,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 12),
@@ -49,19 +49,14 @@ class DictionaryCard extends StatelessWidget {
                         children: [
                           Text(
                             trash.name,
-                            style: CustomTextStyle.bodyBold(AppColors.onSur),
+                            style:
+                                CustomTextStyle.bodyBold(AppColors.onSurface),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
                             "${trash.isOrganic ? "Organic" : "Inorganic"}, ${trash.isRecyable ? "Recyclable" : "Non-recyclable"}",
-                            style: CustomTextStyle.medium(AppColors.onBg),
-                          ),
-                          Text(
-                            trash.shortDescription,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: CustomTextStyle.normal(AppColors.onBg),
+                            style: CustomTextStyle.medium(AppColors.onSurface),
                           ),
                           SizedBox(
                             height: 30,

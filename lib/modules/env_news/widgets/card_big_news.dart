@@ -41,6 +41,12 @@ class CardBigNews extends StatelessWidget {
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.fitWidth,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
               ),
             ),
             SizedBox(

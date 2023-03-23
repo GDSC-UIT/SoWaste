@@ -37,6 +37,12 @@ class NewsCard extends StatelessWidget {
                       child: Image(
                         image: NetworkImage(article.displayImage),
                         fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
                     ),
                     Container(

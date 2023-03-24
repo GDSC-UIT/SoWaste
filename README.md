@@ -21,7 +21,7 @@ Overall, SoWaste helps users accurately sort waste and improve their knowledge o
 
 ## Mobile Installation
 
-Download APK file **<ins>[here](https://drive.google.com/file/d/1DGLuVp5cODrKqdmtiH0tmBRwMKX9eOs-/view?usp=share_link)!</ins>**
+Download APK file **<ins>[here](https://www.tuankietcoder.tech/file/sowaste.apk)!</ins>**
 
 ## Local Installation
 

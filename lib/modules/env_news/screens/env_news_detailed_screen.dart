@@ -44,6 +44,7 @@ class EnvsNewsDetailScreen extends StatelessWidget {
                         },
                       ),
                     ),
+                    const SizedBox(height: 16),
                     Text(
                       article.title,
                       style: CustomTextStyle.sub(AppColors.onBg),
@@ -61,6 +62,9 @@ class EnvsNewsDetailScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     MarkdownText(
                       text: article.description!,
+                    ),
+                    const SizedBox(
+                      height: 80,
                     )
                   ],
                 );

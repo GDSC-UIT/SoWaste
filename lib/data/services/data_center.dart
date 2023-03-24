@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:sowaste/core/values/app_file_name.dart';
@@ -68,7 +69,9 @@ class DataCenter extends GetxController {
         try {
           final response = await LocalService.readFile(quizFile.path);
           DataCenter.localQuizList.add(LocalQuiz.fromJson(response!));
-        } catch (error) {}
+        } catch (error) {
+          log(error.toString());
+        }
       }
     }
   }
@@ -101,6 +104,7 @@ class DataCenter extends GetxController {
   static Future<void> fetchAllArticles() async {
     final EnvironmentNewsController environmentNewsController =
         Get.put(EnvironmentNewsController());
+    log("Article URL ${UrlValue.articlesUrl}");
     try {
       final response = await HttpService.getRequest(UrlValue.articlesUrl);
       final temp = await json.decode(utf8.decode(response.bodyBytes))["data"];
@@ -112,6 +116,7 @@ class DataCenter extends GetxController {
       environmentNewsController.news.value = [...DataCenter.news];
     } catch (error) {
       // isLoading.value = false;
+      log(error.toString());
     }
   }
 
@@ -123,7 +128,10 @@ class DataCenter extends GetxController {
         dictionary.add(Trash.fromJson(trash));
       });
       DataCenter.dictionary = [...dictionary];
-    } catch (error) {}
+    } catch (error) {
+      print(UrlValue.dictionaryUrl);
+      log(error.toString());
+    }
   }
 
   static void sortNews() {

@@ -100,7 +100,7 @@ class TrashDetailScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: dictionaryController.currentQuiz.isNotEmpty
-                            ? 78
+                            ? 200
                             : 8,
                       )
                     ],

@@ -33,8 +33,8 @@ Download APK file **<ins>[here](https://www.tuankietcoder.tech/file/sowaste.apk)
 Follow the steps!
 
 ```
-git clone https://github.com/GDSC-UIT/sowaste.git
-cd sowaste
+git clone https://github.com/GDSC-UIT/sowaste-frontend.git
+cd sowaste-frontend
 flutter pub get
 flutter run
 

@@ -27,7 +27,7 @@ class AppSearchInput extends StatelessWidget {
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(16)),
             contentPadding: const EdgeInsets.symmetric(vertical: 16),
-            hintText: 'Search type of trash',
+            hintText: 'Search type of waste',
             hintStyle: CustomTextStyle.normal(AppColors.info),
             prefixIcon: const Icon(
               Icons.search,

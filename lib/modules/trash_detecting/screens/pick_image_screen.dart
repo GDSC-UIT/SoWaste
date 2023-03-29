@@ -88,7 +88,7 @@ class PickImageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const ArrowBackAppBar(
-          title: "Detect Trash ",
+          title: "Detect Waste ",
           isShowArrowBackIcon: false,
         ),
         body: Container(

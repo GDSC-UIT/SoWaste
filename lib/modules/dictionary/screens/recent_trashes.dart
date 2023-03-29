@@ -14,7 +14,7 @@ class RecentTypesScreen extends StatelessWidget {
     final DictionaryController dictionaryController = Get.find();
     return Scaffold(
         appBar: const ArrowBackAppBar(
-          title: "Recent types of trash",
+          title: "Recent types of waste",
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

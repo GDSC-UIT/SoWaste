@@ -46,7 +46,7 @@ class TrashDetectingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: ArrowBackAppBar(
-          title: "Detect Trash",
+          title: "Detect Waste",
           onTap: () {
             Get.back();
           },

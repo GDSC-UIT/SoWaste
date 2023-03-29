@@ -31,7 +31,7 @@ class DictionaryOverviewScreen extends StatelessWidget {
                 ),
                 gap(),
                 Text(
-                  "Type of trash of the day",
+                  "Type of waste of the day",
                   style: CustomTextStyle.bodyBold(AppColors.secondary),
                 ),
                 gap(),

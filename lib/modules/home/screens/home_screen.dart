@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "You haven’t done any trash detecting yet.",
+                            "You haven’t done any waste detecting yet.",
                             style: CustomTextStyle.bodyBold(AppColors.onBg)
                                 .copyWith(height: 1.5),
                           ),

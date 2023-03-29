@@ -19,7 +19,7 @@ class SavedTrashesScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           child: Obx(() => DataCenter.savedTrashList.isEmpty
-              ? const Empty(text: "saved any trash yet!")
+              ? const Empty(text: "saved any waste yet!")
               : ListView.builder(
                   itemBuilder: (context, index) => AppCardButton(
                       onTapFunction: () async {

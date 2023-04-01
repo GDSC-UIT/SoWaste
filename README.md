@@ -1,5 +1,10 @@
 ![](/assets/logo/logo_full.png)
 
+![flutter support](https://img.shields.io/badge/flutter%20support-%3E%3D%20%203.3.0-skyblue)
+![dart support](https://img.shields.io/badge/dart%20support-%3E%3D%20%202.14.0-blue)
+![python support](https://img.shields.io/badge/python%20support-%3E%3D%20%203.8.0-yellow)
+![go support](https://img.shields.io/badge/go%20support-%3E%3D%20%201.18.0-blue)
+
 The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
 
 ## Features
@@ -18,6 +23,23 @@ The SoWaste application includes AI technology to identify and categorize trash 
 
 <hr />
 Overall, SoWaste helps users accurately sort waste and improve their knowledge of environmental protection in an easy way.
+<hr />
+
+## Project structure module
+
+Project compose 3 git submodules:
+
+1. Mobile Application: [current repository](./)
+2. Backend: [./sowaste-backend](https://github.com/GDSC-UIT/sowaste-backend.git)
+3. AI Model: [./waste_detect_api](https://github.com/tien02/waste_detect_api.git)
+
+README.MD : are covered in each module for clearer explanation + installation + self-host solution
+
+<hr />
+
+## How to run the project
+
+Bellow steps are required to run fully gateway application which include Flutter - Go - Python:
 
 ## Mobile Installation
 
@@ -30,14 +52,34 @@ Download APK file **<ins>[here](https://www.tuankietcoder.tech/file/sowaste.apk)
 - Flutter: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
 - Dart: [https://dart.dev/get-dart](https://dart.dev/get-dart)
 
-Follow the steps!
+- Clone project to local machine:
 
+```bash
+git clone https://github.com/GDSC-UIT/SoWaste.git
 ```
-git clone https://github.com/GDSC-UIT/sowaste-frontend.git
-cd sowaste-frontend
-flutter pub get
-flutter run
 
+- Open your terminal and run the following commands:
+
+```bash
+cd SoWaste
+```
+
+- Run the following commands to install all dependencies:
+
+```bash
+flutter pub get
+```
+
+- Run the following commands to run the project:
+
+```bash
+flutter run
+```
+
+- Run the following commands in production mode:
+
+```bash
+flutter run --release
 ```
 
 **Note**: If you meet the problem from installation, you should:
@@ -46,44 +88,16 @@ flutter run
 - Run `flutter clean` and `flutter run`;
 - Delete `graddle-wrapper.jar` file from `android/gradle/wrapper/gradlle-wrapper.jar` and `flutter run`.
 
-Start using app!
+## Backend Installation
 
-```
-Using
-    - MVVM Architecture
-    - GetX for state management
-```
+You can find the backend installation guide [here](https://github.com/GDSC-UIT/sowaste-backend/blob/main/README.md)
 
-# FILE STRUCTURE
+## AI Model Installation
 
-**assets : contains all the static assets that are used in the application**
+You can find the AI model installation guide [here](https://github.com/tien02/waste_detect_api/blob/main/README.md#run-on-local)
 
-- logo
-- icons
-- images
-- fonts
+Contributors:
 
-**lib**
-
-- core
-  - themes : eg- define TextTheme, TextStyle..., color
-  - utils : static method
-  - values :
-    - app_assets: contains paths for different images, icons.
-    - app_string: contains strings used across entire application .
-    - app_constant: initialize the different color variations.
-      ...
-  - data
-    - models : saves the data and associated logic.
-    - services : eg- contains api services : authentication , fetch data...
-  - global_widgets
-- **modules**
-  - <module_name>
-    - _<module_name>\_binding.dart_ : provide dependencies - controller...
-    - _<module_name>\_controller.dart_ : executes the commands and data linked to the View(s)
-    - widgets: local widgets
-    - screens
-- routes
-  - _app_pages.dart_ : contains screens corresponding to the route name
-  - _app_routes.dart_ : defines route name
-- **_main.dart_**
+![](https://contrib.rocks/image?repo=GDSC-UIT/sowaste)
+<img src="https://avatars.githubusercontent.com/u/86642101" width="64" height="64" style="border-radius:50%"/>
+<img src="https://avatars.githubusercontent.com/u/87572261" width="64" height="64" style="border-radius:50%"/>

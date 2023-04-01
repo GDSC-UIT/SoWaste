@@ -6,8 +6,8 @@ import '../../data/services/data_center.dart';
 class TrashDetectingController extends GetxController {
   RxList recognitions = [].obs;
   RxBool isLoading = false.obs;
-  int imgWidth = 0;
-  int imgHeight = 0;
+  int imgWidth = 1;
+  int imgHeight = 1;
 
   Trash? getDetectedTrash(String name) {
     String temp = name.toLowerCase().substring(0, name.length - 1);

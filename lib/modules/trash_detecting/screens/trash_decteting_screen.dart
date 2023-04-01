@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
@@ -13,16 +15,22 @@ class TrashDetectingScreen extends StatelessWidget {
   List<Widget> stackChildren = [];
 
   List<Widget> renderBoxes(Size size) {
-    final ratio = size.width / _trashDetectingController.imgWidth;
+    final double ratio = size.width / _trashDetectingController.imgWidth;
     stackChildren.add(Image.file(ImageServices.pickedImage!));
 
     if (_trashDetectingController.recognitions.isEmpty) return [];
     return _trashDetectingController.recognitions.map((re) {
+      double left = double.parse(re["xmin"].toString()) * ratio;
+      double top = double.parse(re["ymin"].toString()) * ratio;
+      double width =
+          (double.parse(re["xmax"]) - double.parse(re["xmin"])) * ratio;
+      double height =
+          (double.parse(re["ymax"]) - double.parse(re["ymin"])) * ratio;
       return Positioned(
-        left: re["xmin"] * ratio,
-        top: re["ymin"] * ratio,
-        width: (re["xmax"] - re["xmin"]) * ratio,
-        height: (re["ymax"] - re["ymin"]) * ratio,
+        left: left,
+        top: top,
+        width: width,
+        height: height,
         child: Container(
           decoration: BoxDecoration(
               border: Border.all(
@@ -30,7 +38,7 @@ class TrashDetectingScreen extends StatelessWidget {
             width: 3,
           )),
           child: Text(
-            "${re["name"]} ${(re["confidence"] * 100).toStringAsFixed(0)}%",
+            "${re["name"]} ${(double.parse(re["confidence"]) * 100).toStringAsFixed(0)}%",
             style: TextStyle(
               background: Paint()..color = AppColors.primaryLight,
               color: Colors.black,

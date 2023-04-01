@@ -95,7 +95,6 @@ Here are some examples of waste our AI system has detected:
   <img src="images/detected_result/img1.jpeg" height="250" />
   <img src="images/detected_result/img2.jpeg" height="250" /> 
   <img src="images/detected_result/img3.jpeg" height="250" />
-  <img src="images/detected_result/img4.jpeg" height="250" />
 </p>
 <hr />
 

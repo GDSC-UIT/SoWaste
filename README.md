@@ -5,7 +5,9 @@
 ![python support](https://img.shields.io/badge/python%20support-%3E%3D%20%203.8.0-yellow)
 ![go support](https://img.shields.io/badge/go%20support-%3E%3D%20%201.18.0-blue)
 
-The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
+>The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
+
+**Watch SoWaste demo video here: https://youtu.be/Nebw10PnLNE**
 
 ## Overall
 
@@ -97,6 +99,32 @@ Here are some examples of waste our AI system has detected:
   <img src="images/detected_result/img3.jpeg" height="250" />
 </p>
 <hr />
+
+## The app user flow
+<div float="left" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px">
+  <div>
+    <h3>Camera Detecting Waste</h3>
+    <img src="images/gif/detect.gif" height="600" />
+  </div>
+  <div>
+    <h3>Waste Dictionary</h3>
+    <img src="images/gif/waste-info.gif" height="600" />
+  </div>
+    <div>
+    <h3>Quizzes</h3>
+    <img src="images/gif/quiz.gif" height="600" />
+  </div>
+  <div>
+    <h3>Environment news</h3>
+    <img src="images/gif/news.gif" height="600" />
+  </div>
+  <div>
+    <h3>Waste Dictionary</h3>
+    <img src="images/gif/map.gif" height="600" />
+  </div>
+</div>
+<hr/>
+
 
 ## Contributors:
 

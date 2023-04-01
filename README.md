@@ -7,22 +7,10 @@
 
 The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
 
-## Features
+## Overall
 
-The SoWaste application includes AI technology to identify and categorize trash types.
+<img alt="SoWaste Overall" src="./images/overall.png" width="100%" />
 
-<hr />
-
-**A waste types dictionary and quizzes help users understand how to classify waste.**
-
-**The dictionary is connected to the camera, displaying basic information while users take photos.**
-
-**Environmental news raises awareness on the importance of waste sorting and its impact on the environment.**
-
-**The app also allows users to search for nearby recycling facilities and get driving directions.**
-
-<hr />
-Overall, SoWaste helps users accurately sort waste and improve their knowledge of environmental protection in an easy way.
 <hr />
 
 ## Project structure module
@@ -51,6 +39,11 @@ Download APK file **<ins>[here](https://www.tuankietcoder.tech/file/sowaste.apk)
 
 - Flutter: [https://docs.flutter.dev/get-started/install](https://docs.flutter.dev/get-started/install)
 - Dart: [https://dart.dev/get-dart](https://dart.dev/get-dart)
+- Android Studio: [https://developer.android.com/studio](https://developer.android.com/studio)
+- Xcode: [https://developer.apple.com/xcode/](https://developer.apple.com/xcode/)
+- Or you can use physical device to run the project. You can find the instruction [here](https://flutter.dev/docs/get-started/install/macos#set-up-the-ios-device) (for iOS) and [here](https://flutter.dev/docs/get-started/install/windows#set-up-the-android-device) (for Android).
+
+**Steps**:
 
 - Clone project to local machine:
 
@@ -96,8 +89,8 @@ You can find the backend installation guide [here](https://github.com/GDSC-UIT/s
 
 You can find the AI model installation guide [here](https://github.com/tien02/waste_detect_api/blob/main/README.md#run-on-local)
 
-Contributors:
+<hr />
+
+## Contributors:
 
 ![](https://contrib.rocks/image?repo=GDSC-UIT/sowaste)
-<img src="https://avatars.githubusercontent.com/u/86642101" width="64" height="64" style="border-radius:50%"/>
-<img src="https://avatars.githubusercontent.com/u/87572261" width="64" height="64" style="border-radius:50%"/>

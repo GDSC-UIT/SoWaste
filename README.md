@@ -101,28 +101,7 @@ Here are some examples of waste our AI system has detected:
 <hr />
 
 ## The app user flow
-<div float="left" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px">
-  <div>
-    <h3>Camera Detecting Waste</h3>
-    <img src="images/gif/detect.gif" height="600" />
-  </div>
-  <div>
-    <h3>Waste Dictionary</h3>
-    <img src="images/gif/waste-info.gif" height="600" />
-  </div>
-    <div>
-    <h3>Quizzes</h3>
-    <img src="images/gif/quiz.gif" height="600" />
-  </div>
-  <div>
-    <h3>Environment news</h3>
-    <img src="images/gif/news.gif" height="600" />
-  </div>
-  <div>
-    <h3>Waste Dictionary</h3>
-    <img src="images/gif/map.gif" height="600" />
-  </div>
-</div>
+<img src="images/gif/demo.gif" height="600" />
 <hr/>
 
 

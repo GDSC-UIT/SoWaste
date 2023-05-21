@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
-import 'package:sowaste/global_widget/app_button.dart';
+import 'package:sowaste/modules/signin/sign_in_controller.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  final SignInController _controller = Get.find();
+  SignInScreen({super.key});
   Widget signInWithGoogleButton(
       VoidCallback onPressedFunction, BuildContext context) {
     return ElevatedButton(
@@ -73,7 +73,9 @@ class SignInScreen extends StatelessWidget {
                 height: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [signInWithGoogleButton(() {}, context)],
+                  children: [
+                    signInWithGoogleButton(_controller.signInAction, context)
+                  ],
                 ))
           ],
         ),

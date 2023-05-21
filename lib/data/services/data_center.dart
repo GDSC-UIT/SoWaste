@@ -14,6 +14,7 @@ import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
 
 class DataCenter extends GetxController {
+  static Map<String, String> user = {};
   static bool isFirstTime = false;
   static List<Trash> dictionary = [];
   static List<Article> news = [];

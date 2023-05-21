@@ -19,7 +19,7 @@ class CustomTextStyle extends TextStyle {
         fontWeight: FontWeight.w600,
         color: color,
         letterSpacing: 0.5,
-        textStyle: const TextStyle(height: 2.5));
+        textStyle: const TextStyle(height: 1));
   }
 
   static TextStyle h3(Color color) {

@@ -16,18 +16,24 @@ class OnboardingScreen extends StatelessWidget {
     return Center(
       child: Image.asset(
         path,
-        width: 190,
+        height: 250,
       ),
     );
   }
 
   PageDecoration pageDecoration() => PageDecoration(
-      imageFlex: 5,
-      bodyFlex: 4,
-      titleTextStyle: CustomTextStyle.h3(AppColors.primary),
-      bodyTextStyle: CustomTextStyle.medium(AppColors.primary),
-      titlePadding: const EdgeInsets.only(bottom: 16),
-      pageColor: AppColors.background);
+          contentMargin: const EdgeInsets.all(0),
+          bodyPadding: const EdgeInsets.symmetric(horizontal: 0),
+          imageFlex: 5,
+          bodyFlex: 4,
+          titleTextStyle:
+              CustomTextStyle.h3(AppColors.primary).copyWith(height: 1),
+          bodyTextStyle: CustomTextStyle.medium(AppColors.primary),
+          titlePadding: const EdgeInsets.only(bottom: 16),
+          pageColor: AppColors.background)
+      .copyWith(
+          titlePadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          descriptionPadding: const EdgeInsets.symmetric(horizontal: 16));
 
   DotsDecorator getDotDecoration() => DotsDecorator(
       color: AppColors.primaryLight,
@@ -50,22 +56,22 @@ class OnboardingScreen extends StatelessWidget {
             child: IntroductionScreen(
               pages: [
                 PageViewModel(
-                    image: customImage(AppImages.dustbin),
-                    title: "Raise awareness",
+                    image: customImage(AppImages.onboarding1),
+                    title: "Sort waste with ease",
                     body:
-                        "Garbage pollution threatens the environment and public health.",
+                        "Our AI camera feature helps you identify the waste type and provides recycling guidance.",
                     decoration: pageDecoration()),
                 PageViewModel(
-                    image: customImage(AppImages.recycle),
-                    title: "Reduce waste",
+                    image: customImage(AppImages.onboarding2),
+                    title: "Learn and recycle",
                     body:
                         "Reducing waste by recycling is crucial for preserving our planet's health.",
                     decoration: pageDecoration()),
                 PageViewModel(
-                    image: customImage(AppImages.sort),
-                    title: "Sorting waste",
+                    image: customImage(AppImages.onboarding3),
+                    title: "Contribute to earn rewards",
                     body:
-                        "Effective waste management can help address the garbage pollution.",
+                        "Find nearby recycling points and scrap shops to sell or donate your recyclables.",
                     decoration: pageDecoration()),
               ],
               onChange: (index) => {

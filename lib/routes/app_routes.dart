@@ -22,4 +22,10 @@ class AppRoutes {
 
   //map
   static const mapPage = '/map';
+
+  //welcome
+  static const welcome = '/welcome';
+  //sign in
+  static const signInPage = '/sign_in';
+  static const enterUserNamePage = '/name';
 }

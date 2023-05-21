@@ -16,6 +16,10 @@ import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/map/screens/map_screen.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:sowaste/modules/signin/screens/sign_in_screen.dart';
+import 'package:sowaste/modules/signin/screens/user_name_screen.dart';
+import 'package:sowaste/modules/signin/screens/welcome_screen.dart';
+import 'package:sowaste/modules/signin/sign_in_binding.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
@@ -113,6 +117,24 @@ class AppPages {
       transition: Transition.cupertino,
     ),
 
-    //Test tflite
+    //welcome
+    GetPage(
+      name: AppRoutes.welcome,
+      page: () => WelcomeScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.enterUserNamePage,
+      page: () => UserNameScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.signInPage,
+      page: () => SignInScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
+    ),
   ];
 }

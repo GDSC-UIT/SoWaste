@@ -6,6 +6,8 @@ import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/routes/app_page.dart';
 import 'routes/app_routes.dart';
 
+//ABC
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DataCenter.AppFilePath = await LocalService.getFilePath;
@@ -38,8 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute:
-          DataCenter.isFirstTime ? AppRoutes.onboardingPage : AppRoutes.base,
+      initialRoute: AppRoutes.onboardingPage,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

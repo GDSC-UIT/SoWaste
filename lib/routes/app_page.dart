@@ -114,5 +114,12 @@ class AppPages {
     ),
 
     //Test tflite
+
+    // Reward
+    GetPage(
+      name: AppRoutes.rewardPage,
+      page: () => PickImageScreen(),
+      transition: Transition.cupertino,
+    ),
   ];
 }

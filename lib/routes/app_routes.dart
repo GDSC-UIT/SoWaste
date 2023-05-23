@@ -22,4 +22,7 @@ class AppRoutes {
 
   //map
   static const mapPage = '/map';
+
+  // Reward
+  static const rewardPage = '/reward';
 }

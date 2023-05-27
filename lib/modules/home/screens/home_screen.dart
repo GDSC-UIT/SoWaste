@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_assets/app_icons.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
+import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
@@ -102,6 +104,50 @@ class HomeScreen extends StatelessWidget {
                       ),
               ),
               gap(),
+              title(
+                  "Your badge",
+                  () => {
+                        Get.toNamed(AppRoutes.quizzesPage),
+                      },
+                  true),
+              Card(
+                color: AppColors.primaryLight.withOpacity(0.7),
+                shape:
+                    RoundedRectangleBorder(borderRadius: AppConst.borderRadius),
+                elevation: 7,
+                shadowColor: AppConst.shadowColor,
+                child: Container(
+                  height: 150,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(child: Image.asset(AppImages.cloud)),
+                        Flexible(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Start donate to recycling points",
+                                style: CustomTextStyle.bodyBold(
+                                    AppColors.primaryDark),
+                              ),
+                              const Icon(
+                                Icons.arrow_forward,
+                                color: AppColors.primaryDark,
+                                size: 24,
+                              )
+                            ],
+                          ),
+                        ),
+                      ]),
+                ),
+              ),
+              gap(),
+
               //Your Quizzes
               title(
                   "Your Quizzes",
@@ -109,6 +155,7 @@ class HomeScreen extends StatelessWidget {
                         Get.toNamed(AppRoutes.quizzesPage),
                       },
                   true),
+
               Obx(() => DataCenter.localQuizList.isNotEmpty
                   ? Column(
                       children: [
@@ -130,6 +177,7 @@ class HomeScreen extends StatelessWidget {
                   : const ToDicButton()),
               gap(),
               //Environment News
+
               Padding(
                 padding: const EdgeInsets.only(bottom: 24),
                 child: Column(

@@ -7,4 +7,5 @@ class AppImages {
   static const String onboarding3 = 'assets/images/Onboarding3.png';
   static const String googleIcon = 'assets/images/Google.png';
   static const String welcome = 'assets/images/Welcome.png';
+  static const String cloud = 'assets/images/cloud.png';
 }

@@ -54,10 +54,10 @@ class DictionaryCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          Text(
-                            "${trash.isOrganic ? "Organic" : "Inorganic"}, ${trash.isRecyable ? "Recyclable" : "Non-recyclable"}",
-                            style: CustomTextStyle.medium(AppColors.onSurface),
-                          ),
+                          // Text(
+                          //   "${trash.isOrganic ? "Organic" : "Inorganic"}, ${trash.isRecyable ? "Recyclable" : "Non-recyclable"}",
+                          //   style: CustomTextStyle.medium(AppColors.onSurface),
+                          // ),
                           SizedBox(
                             height: 30,
                             child: TextButton(

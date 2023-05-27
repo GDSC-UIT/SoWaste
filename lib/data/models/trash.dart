@@ -12,17 +12,26 @@ class Trash {
   String displayImage;
   String uri;
   String shortDescription;
+  List<String>? types;
+  String? goodToKnow;
+  List<String>? nonReItems;
+  List<String>? reItems;
+  String? howToRe;
 
-  Trash({
-    required this.id,
-    required this.name,
-    required this.isOrganic,
-    required this.isRecyable,
-    required this.displayImage,
-    required this.uri,
-    required this.shortDescription,
-    this.description,
-  });
+  Trash(
+      {required this.id,
+      required this.name,
+      required this.isOrganic,
+      required this.isRecyable,
+      required this.displayImage,
+      required this.uri,
+      required this.shortDescription,
+      this.description,
+      this.types,
+      this.goodToKnow,
+      this.reItems,
+      this.nonReItems,
+      this.howToRe});
 
   factory Trash.fromJson(Map<String, dynamic> json) {
     return Trash(
@@ -33,7 +42,16 @@ class Trash {
         description: json["description"],
         uri: json["uri"],
         shortDescription: json["short_description"],
-        displayImage: json["display_image"]);
+        displayImage: json["display_image"],
+        types: json["types"] != null ? json["types"] as List<String> : null,
+        goodToKnow: json["good_to_know"],
+        reItems: json["types"] != null
+            ? json["recyclable_items"] as List<String>
+            : null,
+        nonReItems: json["types"] != null
+            ? json["non_recyclable_items"] as List<String>
+            : null,
+        howToRe: json["how_to_recyclable"]);
   }
 
   static Future<Trash?> getTrash(String id) async {

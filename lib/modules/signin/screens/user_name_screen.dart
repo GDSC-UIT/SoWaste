@@ -3,12 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
+import 'package:sowaste/modules/signin/sign_in_controller.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 class UserNameScreen extends StatelessWidget {
-  const UserNameScreen({super.key});
+  UserNameScreen({super.key});
+  final SignInController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,7 @@ class UserNameScreen extends StatelessWidget {
                         Flexible(
                           flex: 1,
                           child: TextField(
+                            controller: _controller.name,
                             style: CustomTextStyle.h2(Colors.black)
                                 .copyWith(height: 1),
                             decoration: InputDecoration(
@@ -64,9 +69,11 @@ class UserNameScreen extends StatelessWidget {
                               Icons.arrow_forward,
                               color: AppColors.info,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.signInPage);
+                            },
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -78,7 +85,7 @@ class UserNameScreen extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Image.asset(
-                    AppImages.camera,
+                    AppImages.welcome,
                     height: 300,
                   ),
                 )),

@@ -94,8 +94,45 @@ class TrashDetailScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        child: MarkdownText(
-                          text: trash.description!,
+                        child: Column(
+                          children: [
+                            Text("Types",
+                                style: CustomTextStyle.title(Colors.black)),
+                            Column(
+                              children: trash.types!
+                                  .map(
+                                    (e) => ListTile(
+                                      leading: const Icon(Icons.circle),
+                                      title: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            Text("Recyclable items",
+                                style: CustomTextStyle.title(Colors.black)),
+                            Column(
+                              children: trash.reItems!
+                                  .map(
+                                    (e) => ListTile(
+                                      leading: const Icon(Icons.circle),
+                                      title: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                            Text("Non recyclable items",
+                                style: CustomTextStyle.title(Colors.black)),
+                            Column(
+                              children: trash.nonReItems!
+                                  .map(
+                                    (e) => ListTile(
+                                      leading: const Icon(Icons.circle),
+                                      title: Text(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(

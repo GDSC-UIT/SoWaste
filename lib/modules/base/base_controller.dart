@@ -23,7 +23,7 @@ class BaseController extends GetxController {
     const HomeScreen(),
     const DictionaryOverviewScreen(),
     PickImageScreen(),
-    EnvironmentNewsOverviewScreen(),
     const MapScreen(),
+    EnvironmentNewsOverviewScreen(),
   ].obs;
 }

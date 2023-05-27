@@ -50,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Image.asset(
-                    AppImages.camera,
+                    AppImages.welcome,
                     height: 300,
                   ),
                 )),

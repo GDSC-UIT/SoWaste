@@ -45,7 +45,7 @@ class ToDicButton extends StatelessWidget {
                           const Icon(
                             Icons.arrow_forward,
                             color: AppColors.primary,
-                            size: 40,
+                            size: 24,
                           )
                         ],
                       ),

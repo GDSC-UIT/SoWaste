@@ -21,18 +21,6 @@ void main() async {
         {"isTheFirstTime": true}, "${DataCenter.AppFilePath}/app.json");
     DataCenter.isFirstTime = true;
   }
-  // fetch all data from local and api
-  DataCenter.doneQuizzesFolder =
-      await LocalService.createFolderInAppDocDir("quizzes");
-  await Future.wait([
-    LocalService.getAllFileDoneQuiz(),
-    DataCenter.fetchDictionary(),
-    DataCenter.fetchAllQuestions(),
-    DataCenter.fetchAllArticles(),
-    DataCenter.fetchSavedTrashes(),
-    DataCenter.fetchAllUserQuizzes(),
-    DataCenter.fetchRecentTrashes(),
-  ]);
 
   runApp(const MyApp());
 }
@@ -42,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: AppRoutes.signInPage,
+      initialRoute: AppRoutes.base,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

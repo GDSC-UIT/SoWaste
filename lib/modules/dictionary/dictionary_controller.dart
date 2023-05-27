@@ -5,6 +5,7 @@ import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/data/models/quiz_local.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
+import 'package:sowaste/modules/home/home_controller.dart';
 
 import '../../data/models/trash.dart';
 import '../../routes/app_routes.dart';

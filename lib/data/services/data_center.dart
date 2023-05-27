@@ -12,12 +12,13 @@ import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DataCenter extends GetxController {
-  static Map<String, String> user = {};
+  static User? user;
   static bool isFirstTime = false;
   static List<Trash> dictionary = [];
-  static List<Article> news = [];
+  static RxList<Article> news = <Article>[].obs;
   static String AppFilePath = "";
   static Map<dynamic, Set<String>> doneQuizId = {};
   static RxList<LocalQuiz> localQuizList = <LocalQuiz>[].obs;
@@ -112,7 +113,7 @@ class DataCenter extends GetxController {
       temp.forEach((article) {
         DataCenter.news.add(Article.fromJson(article));
       });
-
+      DataCenter.news.value = [...DataCenter.news];
       sortNews();
       environmentNewsController.news.value = [...DataCenter.news];
     } catch (error) {

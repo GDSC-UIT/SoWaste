@@ -13,7 +13,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    print("USER NAME:" + AuthServices.currentUser!.displayName.toString());
+    print(AuthServices.currentUser!.displayName.toString());
     DataCenter.doneQuizzesFolder =
         await LocalService.createFolderInAppDocDir("quizzes");
     await Future.wait([

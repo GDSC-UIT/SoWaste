@@ -19,7 +19,7 @@ class DIYCard extends StatelessWidget {
         ),
       ),
       Container(
-          // width: screenWidth * (388 / 482),
+          width: screenWidth,
           height: screenHeight * (232 / 932),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),

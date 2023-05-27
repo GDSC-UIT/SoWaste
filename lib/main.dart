@@ -7,20 +7,10 @@ import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/routes/app_page.dart';
 import 'routes/app_routes.dart';
 
-//ABC
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   DataCenter.AppFilePath = await LocalService.getFilePath;
-  // check if this is the first time user have opened this app then show onboarding screen
-  var response =
-      await LocalService.readFile("${DataCenter.AppFilePath}/app.json");
-  if (response == null) {
-    LocalService.saveContent(
-        {"isTheFirstTime": true}, "${DataCenter.AppFilePath}/app.json");
-    DataCenter.isFirstTime = true;
-  }
 
   runApp(const MyApp());
 }
@@ -30,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: AppRoutes.base,
+      initialRoute: AppRoutes.welcome,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,

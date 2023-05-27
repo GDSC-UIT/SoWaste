@@ -79,7 +79,7 @@ class _CategoriesandDIYscreenState extends State<CategoriesandDIYscreen>
                     unselectedLabelColor: AppColors.unselectedTabTitle,
                     labelColor: Colors.green,
                     indicatorColor: Colors.transparent,
-                    tabs: [
+                    tabs: const [
                       Tab(
                         text: 'Categories',
                       ),

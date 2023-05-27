@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/modules/dictionary/widgets/diy_card.dart';
 
 class ListDIY extends StatelessWidget {
@@ -8,14 +9,13 @@ class ListDIY extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         itemBuilder: ((context, index) => DIYCard(
-              title: "How to make Paper Basket | Do It Yourself",
-              image:
-                  "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=600",
+              title: DataCenter.dictionary[index].name,
+              image: DataCenter.dictionary[index].displayImage,
             )),
         separatorBuilder: (context, index) => SizedBox(
               height: 16,
             ),
-        itemCount: 10);
+        itemCount: DataCenter.dictionary.length);
     ;
   }
 }

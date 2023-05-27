@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/modules/base/base_binding.dart';
 import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
+import 'package:sowaste/modules/dictionary/screens/categories_diy_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
@@ -43,7 +44,7 @@ class AppPages {
         binding: OnBoardingBinding()),
     GetPage(
         name: AppRoutes.dictionaryPage,
-        page: () => const DictionaryOverviewScreen(),
+        page: () => const CategoriesandDIYscreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
 

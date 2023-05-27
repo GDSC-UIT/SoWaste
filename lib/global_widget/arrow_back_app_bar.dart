@@ -23,7 +23,7 @@ class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: isShowArrowBackIcon,
       title: Text(
         title ?? "",
-        style: CustomTextStyle.sub(AppColors.secondary),
+        style: CustomTextStyle.sub(AppColors.primary),
       ),
       leading: isShowArrowBackIcon
           ? IconButton(

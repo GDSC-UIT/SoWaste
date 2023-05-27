@@ -1,6 +1,7 @@
 class AppRoutes {
   //Home
   static const homeScreen = '/';
+  static const profile = '/profile';
   //OnBoarding
   static const onboardingPage = '/onboarding';
   //Dictionary

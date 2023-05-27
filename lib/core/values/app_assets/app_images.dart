@@ -5,4 +5,6 @@ class AppImages {
   static const String dustbin = 'assets/images/dustbin.png';
   static const String recycle = 'assets/images/recycle.png';
   static const String sort = 'assets/images/sort.png';
+  static const String trophy = 'assets/images/trophy.png';
+  static const String emptybag = 'assets/images/emptybag.png';
 }

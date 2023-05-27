@@ -7,7 +7,7 @@ class AppColors {
   static const Color primaryDark = Color(0xFF13A242);
   static const Color primaryLight = Color(0xFF86DA9E);
   static const Color secondary = Color(0xFFF89161);
-
+  static const Color gray300 = Color.fromRGBO(209, 212, 220, 1);
   //Base
   static const Color background = Color(0xFFFAFAFA);
   static const Color error = Color(0xFFEF5E5E);

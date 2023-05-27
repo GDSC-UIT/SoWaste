@@ -49,6 +49,15 @@ class CustomTextStyle extends TextStyle {
     );
   }
 
+  static TextStyle subHeading(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
+
   static TextStyle title(Color color) {
     return GoogleFonts.roboto(
         fontSize: 18,
@@ -56,6 +65,15 @@ class CustomTextStyle extends TextStyle {
         color: color,
         letterSpacing: 0.5,
         textStyle: const TextStyle(height: 1.5));
+  }
+
+  static TextStyle heading() {
+    return GoogleFonts.roboto(
+      fontSize: 26,
+      fontWeight: FontWeight.w700,
+      color: AppColors.primaryDark,
+      letterSpacing: 0.5,
+    );
   }
 
   static TextStyle bodyBold(Color color) {

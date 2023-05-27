@@ -16,6 +16,7 @@ import 'package:sowaste/modules/home/home_binding.dart';
 import 'package:sowaste/modules/map/screens/map_screen.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:sowaste/modules/reward/screens/reward_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
@@ -118,7 +119,7 @@ class AppPages {
     // Reward
     GetPage(
       name: AppRoutes.rewardPage,
-      page: () => PickImageScreen(),
+      page: () => const RewardScreen(),
       transition: Transition.cupertino,
     ),
   ];

@@ -58,6 +58,41 @@ class CustomTextStyle extends TextStyle {
         textStyle: const TextStyle(height: 1.5));
   }
 
+  static TextStyle dictionaryTitle(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 26,
+      fontWeight: FontWeight.bold,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
+
+  static TextStyle tabTitle() {
+    return GoogleFonts.roboto(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 0.5,
+    );
+  }
+
+  static TextStyle DIYtitle() {
+    return GoogleFonts.roboto(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+      color: Colors.white,
+    );
+  }
+
+  static TextStyle Categoriestitle() {
+    return GoogleFonts.roboto(
+      fontSize: 15,
+      color: Colors.black,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+    );
+  }
+
   static TextStyle bodyBold(Color color) {
     return GoogleFonts.roboto(
         fontSize: 16,

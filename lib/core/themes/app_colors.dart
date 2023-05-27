@@ -7,11 +7,14 @@ class AppColors {
   static const Color primaryDark = Color(0xFF13A242);
   static const Color primaryLight = Color(0xFF86DA9E);
   static const Color secondary = Color(0xFFF89161);
-
+  static const Color dictionaryTitleColor = Color.fromRGBO(0, 203, 93, 1);
+  static const Color dictionaryTextField = Color.fromRGBO(241, 243, 246, 1);
+  static const Color unselectedTabTitle = Color.fromRGBO(153, 158, 164, 1);
   //Base
   static const Color background = Color(0xFFFAFAFA);
   static const Color error = Color(0xFFEF5E5E);
   static const Color info = Color(0xFF959595);
+  static const Color imageCategories = dictionaryTextField;
   //On Color
   static const Color onSurface = Color(0xFFFAFAFA);
   static const Color onBg = Color(0xFF494949);

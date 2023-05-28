@@ -14,6 +14,7 @@ import 'package:sowaste/modules/env_news/env_news_binding.dart';
 import 'package:sowaste/modules/env_news/screens/env_news_detailed_screen.dart';
 import 'package:sowaste/modules/env_news/screens/env_news_search_screen.dart';
 import 'package:sowaste/modules/home/home_binding.dart';
+import 'package:sowaste/modules/home/screens/profile.dart';
 import 'package:sowaste/modules/map/screens/map_screen.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
@@ -35,6 +36,12 @@ class AppPages {
     GetPage(
       name: AppRoutes.homeScreen,
       page: () => HomeScreen(),
+      transition: Transition.cupertino,
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const ProfileScreen(),
       transition: Transition.cupertino,
       binding: HomeBinding(),
     ),

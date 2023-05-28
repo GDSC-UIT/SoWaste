@@ -19,7 +19,6 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: const ArrowBackAppBar(
-        isShowArrowBackIcon: false,
         title: "Environment News",
       ),
       backgroundColor: Colors.white,
@@ -70,18 +69,3 @@ class EnvironmentNewsOverviewScreen extends StatelessWidget {
     ));
   }
 }
-
-/*
-Obx(
-                  () => ListView.separated(
-                    
-                    itemBuilder: (_, index) => NewsItem(
-                      article: _environmentNewsController.news[index],
-                    ),
-                    separatorBuilder: (_, __) => const SizedBox(
-                      height: 16,
-                    ),
-                    itemCount: _environmentNewsController.news.length,
-                  ),
-                ),
- */

@@ -37,7 +37,7 @@ class SignInController extends GetxController {
       print("AUTH IDTOKEN: " + AuthServices.idToken!);
       await setUserInfo();
       log("CHECK USER: " + DataCenter.user!.name);
-      Get.toNamed(AppRoutes.base);
+      Get.offAndToNamed(AppRoutes.base);
     } else {
       Get.toNamed(AppRoutes.enterUserNamePage);
     }
@@ -58,6 +58,6 @@ class SignInController extends GetxController {
     await setUserInfo();
     await LocalService.saveContent({"idToken": AuthServices.idToken},
         "${DataCenter.AppFilePath}/app.json");
-    Get.toNamed(AppRoutes.base);
+    Get.offAndToNamed(AppRoutes.base);
   }
 }

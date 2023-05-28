@@ -46,7 +46,7 @@ class _CategoriesandDIYscreenState extends State<CategoriesandDIYscreen>
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 24),
                     child: Text(
                       "Waste dictionary",
                       style: CustomTextStyle.dictionaryTitle(

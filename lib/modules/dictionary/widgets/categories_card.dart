@@ -17,7 +17,7 @@ class CategoriesCard extends StatelessWidget {
             color: Colors.white, borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 13,
             ),
             Container(
@@ -32,16 +32,18 @@ class CategoriesCard extends StatelessWidget {
             SizedBox(
               width: 16,
             ),
-            Text(
-              title,
-              style: CustomTextStyle.Categoriestitle(),
+            Expanded(
+              child: Text(
+                title,
+                style: CustomTextStyle.Categoriestitle(),
+                softWrap: true,
+              ),
             ),
-            Spacer(),
-            Icon(
-              Icons.arrow_right,
-              size: 30,
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
             ),
-            SizedBox(
+            const SizedBox(
               width: 21,
             )
           ],

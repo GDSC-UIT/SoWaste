@@ -184,8 +184,10 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 24),
                 child: Column(
                   children: [
-                    title("Environment News",
-                        () => {BaseController.changeIndexPage(1)}, true),
+                    title(
+                        "Environment News",
+                        () => {Get.toNamed(AppRoutes.environmentNewsPage)},
+                        true),
                     SizedBox(
                         height: 200,
                         child: Obx(

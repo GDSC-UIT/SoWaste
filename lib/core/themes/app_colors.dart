@@ -11,6 +11,7 @@ class AppColors {
   static const Color dictionaryTitleColor = Color.fromRGBO(0, 203, 93, 1);
   static const Color dictionaryTextField = Color.fromRGBO(241, 243, 246, 1);
   static const Color unselectedTabTitle = Color.fromRGBO(153, 158, 164, 1);
+  static const Color primarySubtle = Color.fromRGBO(200, 239, 218, 1);
   //Base
   static const Color background = Color(0xFFFAFAFA);
   static const Color error = Color(0xFFEF5E5E);

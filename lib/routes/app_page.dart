@@ -33,7 +33,7 @@ class AppPages {
     //home page
     GetPage(
       name: AppRoutes.homeScreen,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
       transition: Transition.cupertino,
       binding: HomeBinding(),
     ),

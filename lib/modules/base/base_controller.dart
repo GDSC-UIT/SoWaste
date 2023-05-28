@@ -21,7 +21,7 @@ class BaseController extends GetxController {
 
   @override
   var pages = [
-    const HomeScreen(),
+    HomeScreen(),
     //const DictionaryOverviewScreen(),
     const CategoriesandDIYscreen(),
     PickImageScreen(),

@@ -12,10 +12,10 @@ import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
 import 'package:sowaste/modules/env_news/env_news_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../models/user.dart';
 
 class DataCenter extends GetxController {
-  static User? user;
+  static UserModel? user;
   static bool isFirstTime = false;
   static List<Trash> dictionary = [];
   static RxList<Article> news = <Article>[].obs;
@@ -129,7 +129,6 @@ class DataCenter extends GetxController {
       temp.forEach((trash) {
         dictionary.add(Trash.fromJson(trash));
       });
-      DataCenter.dictionary = [...dictionary];
     } catch (error) {
       print(UrlValue.dictionaryUrl);
       log(error.toString());

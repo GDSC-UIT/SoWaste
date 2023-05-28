@@ -7,9 +7,8 @@ import 'package:sowaste/data/services/auth_service.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/local_data.dart';
 
-import '../../data/models/trash.dart';
-
 class HomeController extends GetxController {
+  RxList<Article> news = <Article>[].obs;
   @override
   void onInit() async {
     super.onInit();
@@ -25,7 +24,7 @@ class HomeController extends GetxController {
       DataCenter.fetchAllUserQuizzes(),
       DataCenter.fetchRecentTrashes(),
     ]);
-
+    news.value = [...DataCenter.news];
     setColorForPieChart(0);
     updateTotalDetectedObjects();
   }
@@ -34,7 +33,6 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
 
   var articlesList = <Article>[].obs;
-  var dictionary = <Trash>[].obs;
   RxInt totalDetectedObjects = 0.obs;
 
   void getDate() {}

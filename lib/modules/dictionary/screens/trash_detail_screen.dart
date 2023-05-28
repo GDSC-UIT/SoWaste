@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
@@ -26,9 +27,8 @@ class TrashDetailScreen extends StatelessWidget {
       return IconButton(
         onPressed: () => {dictionaryController.saveTrash(trash)},
         icon: Obx(() {
-          for (int i = 0; i < DataCenter.savedTrashList.length; ++i) {
-            if (DataCenter.savedTrashList[i].values.contains(trash.id)) {
-              dictionaryController.indexTrashToRemove.value = i;
+          for (Trash t in dictionaryController.savedTrashList) {
+            if (t.id.compareTo(trash.id) == 0) {
               dictionaryController.isSaved.value = true;
               break;
             }
@@ -55,12 +55,7 @@ class TrashDetailScreen extends StatelessWidget {
                 ? AppButton(
                     buttonText: "START QUIZ",
                     onPressedFunction: () async {
-                      //get DONE quiz from LOCAL
-                      await dictionaryController.getQuizFromLocal();
-                      //If the user has completed the quiz, then navigate to result screen
-                      dictionaryController.isFinishedQuiz.value
-                          ? Get.to(() => QuizResultScreen())
-                          : Get.to(() => QuestionScreen());
+                      Get.to(() => QuestionScreen());
                     })
                 : Container()),
         body: Obx(() {
@@ -84,7 +79,7 @@ class TrashDetailScreen extends StatelessWidget {
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: Text(
                               trash.name,
-                              style: CustomTextStyle.h2(AppColors.primaryDark)
+                              style: CustomTextStyle.h2(AppColors.primary)
                                   .copyWith(height: 1.2),
                               textAlign: TextAlign.start,
                               maxLines: 3,
@@ -94,46 +89,46 @@ class TrashDetailScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        child: Column(
-                          children: [
-                            Text("Types",
-                                style: CustomTextStyle.title(Colors.black)),
-                            Column(
-                              children: trash.types!
-                                  .map(
-                                    (e) => ListTile(
-                                      leading: const Icon(Icons.circle),
-                                      title: Text(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            Text("Recyclable items",
-                                style: CustomTextStyle.title(Colors.black)),
-                            Column(
-                              children: trash.reItems!
-                                  .map(
-                                    (e) => ListTile(
-                                      leading: const Icon(Icons.circle),
-                                      title: Text(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                            Text("Non recyclable items",
-                                style: CustomTextStyle.title(Colors.black)),
-                            Column(
-                              children: trash.nonReItems!
-                                  .map(
-                                    (e) => ListTile(
-                                      leading: const Icon(Icons.circle),
-                                      title: Text(e),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        ),
+                        child: MarkdownText(text: trash.shortDescription),
+                        // child: Column(
+                        //   children: [
+                        //     Text("Types",
+                        //         style: CustomTextStyle.title(Colors.black)),
+                        //     Column(
+                        //         children: trash.types!
+                        //             .map(
+                        //               (e) => ListTile(
+                        //                 leading: const Icon(Icons.circle),
+                        //                 title: Text(e),
+                        //               ),
+                        //             )
+                        //             .toList()),
+                        //     Text("Recyclable items",
+                        //         style: CustomTextStyle.title(Colors.black)),
+                        //     Column(
+                        //       children: trash.reItems!
+                        //           .map(
+                        //             (e) => ListTile(
+                        //               leading: const Icon(Icons.circle),
+                        //               title: Text(e),
+                        //             ),
+                        //           )
+                        //           .toList(),
+                        //     ),
+                        //     Text("Non recyclable items",
+                        //         style: CustomTextStyle.title(Colors.black)),
+                        //     Column(
+                        //       children: trash.nonReItems!
+                        //           .map(
+                        //             (e) => ListTile(
+                        //               leading: const Icon(Icons.circle),
+                        //               title: Text(e),
+                        //             ),
+                        //           )
+                        //           .toList(),
+                        //     ),
+
+                        // ],
                       ),
                       SizedBox(
                         height: dictionaryController.currentQuiz.isNotEmpty

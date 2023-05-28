@@ -46,11 +46,11 @@ class SearchTrash extends StatelessWidget {
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child:
-                            Text(_dictionaryController.foundWords[index].name),
+                            Text(_dictionaryController.foundTrash[index].name),
                       ),
                       onTap: () => {
                         _dictionaryController.getDetailTrash(
-                            _dictionaryController.foundWords[index].id)
+                            _dictionaryController.foundTrash[index].id)
                       },
                     ),
                     const Divider(
@@ -59,7 +59,7 @@ class SearchTrash extends StatelessWidget {
                   ],
                 ),
               ),
-              itemCount: _dictionaryController.foundWords.length,
+              itemCount: _dictionaryController.foundTrash.length,
             ),
           ),
         )

@@ -27,7 +27,7 @@ class AppButton extends StatelessWidget {
             ignoring: ignore,
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: (ignore ? color.withOpacity(0.3) : color),
+                    backgroundColor: (ignore ? AppColors.gray400 : color),
                     side: color == AppColors.background
                         ? const BorderSide(width: 0.3, color: AppColors.info)
                         : BorderSide.none,
@@ -39,8 +39,7 @@ class AppButton extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                         child: Text(buttonText,
-                            style: CustomTextStyle.button(
-                                AppColors.background))))),
+                            style: CustomTextStyle.button(textColor))))),
           ),
         ));
   }

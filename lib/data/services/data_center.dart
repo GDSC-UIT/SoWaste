@@ -7,7 +7,6 @@ import 'package:sowaste/core/values/app_url.dart';
 import 'package:sowaste/data/models/article.dart';
 import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/data/models/quiz.dart';
-import 'package:sowaste/data/models/quiz_local.dart';
 import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
@@ -21,13 +20,11 @@ class DataCenter extends GetxController {
   static RxList<Article> news = <Article>[].obs;
   static String AppFilePath = "";
   static Map<dynamic, Set<String>> doneQuizId = {};
-  static RxList<LocalQuiz> localQuizList = <LocalQuiz>[].obs;
   static List<Question> questionList = [];
   static RxList<dynamic> savedTrashList = [].obs;
   static RxList<Quiz> allQuizzes = <Quiz>[].obs;
   static RxList<dynamic> recentTrashes = [].obs;
   static String doneQuizzesFolder = "";
-  static List<FileSystemEntity> listQuizFile = [];
   static RxList<dynamic> recentDetectedTrashes = [].obs;
   static RxInt timesDeteted = 0.obs;
 
@@ -64,20 +61,6 @@ class DataCenter extends GetxController {
     } catch (error) {}
   }
 
-  static Future<void> fetchAllUserQuizzes() async {
-    await LocalService.getAllFileDoneQuiz();
-    for (var quizFile in DataCenter.listQuizFile) {
-      {
-        try {
-          final response = await LocalService.readFile(quizFile.path);
-          DataCenter.localQuizList.add(LocalQuiz.fromJson(response!));
-        } catch (error) {
-          log(error.toString());
-        }
-      }
-    }
-  }
-
   static Future<void> fetchSavedTrashes() async {
     try {
       final response = await LocalService.readFile(
@@ -88,6 +71,7 @@ class DataCenter extends GetxController {
   }
 
   static Future<void> fetchAllQuestions() async {
+    questionList = [];
     try {
       final response = await HttpService.getRequest(UrlValue.questionsUrl);
       final questionsJson =
@@ -95,9 +79,7 @@ class DataCenter extends GetxController {
       questionsJson
           .forEach((q) => DataCenter.questionList.add(Question.fromJson(q)));
       // add quiz per trash
-      for (var trash in DataCenter.dictionary) {
-        DataCenter.allQuizzes.add(Quiz.init(trash.id, trash.name));
-      }
+
     } catch (error) {
       // isLoading.value = false;
     }

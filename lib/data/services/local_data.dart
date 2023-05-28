@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:sowaste/core/values/app_file_name.dart';
-import 'package:sowaste/data/services/data_center.dart';
 
 class LocalService {
   //get app file path
@@ -46,15 +44,5 @@ class LocalService {
           await appDocDirFolder.create(recursive: true);
       return appDocDirNewFolder.path;
     }
-  }
-
-  static Future<void> getAllFileDoneQuiz() async {
-    DataCenter.doneQuizzesFolder =
-        await LocalService.createFolderInAppDocDir(AppFileName.quizzes);
-
-    String pdfDirectory = '${DataCenter.doneQuizzesFolder}/';
-    final myDir = Directory(pdfDirectory);
-    DataCenter.listQuizFile =
-        myDir.listSync(recursive: true, followLinks: false);
   }
 }

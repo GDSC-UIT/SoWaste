@@ -4,6 +4,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
+import 'package:sowaste/modules/home/home_controller.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
@@ -17,46 +18,37 @@ class QuizzesScreen extends StatelessWidget {
     final DictionaryController dictionaryController = Get.find();
     return Scaffold(
         appBar: const ArrowBackAppBar(
-          title: "All Quiz",
+          title: "Quiz result",
         ),
         body: Obx(() => ListView.builder(
               itemBuilder: (context, index) {
-                if (DataCenter.allQuizzes[index].questions.isNotEmpty) {
-                  final localQuizIndex = DataCenter.localQuizList.indexWhere(
-                      (q) => q.quizId == DataCenter.allQuizzes[index].quizId);
-                  double percentage = (localQuizIndex >= 0
-                      ? DataCenter.localQuizList[localQuizIndex].point! /
-                          DataCenter
-                              .localQuizList[localQuizIndex].totalQuizPoint!
-                      : 0);
+                if (dictionaryController.doneQuizList.isNotEmpty) {
+                  double percentage = dictionaryController
+                          .doneQuizList[index].userPoint /
+                      dictionaryController.doneQuizList[index].totalQuizPoint;
+
                   return AppCardButton(
                     onTapFunction: () => {
-                      dictionaryController
-                          .getDetailTrash(DataCenter.allQuizzes[index].quizId)
+                      dictionaryController.getDetailTrash(
+                          dictionaryController.doneQuizList[index].trashId)
                     },
-                    title: DataCenter.allQuizzes[index].quizName,
+                    title: dictionaryController.doneQuizList[index].name,
                     trailing: CircularPercentIndicator(
                       animationDuration: 300,
                       radius: 24,
                       lineWidth: 4,
-                      progressColor: percentage == 1.0
-                          ? AppColors.primary
-                          : AppColors.secondary,
+                      progressColor: AppColors.primary,
                       animation: true,
                       percent: percentage,
-                      center: Text(
-                        '${(percentage * 100).toStringAsFixed(0)}%',
-                        style: percentage == 1.0
-                            ? CustomTextStyle.link(AppColors.primary)
-                            : CustomTextStyle.link(AppColors.secondary),
-                      ),
+                      center: Text('${(percentage * 100).toStringAsFixed(0)}%',
+                          style: CustomTextStyle.link(Colors.black54)),
                     ),
                   );
                 } else {
                   return Container();
                 }
               },
-              itemCount: DataCenter.allQuizzes.length,
+              itemCount: dictionaryController.doneQuizList.length,
             )));
   }
 }

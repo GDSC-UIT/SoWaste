@@ -27,7 +27,7 @@ class QuestionScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
             children: [
               Text(
-                "Point: ${_dictionaryController.currentPoint} ",
+                "Point: ${_dictionaryController.totalPoint} ",
                 style: CustomTextStyle.title(AppColors.secondary),
               ),
               const SizedBox(
@@ -61,6 +61,9 @@ class QuestionScreen extends StatelessWidget {
                       .toList(),
                 );
               })),
+              const SizedBox(
+                height: 24,
+              ),
               Obx(() => AppButton(
                   ignore: _dictionaryController.userAnswer.value == 0,
                   buttonText:
@@ -72,6 +75,7 @@ class QuestionScreen extends StatelessWidget {
                     if (index + 1 < _dictionaryController.currentQuiz.length) {
                       _dictionaryController.currentQuestionIndex.value++;
                     } else {
+                      _dictionaryController.postQuizResult();
                       Get.offNamed(AppRoutes.resultQuizPage);
                     }
                   }))

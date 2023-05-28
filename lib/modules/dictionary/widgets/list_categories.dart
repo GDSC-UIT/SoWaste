@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sowaste/data/services/data_center.dart';
+import 'package:get/get.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/widgets/categories_card.dart';
 
 class ListCategories extends StatelessWidget {
-  const ListCategories({super.key});
-
+  ListCategories({super.key});
+  final DictionaryController _controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.separated(
+    return Obx(
+      () => ListView.separated(
           itemBuilder: ((context, index) => CategoriesCard(
-                title: DataCenter.dictionary[index].name,
-                image: DataCenter.dictionary[index].displayImage,
+                title: _controller.foundTrash[index].name,
+                image: _controller.foundTrash[index].displayImage,
+                onPress: () => {
+                  _controller.getDetailTrash(_controller.foundTrash[index].id)
+                },
               )),
-          separatorBuilder: (context, index) => SizedBox(
+          separatorBuilder: (context, index) => const SizedBox(
                 height: 8,
               ),
-          itemCount: 10),
+          itemCount: _controller.foundTrash.length),
     );
   }
 }

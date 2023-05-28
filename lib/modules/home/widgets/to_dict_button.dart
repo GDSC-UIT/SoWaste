@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_icons.dart';
+import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/modules/base/base_controller.dart';
 
@@ -33,7 +34,7 @@ class ToDicButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      flex: 2,
+                      flex: 3,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +51,7 @@ class ToDicButton extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Flexible(child: Image.asset(AppIcons.dictionary))
+                    Flexible(flex: 2, child: Image.asset(AppImages.onboarding1))
                   ]),
             ),
           ),

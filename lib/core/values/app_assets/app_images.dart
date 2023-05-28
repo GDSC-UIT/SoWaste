@@ -13,4 +13,6 @@ class AppImages {
   static const String googleIcon = 'assets/images/Google.png';
   static const String welcome = 'assets/images/Welcome.png';
   static const String cloud = 'assets/images/cloud.png';
+  static const String fail = 'assets/images/fail.png';
+  static const String congra = 'assets/images/congra.png';
 }

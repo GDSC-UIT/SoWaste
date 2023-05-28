@@ -7,6 +7,7 @@ import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/home/home_controller.dart';
 import 'package:sowaste/modules/home/widgets/learn_more_button.dart';
@@ -22,6 +23,7 @@ import '../widgets/detect_trash_button.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final HomeController _controller = Get.find();
+  final DictionaryController _dictionaryController = Get.find();
 
   Row title(String text, [final VoidCallback? seeAll, isShowSeeAll = false]) {
     return Row(
@@ -158,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                       },
                   true),
 
-              Obx(() => DataCenter.localQuizList.isNotEmpty
+              Obx(() => _dictionaryController.doneQuizList.isNotEmpty
                   ? Column(
                       children: [
                         SizedBox(
@@ -167,10 +169,12 @@ class HomeScreen extends StatelessWidget {
                               () => ListView.builder(
                                 itemBuilder: ((context, index) {
                                   return QuizCard(
-                                    quiz: DataCenter.localQuizList[index],
+                                    quiz: _dictionaryController
+                                        .doneQuizList[index],
                                   );
                                 }),
-                                itemCount: DataCenter.localQuizList.length,
+                                itemCount:
+                                    _dictionaryController.doneQuizList.length,
                                 scrollDirection: Axis.horizontal,
                               ),
                             )),

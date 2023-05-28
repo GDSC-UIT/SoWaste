@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
-import 'package:sowaste/data/models/quiz_local.dart';
+import 'package:sowaste/data/models/quiz_result.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 
 class QuizCard extends StatelessWidget {
   const QuizCard({super.key, required this.quiz});
-  final LocalQuiz quiz;
+  final QuizResult quiz;
   @override
   Widget build(BuildContext context) {
-    final percentage = quiz.point! / quiz.totalQuizPoint!;
+    final percentage = quiz.userPoint / quiz.totalQuizPoint;
     final DictionaryController dictionaryController = Get.find();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () => {dictionaryController.getDetailTrash(quiz.quizId!)},
+        onTap: () => {dictionaryController.getDetailTrash(quiz.trashId)},
         child: Container(
           width: 160,
           height: 180,
@@ -40,7 +40,7 @@ class QuizCard extends StatelessWidget {
               height: 6,
             ),
             Text(
-              quiz.shortDescription!,
+              quiz.shortDescription,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: CustomTextStyle.normal(AppColors.onBg),

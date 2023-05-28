@@ -23,13 +23,13 @@ class ArrowBackAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: isShowArrowBackIcon,
       title: Text(
         title ?? "",
-        style: CustomTextStyle.sub(AppColors.secondary),
+        style: CustomTextStyle.sub(AppColors.primary),
       ),
       leading: isShowArrowBackIcon
           ? IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios,
-                color: AppColors.secondary,
+                color: AppColors.primary,
               ),
               onPressed: onTap ?? () => {Get.back()})
           : null,

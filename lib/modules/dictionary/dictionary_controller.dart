@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/values/app_file_name.dart';
+import 'package:sowaste/core/values/app_url.dart';
 import 'package:sowaste/data/models/question.dart';
-import 'package:sowaste/data/models/quiz_local.dart';
+import 'package:sowaste/data/models/quiz_result.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
 
 import '../../data/models/trash.dart';
@@ -11,15 +15,19 @@ import '../../routes/app_routes.dart';
 
 class DictionaryController extends GetxController {
   RxBool isLoading = false.obs;
+  RxBool isFinishedQuiz = false.obs;
 
   TextEditingController searchInput = TextEditingController();
-  RxList<Trash> foundWords = <Trash>[].obs;
+  RxList<Trash> foundTrash = <Trash>[].obs;
 
   RxList<Question> currentQuiz = <Question>[].obs; // quiz fetch from api
   RxInt currentQuestionIndex = 0.obs;
   RxInt userAnswer = 0.obs;
-  RxInt currentPoint = 0.obs;
-  RxBool isFinishedQuiz = false.obs;
+  RxInt totalPoint = 0.obs;
+
+  RxList<Trash> savedTrashList = <Trash>[].obs;
+  RxList<QuizResult> doneQuizList = <QuizResult>[].obs;
+  Set<String> setDoneQuizTrashId = {};
 
   //Trash
   Rx<Trash> currentTrash = Trash(
@@ -32,16 +40,19 @@ class DictionaryController extends GetxController {
           shortDescription: "")
       .obs;
   //For local logic
-  RxList<LocalQuestion> doneQuestions = <LocalQuestion>[].obs;
-  LocalQuiz localQuiz = LocalQuiz(doneQuestions: []);
+  // RxList<LocalQuestion> doneQuestions = <LocalQuestion>[].obs;
+  // LocalQuiz localQuiz = LocalQuiz(doneQuestions: []);
 
   //For save trash
   RxBool isSaved = false.obs;
-  RxInt indexTrashToRemove = 0.obs;
 
   @override
-  void onInit() {
-    foundWords.value = [];
+  void onInit() async {
+    await DataCenter.fetchDictionary();
+    await DataCenter.fetchAllQuestions();
+    savedTrashList.value = await fetchSavedTrashList();
+    await setDoneQuizList();
+    foundTrash.value = [...DataCenter.dictionary];
     super.onInit();
   }
 
@@ -49,7 +60,7 @@ class DictionaryController extends GetxController {
     isLoading.value = true;
     Get.toNamed(AppRoutes.trashDetailPage, arguments: id);
     currentTrash.value = (await Trash.getTrash(id))!;
-    initCurrentQuiz(id);
+    initCurrentQuiz();
     postRecentTrashToLocalStorage();
     isLoading.value = false;
   }
@@ -62,72 +73,77 @@ class DictionaryController extends GetxController {
               .toLowerCase()
               .contains(searchInput.value.text.toLowerCase()))
           .toList();
+      foundTrash.value = result;
+    } else {
+      foundTrash.value = [...DataCenter.dictionary];
     }
-    foundWords.value = result;
+  }
+
+  Future<List<Trash>> fetchSavedTrashList() async {
+    List<Trash> result = [];
+    var response =
+        await HttpService.getRequest("${UrlValue.appUrl}/api/saved/user");
+    final listJson = await json.decode(utf8.decode(response.bodyBytes))["data"];
+    listJson.forEach((e) {
+      result.add(Trash.fromJson(e["dictionary"][0]));
+    });
+    return result;
   }
 
   Future<void> saveTrash(Trash t) async {
+    //nếu save
     if (!isSaved.value) {
-      DataCenter.savedTrashList.add({"id": t.id, "name": t.name});
-    } else {
-      DataCenter.savedTrashList.removeAt(indexTrashToRemove.value);
+      await HttpService.postRequestWithParam(
+          parameters: {"dictionary_id": t.id},
+          url: "${UrlValue.appUrl}/api/saved");
     }
-    final response = await LocalService.saveContent(
-        {"data": DataCenter.savedTrashList},
-        "${DataCenter.AppFilePath}/${AppFileName.savedTrashes}");
     isSaved.value = !isSaved.value;
-    DataCenter.savedTrashList.value = [...DataCenter.savedTrashList];
+    savedTrashList.value = await fetchSavedTrashList();
   }
 
   RxInt count = 0.obs;
-  void initAllValuesForCurrentQuiz([point = 0, index = 0]) {
-    isFinishedQuiz.value = false;
-    currentPoint.value = point;
-    currentQuestionIndex.value = index;
-    if (currentPoint.value == 0 && currentQuestionIndex.value == 0) {
-      doneQuestions.value = [];
-    }
+  void initCurrentQuiz() {
+    totalPoint.value = 0;
+    currentQuestionIndex.value = 0;
+    currentQuiz.value = DataCenter.questionList
+        .where((q) => q.trashId == currentTrash.value.id)
+        .toList();
   }
 
-  Future<void> postQuizToLocal() async {
-    localQuiz.quizId = currentTrash.value.id;
-    localQuiz.numberOfDoneQues = currentQuestionIndex.value + 1;
-    localQuiz.point = currentPoint.value;
-    localQuiz.totalQuizPoint = getTotalPoint();
-    localQuiz.doneQuestions = doneQuestions;
-    localQuiz.name = currentTrash.value.name;
-    localQuiz.shortDescription = currentTrash.value.shortDescription;
-
-    await LocalService.saveContent(localQuiz.toJson(),
-        "${DataCenter.doneQuizzesFolder}/${localQuiz.quizId}.json");
-    DataCenter.localQuizList
-        .removeWhere((quiz) => quiz.quizId == localQuiz.quizId);
-    DataCenter.localQuizList.add(localQuiz);
-    DataCenter.localQuizList.value = [...DataCenter.localQuizList];
-    DataCenter.allQuizzes.value = [...DataCenter.allQuizzes];
-  }
-
-  Future<void> getQuizFromLocal() async {
-    final response = await LocalService.readFile(
-        "${DataCenter.doneQuizzesFolder}/${currentTrash.value.id}.json");
-    if (response != null) {
-      localQuiz = LocalQuiz.fromJson(response);
-      initAllValuesForCurrentQuiz(localQuiz.point, localQuiz.numberOfDoneQues);
-      //check if finish when the number of done questions are equal to number of question in real quiz.
-      isFinishedQuiz.value =
-          (localQuiz.numberOfDoneQues == getNumberOfQuestion());
+  Future<void> postQuizResult() async {
+    //xet truong hop post va put quiz
+    //1. Neu quiz lam roi -> put
+    //2. Neu quiz chua lam -> post
+    if (setDoneQuizTrashId.contains(currentTrash.value.id)) {
+      var data = {"total": totalPoint.value};
+      String id = "";
+      for (QuizResult q in doneQuizList) {
+        if (q.trashId == currentTrash.value.id) {
+          id = q.quizId;
+          break;
+        }
+      }
+      final response = await HttpService.putRequest(
+          body: json.encode(data),
+          url: "${UrlValue.appUrl}/api/quiz-result/$id");
+      if (json.decode(response.body) != null) {
+        setDoneQuizList();
+      }
     } else {
-      initAllValuesForCurrentQuiz();
+      var data = {
+        "dictionary_id": currentTrash.value.id,
+        "total": totalPoint.value
+      };
+      final response = await HttpService.postRequest(
+          body: json.encode(data), url: "${UrlValue.appUrl}/api/quiz-result");
+      if (response.body.isNotEmpty) {
+        setDoneQuizList();
+      }
     }
-  }
-
-  void initCurrentQuiz(String trashId) {
-    currentQuiz.value =
-        DataCenter.questionList.where((q) => q.trashId == trashId).toList();
   }
 
   void addPoint(int point) {
-    currentPoint.value += point;
+    totalPoint.value += point;
   }
 
   int getTotalPoint() {
@@ -136,10 +152,6 @@ class DictionaryController extends GetxController {
       total += currentQuiz[i].point;
     }
     return total;
-  }
-
-  int getNumberOfQuestion() {
-    return currentQuiz.length;
   }
 
   Future<void> postRecentTrashToLocalStorage({bool isDetected = false}) async {
@@ -163,5 +175,19 @@ class DictionaryController extends GetxController {
     DataCenter.recentTrashes.value = [...DataCenter.recentTrashes];
     DataCenter.recentDetectedTrashes.value =
         DataCenter.getrecentDetectedTrasheses();
+  }
+
+  Future<void> setDoneQuizList() async {
+    var result = [];
+    setDoneQuizTrashId = {};
+    var response =
+        await HttpService.getRequest("${UrlValue.appUrl}/api/quiz-result");
+    final responseJson =
+        await json.decode(utf8.decode(response.bodyBytes))["data"];
+    responseJson.forEach((json) {
+      result.add(QuizResult.fromJson(json));
+      setDoneQuizTrashId.add(json["dictionary_id"]);
+    });
+    doneQuizList.value = [...result];
   }
 }

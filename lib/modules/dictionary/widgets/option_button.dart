@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/data/models/option.dart';
-import 'package:sowaste/data/models/quiz_local.dart';
+import 'package:sowaste/data/models/quiz_result.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 
 class OptionButton extends StatelessWidget {
@@ -30,12 +30,6 @@ class OptionButton extends StatelessWidget {
               if (option.isCorrect) {
                 _dictionaryController.addPoint(point);
               }
-              _dictionaryController.doneQuestions.add(LocalQuestion(
-                  questionId: option.questionId,
-                  optionId: option.id,
-                  isCorrect: option.isCorrect));
-
-              await _dictionaryController.postQuizToLocal();
             },
             customBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -50,7 +44,7 @@ class OptionButton extends StatelessWidget {
                               : null,
                       color: option.isCorrect &&
                               _dictionaryController.userAnswer.value != 0
-                          ? AppColors.primaryDark
+                          ? AppColors.primary
                           : (!option.isCorrect &&
                                   _dictionaryController.userAnswer.value ==
                                       optionIndex

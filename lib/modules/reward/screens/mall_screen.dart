@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/reward/widgets/empty_bag.dart';
+import 'package:sowaste/modules/reward/widgets/gridview_item.dart';
 import 'package:sowaste/modules/reward/widgets/row_exchange.dart';
 
 class MallScreen extends StatelessWidget {
@@ -33,6 +34,7 @@ class MallScreen extends StatelessWidget {
             height: 38,
           ),
           RowTitle(),
+          Expanded(child: GridViewItem()),
         ]),
       ),
     );

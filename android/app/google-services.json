@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "759698882835",
+    "project_id": "sowaste-16615",
+    "storage_bucket": "sowaste-16615.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759698882835:android:ce23b4efa1a52ff961dae6",
+        "android_client_info": {
+          "package_name": "com.example.sowaste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759698882835-qtdo0flh0dbvjilhfi0lcmseefgdq47u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sowaste",
+            "certificate_hash": "efc9f2d02bd8ae03e8d28baf2734f2481090d099"
+          }
+        },
+        {
+          "client_id": "759698882835-pi8l5g2gau14rh0g2jiv1c2puj2kh649.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMHamc6Mah9AMPdN-FYb3I7GF6G7RT-C4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759698882835-obaqj3l1s02lgh2of3nlbkbfr09u77ip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

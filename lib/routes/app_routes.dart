@@ -25,4 +25,9 @@ class AppRoutes {
 
   // Reward
   static const rewardPage = '/reward';
+  //welcome
+  static const welcome = '/welcome';
+  //sign in
+  static const signInPage = '/sign_in';
+  static const enterUserNamePage = '/name';
 }

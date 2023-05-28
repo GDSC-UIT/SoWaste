@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:sowaste/modules/base/base_binding.dart';
 import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
+import 'package:sowaste/modules/dictionary/screens/categories_diy_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
@@ -17,6 +18,10 @@ import 'package:sowaste/modules/map/screens/map_screen.dart';
 import 'package:sowaste/modules/onboarding/onboarding_binding.dart';
 import 'package:sowaste/modules/onboarding/screens/onboarding_screen.dart';
 import 'package:sowaste/modules/reward/screens/reward_screen.dart';
+import 'package:sowaste/modules/signin/screens/sign_in_screen.dart';
+import 'package:sowaste/modules/signin/screens/user_name_screen.dart';
+import 'package:sowaste/modules/signin/screens/welcome_screen.dart';
+import 'package:sowaste/modules/signin/sign_in_binding.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
@@ -29,7 +34,7 @@ class AppPages {
     //home page
     GetPage(
       name: AppRoutes.homeScreen,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
       transition: Transition.cupertino,
       binding: HomeBinding(),
     ),
@@ -40,7 +45,7 @@ class AppPages {
         binding: OnBoardingBinding()),
     GetPage(
         name: AppRoutes.dictionaryPage,
-        page: () => const DictionaryOverviewScreen(),
+        page: () => const CategoriesandDIYscreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
 
@@ -121,6 +126,25 @@ class AppPages {
       name: AppRoutes.rewardPage,
       page: () => const RewardScreen(),
       transition: Transition.cupertino,
+    ),
+    //welcome
+    GetPage(
+      name: AppRoutes.welcome,
+      page: () => WelcomeScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.enterUserNamePage,
+      page: () => UserNameScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.signInPage,
+      page: () => SignInScreen(),
+      transition: Transition.cupertino,
+      binding: SignInBinding(),
     ),
   ];
 }

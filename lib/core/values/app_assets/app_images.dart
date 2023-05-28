@@ -7,4 +7,10 @@ class AppImages {
   static const String sort = 'assets/images/sort.png';
   static const String trophy = 'assets/images/trophy.png';
   static const String emptybag = 'assets/images/emptybag.png';
+  static const String onboarding2 = 'assets/images/Onboarding2.png';
+  static const String onboarding1 = 'assets/images/Onboarding1.png';
+  static const String onboarding3 = 'assets/images/Onboarding3.png';
+  static const String googleIcon = 'assets/images/Google.png';
+  static const String welcome = 'assets/images/Welcome.png';
+  static const String cloud = 'assets/images/cloud.png';
 }

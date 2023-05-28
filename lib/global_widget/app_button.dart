@@ -39,7 +39,8 @@ class AppButton extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                         child: Text(buttonText,
-                            style: CustomTextStyle.button(textColor))))),
+                            style: CustomTextStyle.button(
+                                AppColors.background))))),
           ),
         ));
   }

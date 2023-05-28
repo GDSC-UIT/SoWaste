@@ -19,7 +19,7 @@ class CustomTextStyle extends TextStyle {
         fontWeight: FontWeight.w600,
         color: color,
         letterSpacing: 0.5,
-        textStyle: const TextStyle(height: 2.5));
+        textStyle: const TextStyle(height: 1));
   }
 
   static TextStyle h3(Color color) {
@@ -72,6 +72,40 @@ class CustomTextStyle extends TextStyle {
       fontSize: 26,
       fontWeight: FontWeight.w700,
       color: AppColors.primaryDark,
+    );
+  }
+
+  static TextStyle dictionaryTitle(Color color) {
+    return GoogleFonts.roboto(
+      fontSize: 26,
+      fontWeight: FontWeight.bold,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
+
+  static TextStyle tabTitle() {
+    return GoogleFonts.roboto(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 0.5,
+    );
+  }
+
+  static TextStyle DIYtitle() {
+    return GoogleFonts.roboto(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.5,
+      color: Colors.white,
+    );
+  }
+
+  static TextStyle Categoriestitle() {
+    return GoogleFonts.roboto(
+      fontSize: 15,
+      color: Colors.black,
+      fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
     );
   }

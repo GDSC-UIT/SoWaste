@@ -1,17 +1,20 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:sowaste/data/models/badge.dart';
+import 'package:sowaste/data/models/reward.dart';
 
 import '../../../core/values/app_assets/app_images.dart';
 import '../../../data/models/api_result.dart';
 import '../../../data/services/reward_service.dart';
+import 'mall_item.dart';
 
-class BadgeScreen extends StatelessWidget {
-  const BadgeScreen({super.key});
+class UserBag extends StatelessWidget {
+  const UserBag({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: RewardService.ins.getAllAppBadges(),
+      future: RewardService.ins.getAllUserRewards(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           var result = snapshot.data;
@@ -28,7 +31,7 @@ class BadgeScreen extends StatelessWidget {
                 children: [
                   Container(height: 100),
                   Text(
-                    (snapshot.data as ErrorResult).message,
+                    (result as ErrorResult).message,
                     style: const TextStyle(color: Colors.red),
                   ),
                 ],
@@ -38,28 +41,24 @@ class BadgeScreen extends StatelessWidget {
                 children: [
                   Container(height: 100),
                   Text(
-                    (snapshot.data as FailedResult).message,
+                    (result as FailedResult).message,
                     style: const TextStyle(color: Colors.red),
                   ),
                 ],
               );
             case SuccessResult:
-              List<TrashBadge> appBadges =
-                  (snapshot.data as SuccessResult).data;
-              return GridView.count(
-                crossAxisCount: 3,
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                mainAxisSpacing: 24.0,
-                crossAxisSpacing: 26.0,
-                children: List.generate(
-                  appBadges.length,
-                  (index) => GridTile(
-                    child: Image.network(
-                      appBadges[index].displayImage,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
+              List<Reward> userRewards = (result as SuccessResult).data;
+              return ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: min(3, userRewards.length),
+                itemBuilder: (context, index) {
+                  return MallItem(
+                    point: userRewards[index].point,
+                    image: userRewards[index].displayImage,
+                    showPoint: false,
+                  );
+                },
               );
           }
         }

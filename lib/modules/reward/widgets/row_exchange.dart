@@ -13,10 +13,8 @@ class RowTitle extends StatelessWidget {
           "Exchange",
           style: CustomTextStyle.subHeading(Colors.black),
         ),
+        const SizedBox(width: 6),
         SizedBox(
-          width: 6,
-        ),
-        Container(
           height: 24,
           width: 15.5,
           child: FittedBox(
@@ -24,9 +22,7 @@ class RowTitle extends StatelessWidget {
             child: Image.asset(AppImages.trophy),
           ),
         ),
-        SizedBox(
-          width: 6,
-        ),
+        const SizedBox(width: 6),
         Text(
           "to real rewards",
           style: CustomTextStyle.subHeading(Colors.black),

@@ -20,12 +20,12 @@ class SignInController extends GetxController {
     try {
       final response =
           await HttpService.getRequest("${UrlValue.appUrl}/api/user");
-      print("RESPONSE BODY: " + response.body);
+      print("RESPONSE BODY: ${response.body}");
       final responseJson =
           await json.decode(utf8.decode(response.bodyBytes))["data"];
       DataCenter.user = UserModel.fromJson(responseJson);
     } catch (error) {
-      print("ERROR IN SET USER INFO: " + error.toString());
+      print("ERROR IN SET USER INFO: $error");
     }
   }
 
@@ -34,9 +34,9 @@ class SignInController extends GetxController {
         await LocalService.readFile("${DataCenter.AppFilePath}/app.json");
     if (response != null) {
       AuthServices.idToken = response["idToken"];
-      print("AUTH IDTOKEN: " + AuthServices.idToken!);
+      print("AUTH IDTOKEN: ${AuthServices.idToken!}");
       await setUserInfo();
-      log("CHECK USER: " + DataCenter.user!.name);
+      log("CHECK USER: ${DataCenter.user!.name}");
       Get.offAndToNamed(AppRoutes.base);
     } else {
       Get.toNamed(AppRoutes.enterUserNamePage);
@@ -53,7 +53,7 @@ class SignInController extends GetxController {
     // Cập nhật thông tin người dùng trên Firebase Authentication
     await user?.updateDisplayName(displayName);
     await HttpService.postRequestWithParam(
-            parameters: {"uid": user!.uid}, url: UrlValue.createUser)
+            parameters: {"uid": user!.uid}, url: UrlValue.userUrl)
         .then((value) => print(value.body));
     await setUserInfo();
     await LocalService.saveContent({"idToken": AuthServices.idToken},

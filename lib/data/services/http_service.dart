@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:sowaste/data/services/auth_service.dart';
 
@@ -53,5 +55,18 @@ class HttpService {
     };
 
     return await http.post(uriWithParams, headers: headers);
+  }
+
+  static Future<http.Response> putRequestWithParam(
+      {required Map<String, dynamic> parameters, required String url}) async {
+    final headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ${AuthServices.idToken}',
+    };
+
+    return await http.put(
+      Uri.parse(url).replace(queryParameters: parameters),
+      headers: headers,
+    );
   }
 }

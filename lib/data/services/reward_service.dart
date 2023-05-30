@@ -155,9 +155,10 @@ class RewardService {
   }
 
   Future<bool> updateUserPoint(int rewardPoint) async {
-    var res = await HttpService.postRequest(
-        url:
-            "${UrlValue.updateUserPointUrl}?action=decrease&point=$rewardPoint");
+    var res = await HttpService.putRequestWithParam(parameters: {
+      'action': 'decrease',
+      'point': rewardPoint.toString(),
+    }, url: UrlValue.updateUserPointUrl);
     try {
       if (res.isOk) {
         return true;

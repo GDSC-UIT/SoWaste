@@ -39,7 +39,8 @@ class _QrScreenState extends State<QrScreen> {
           var apiResult = await rewardController.postQrCode(result!.code!);
           switch (apiResult.runtimeType) {
             case SuccessResult:
-              await Get.dialog(const QrCodeResultDialog(),
+              int point = (apiResult as SuccessResult).data as int;
+              await Get.dialog(QrCodeResultDialog(point: point),
                   barrierDismissible: false);
               Get.back();
               break;

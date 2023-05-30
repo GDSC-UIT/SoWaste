@@ -22,6 +22,7 @@ Future defaultDialog({required String title, required String content}) async {
           child: Text(
             "Ok".toUpperCase(),
             style: CustomTextStyle.button(Colors.white),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

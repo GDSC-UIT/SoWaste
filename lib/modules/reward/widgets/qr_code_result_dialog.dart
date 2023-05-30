@@ -5,7 +5,8 @@ import 'package:sowaste/core/values/app_assets/app_images.dart';
 import '../../../core/themes/app_colors.dart';
 
 class QrCodeResultDialog extends StatelessWidget {
-  const QrCodeResultDialog({super.key});
+  final int point;
+  const QrCodeResultDialog({super.key, required this.point});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class QrCodeResultDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "100",
+                  point.toString(),
                   style: CustomTextStyle.subHeading(AppColors.primary),
                 ),
                 const SizedBox(width: 6),

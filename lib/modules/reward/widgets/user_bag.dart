@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:sowaste/data/models/reward.dart';
+import 'package:get/get.dart';
 
 import '../../../core/values/app_assets/app_images.dart';
 import '../../../data/models/api_result.dart';
 import '../../../data/services/reward_service.dart';
+import '../reward_controller.dart';
+import 'exchange_now_dialog.dart';
 import 'mall_item.dart';
 
 class UserBag extends StatelessWidget {
@@ -13,57 +15,57 @@ class UserBag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: RewardService.ins.getAllUserRewards(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          var result = snapshot.data;
-          switch (result.runtimeType) {
-            case EmptyResult:
-              return Center(
-                child: Image.asset(
-                  AppImages.emptybag,
-                  fit: BoxFit.fitHeight,
-                ),
-              );
-            case ErrorResult:
-              return Column(
-                children: [
-                  Container(height: 100),
-                  Text(
-                    (result as ErrorResult).message,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ],
-              );
-            case FailedResult:
-              return Column(
-                children: [
-                  Container(height: 100),
-                  Text(
-                    (result as FailedResult).message,
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                ],
-              );
-            case SuccessResult:
-              List<Reward> userRewards = (result as SuccessResult).data;
-              return ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: min(3, userRewards.length),
-                itemBuilder: (context, index) {
-                  return MallItem(
-                    point: userRewards[index].point,
-                    image: userRewards[index].displayImage,
-                    showPoint: false,
+    final rewardController = Get.find<RewardController>();
+    return Obx(() => FutureBuilder(
+          key: ValueKey(rewardController.futureKey.value),
+          future: RewardService.ins.getAllUserRewards(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              var result = snapshot.data;
+              switch (result.runtimeType) {
+                case EmptyResult:
+                  return Center(
+                      child: Image.asset(AppImages.emptybag,
+                          fit: BoxFit.fitHeight));
+                case ErrorResult:
+                  return Column(
+                    children: [
+                      Container(height: 100),
+                      Text(
+                        (result as ErrorResult).message,
+                        style: const TextStyle(color: Colors.red),
+                      ),
+                    ],
                   );
-                },
-              );
-          }
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
+                case FailedResult:
+                  return Column(
+                    children: [
+                      Container(height: 100),
+                      Text((result as FailedResult).message,
+                          style: const TextStyle(color: Colors.red)),
+                    ],
+                  );
+                case SuccessResult:
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: min(3, rewardController.userRewards.length),
+                    itemBuilder: (context, index) {
+                      return MallItem(
+                        point: rewardController.userRewards[index].reward.point,
+                        image: rewardController
+                            .userRewards[index].reward.displayImage,
+                        onTap: () => Get.dialog(ExchangeNowDialog(
+                            userReward: rewardController.userRewards[index])),
+                        showPoint: false,
+                      );
+                    },
+                    separatorBuilder: (_, __) => const SizedBox(width: 20),
+                  );
+              }
+            }
+            return const Center(child: CircularProgressIndicator());
+          },
+        ));
   }
 }

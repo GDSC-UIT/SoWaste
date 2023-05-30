@@ -9,6 +9,7 @@ import 'package:sowaste/data/services/http_service.dart';
 import '../../modules/reward/reward_controller.dart';
 import '../models/api_result.dart';
 import '../models/badge.dart';
+import '../models/user_reward.dart';
 
 class RewardService {
   static final RewardService ins = RewardService._initInstance();
@@ -44,22 +45,23 @@ class RewardService {
   }
 
   Future<ApiResult> getAllUserRewards() async {
-    if (rewardController.userRewards.value != null) {
-      if (rewardController.userRewards.value?.isEmpty ?? true) {
+    if (!rewardController.firstLoadUserRewards) {
+      if (rewardController.userRewards.isEmpty) {
         return EmptyResult();
       }
-      return SuccessResult(data: rewardController.userRewards.value);
+      return SuccessResult(data: rewardController.userRewards);
     }
     var res = await HttpService.getRequest(UrlValue.getAllUserRewardsUrl);
     try {
       if (res.isOk) {
+        rewardController.firstLoadUserRewards = false;
         var listMapReward = res.data;
         if (listMapReward == null) {
           rewardController.userRewards.value = [];
           return EmptyResult();
         }
         rewardController.userRewards.value =
-            List.from(listMapReward.map((json) => Reward.fromMap(json)));
+            List.from(listMapReward.map((json) => UserReward.fromMap(json)));
         return SuccessResult(data: rewardController.userRewards);
       }
     } catch (e) {
@@ -96,8 +98,8 @@ class RewardService {
   }
 
   Future<ApiResult?> getAllUserBadges() async {
-    if (rewardController.userBadges.value != null) {
-      if (rewardController.userBadges.value?.isEmpty ?? true) {
+    if (!rewardController.firstLoadUserBadges) {
+      if (rewardController.userBadges.isEmpty) {
         return EmptyResult();
       }
       return SuccessResult(data: rewardController.userBadges);
@@ -105,6 +107,7 @@ class RewardService {
     var res = await HttpService.getRequest(UrlValue.getAllUserBadgesUrl);
     try {
       if (res.isOk) {
+        rewardController.firstLoadUserBadges = false;
         var listMapBadge = res.data;
         if (listMapBadge == null) {
           rewardController.userBadges.value = [];
@@ -129,7 +132,6 @@ class RewardService {
         if (res.data == null) {
           return EmptyResult();
         }
-
         return SuccessResult(data: res.data["QR"]["point"]);
       }
     } catch (e) {
@@ -137,5 +139,37 @@ class RewardService {
       return ErrorResult(message: e.toString());
     }
     return FailedResult(message: res.message);
+  }
+
+  Future<dynamic> createUserExchange(String rewardId) async {
+    var res = await HttpService.postRequest(
+        url: "${UrlValue.createUserExchangeUrl}?reward_id=$rewardId");
+    try {
+      if (res.isOk) {
+        return res.data["exchange"]["_id"];
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
+  }
+
+  Future<void> updateUserPoint(int rewardPoint) {
+    return HttpService.postRequest(
+        url:
+            "${UrlValue.updateUserPointUrl}?action=decrease&point=$rewardPoint");
+  }
+
+  Future<bool> deleteUserExchange(String rewardId) async {
+    var res = await HttpService.deleteRequest(
+        url: "${UrlValue.deleteUserExchangeUrl}/$rewardId");
+    try {
+      if (res.isOk) {
+        return true;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
   }
 }

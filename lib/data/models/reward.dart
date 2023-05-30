@@ -12,8 +12,8 @@ class Reward {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'displayImage': displayImage,
+      '_id': id,
+      'display_image': displayImage,
       'point': point,
     };
   }

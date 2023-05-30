@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/reward/reward_controller.dart';
+import 'package:sowaste/modules/reward/screens/your_bag_screen.dart';
 import 'package:sowaste/modules/reward/widgets/user_bag.dart';
 import 'package:sowaste/modules/reward/widgets/app_reward_item.dart';
 import 'package:sowaste/modules/reward/widgets/row_exchange.dart';
@@ -27,20 +28,23 @@ class MallScreen extends StatelessWidget {
                   style: CustomTextStyle.subHeading(Colors.black),
                 ),
                 const Spacer(),
-                if ((rewardController.userRewards.value?.length ?? 0) > 3)
-                  Obx(() => Row(
-                        children: [
-                          Text(
-                            "See all",
-                            style: CustomTextStyle.normal(AppColors.primary),
-                          ),
-                          const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                            color: AppColors.primary,
-                          )
-                        ],
-                      ))
+                Obx(() => ((rewardController.userRewards.length) > 3)
+                    ? InkWell(
+                        onTap: () => Get.to(() => const YourBagScreen()),
+                        child: Row(
+                          children: [
+                            Text("See all",
+                                style:
+                                    CustomTextStyle.normal(AppColors.primary)),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 12,
+                              color: AppColors.primary,
+                            )
+                          ],
+                        ),
+                      )
+                    : const SizedBox.shrink())
               ],
             ),
             const SizedBox(height: 6),

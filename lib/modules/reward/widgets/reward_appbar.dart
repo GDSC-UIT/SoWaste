@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
-import 'package:sowaste/modules/reward/screens/qr_screen.dart';
+
+import '../screens/qr_screen.dart';
 
 class RewardAppbar extends StatelessWidget {
   const RewardAppbar({super.key});
@@ -12,16 +13,10 @@ class RewardAppbar extends StatelessWidget {
     return Row(
       children: [
         const SizedBox(width: 20),
-        Text(
-          "Rewards",
-          style: CustomTextStyle.heading(),
-        ),
+        Text("Rewards", style: CustomTextStyle.heading()),
         const Spacer(),
         IconButton(
-          icon: const Icon(
-            Icons.qr_code,
-            color: AppColors.primaryDark,
-          ),
+          icon: const Icon(Icons.qr_code, color: AppColors.primaryDark),
           onPressed: () => Get.to(() => const QrScreen()),
         ),
         const SizedBox(width: 20),

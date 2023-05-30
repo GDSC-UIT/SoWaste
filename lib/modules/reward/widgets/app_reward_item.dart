@@ -11,7 +11,7 @@ class AppRewardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rewartController = Get.find<RewardController>();
+    final rewardController = Get.find<RewardController>();
 
     return FutureBuilder(
       future: RewardService.ins.getAllAppRewards(),
@@ -66,6 +66,7 @@ class AppRewardItem extends StatelessWidget {
                     point: appRewards?[index].point ?? -999,
                     image: appRewards?[index].displayImage ??
                         "https://link.gdsc.app/XFblK6o",
+                    onTap: () => rewardController.tradeItem(appRewards?[index]),
                   );
                 },
               );

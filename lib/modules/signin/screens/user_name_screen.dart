@@ -22,43 +22,42 @@ class UserNameScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 180,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "...Can I ask your name?",
-                    style: CustomTextStyle.h3(Colors.black),
-                  ),
-                  Text(
-                    'Enter the name you would like to go by',
-                    style: CustomTextStyle.large(Colors.black),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: TextField(
-                            controller: _controller.name,
-                            style: CustomTextStyle.h2(Colors.black)
-                                .copyWith(height: 1),
-                            decoration: InputDecoration(
-                                focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                                hintText: 'NAME',
-                                hintStyle: CustomTextStyle.h2(
-                                    AppColors.info) // Set the hint text
-                                ),
-                          ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "...Can I ask your name?",
+                  style: CustomTextStyle.h3(Colors.black),
+                ),
+                Text(
+                  'Enter the name you would like to go by',
+                  style: CustomTextStyle.large(Colors.black),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: TextField(
+                          controller: _controller.name,
+                          style: CustomTextStyle.h2(Colors.black)
+                              .copyWith(height: 1),
+                          decoration: InputDecoration(
+                              focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide.none),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide.none),
+                              hintText: 'NAME',
+                              hintStyle: CustomTextStyle.h2(
+                                  AppColors.info) // Set the hint text
+                              ),
                         ),
-                        Container(
+                      ),
+                      SizedBox(
+                        child: Container(
                           height: 40,
                           child: ElevatedButton.icon(
                             style: ElevatedButton.styleFrom(
@@ -73,12 +72,12 @@ class UserNameScreen extends StatelessWidget {
                               Get.toNamed(AppRoutes.signInPage);
                             },
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Flexible(
                 flex: 1,

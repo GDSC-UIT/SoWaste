@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/values/app_file_name.dart';
 import 'package:sowaste/core/values/app_url.dart';
+import 'package:sowaste/data/models/diy.dart';
 import 'package:sowaste/data/models/question.dart';
 import 'package:sowaste/data/models/quiz_result.dart';
 import 'package:sowaste/data/services/data_center.dart';
@@ -19,6 +20,7 @@ class DictionaryController extends GetxController {
 
   TextEditingController searchInput = TextEditingController();
   RxList<Trash> foundTrash = <Trash>[].obs;
+  RxList<DIY> diyList = <DIY>[].obs;
 
   RxList<Question> currentQuiz = <Question>[].obs; // quiz fetch from api
   RxInt currentQuestionIndex = 0.obs;
@@ -30,15 +32,9 @@ class DictionaryController extends GetxController {
   Set<String> setDoneQuizTrashId = {};
 
   //Trash
-  Rx<Trash> currentTrash = Trash(
-          id: "",
-          name: "",
-          isOrganic: false,
-          isRecyable: false,
-          displayImage: "",
-          uri: "",
-          shortDescription: "")
-      .obs;
+  Rx<Trash> currentTrash =
+      Trash(id: "", name: "", displayImage: "", nonReItems: {}, reItems: {})
+          .obs;
   //For local logic
   // RxList<LocalQuestion> doneQuestions = <LocalQuestion>[].obs;
   // LocalQuiz localQuiz = LocalQuiz(doneQuestions: []);
@@ -46,18 +42,32 @@ class DictionaryController extends GetxController {
   //For save trash
   RxBool isSaved = false.obs;
 
+  RxList<DIY> currentDIYList = <DIY>[].obs;
+
   @override
   void onInit() async {
-    await DataCenter.fetchDictionary();
-    await DataCenter.fetchAllQuestions();
-    savedTrashList.value = await fetchSavedTrashList();
-    await setDoneQuizList();
+    await Future.wait([
+      DataCenter.fetchDictionary(),
+      DataCenter.fetchAllQuestions(),
+    ]);
+    await Future.wait([
+      fetchSavedTrashList(),
+      fetchAllDIY(),
+      setDoneQuizList(),
+    ]);
+
     foundTrash.value = [...DataCenter.dictionary];
     super.onInit();
   }
 
   Future<void> getDetailTrash(String id) async {
     isLoading.value = true;
+    currentDIYList.value = [];
+    for (DIY d in diyList) {
+      if (d.trashId == id) {
+        currentDIYList.add(d);
+      }
+    }
     Get.toNamed(AppRoutes.trashDetailPage, arguments: id);
     currentTrash.value = (await Trash.getTrash(id))!;
     initCurrentQuiz();
@@ -79,15 +89,17 @@ class DictionaryController extends GetxController {
     }
   }
 
-  Future<List<Trash>> fetchSavedTrashList() async {
+  Future<void> fetchSavedTrashList() async {
     List<Trash> result = [];
     var response =
         await HttpService.getRequest("${UrlValue.appUrl}/api/saved/user");
     final listJson = await json.decode(utf8.decode(response.bodyBytes))["data"];
-    listJson.forEach((e) {
-      result.add(Trash.fromJson(e["dictionary"][0]));
-    });
-    return result;
+    if (listJson != null) {
+      listJson.forEach((e) {
+        result.add(Trash.fromJson(e["dictionary"][0]));
+      });
+    }
+    savedTrashList.value = result;
   }
 
   Future<void> saveTrash(Trash t) async {
@@ -96,15 +108,19 @@ class DictionaryController extends GetxController {
       await HttpService.postRequestWithParam(
           parameters: {"dictionary_id": t.id},
           url: "${UrlValue.appUrl}/api/saved");
+    } else {
+      await HttpService.deleteRequest(
+          "${UrlValue.appUrl}/api/saved/user/${currentTrash.value.id}");
     }
     isSaved.value = !isSaved.value;
-    savedTrashList.value = await fetchSavedTrashList();
+    fetchSavedTrashList();
   }
 
   RxInt count = 0.obs;
   void initCurrentQuiz() {
     totalPoint.value = 0;
     currentQuestionIndex.value = 0;
+    userAnswer.value = 0;
     currentQuiz.value = DataCenter.questionList
         .where((q) => q.trashId == currentTrash.value.id)
         .toList();
@@ -184,10 +200,44 @@ class DictionaryController extends GetxController {
         await HttpService.getRequest("${UrlValue.appUrl}/api/quiz-result");
     final responseJson =
         await json.decode(utf8.decode(response.bodyBytes))["data"];
-    responseJson.forEach((json) {
-      result.add(QuizResult.fromJson(json));
-      setDoneQuizTrashId.add(json["dictionary_id"]);
-    });
+    if (responseJson != null) {
+      responseJson.forEach((json) {
+        result.add(QuizResult.fromJson(json));
+        setDoneQuizTrashId.add(json["dictionary_id"]);
+      });
+    }
     doneQuizList.value = [...result];
+  }
+
+  Future<void> fetchAllDIY() async {
+    var result = [];
+    try {
+      final response =
+          await HttpService.getRequest("${UrlValue.appUrl}/api/diy");
+      print("RESPONSE: " + response.body);
+      final temp = await json.decode(utf8.decode(response.bodyBytes))["data"];
+      temp.forEach((d) {
+        result.add(DIY.fromJson(d));
+      });
+      diyList.value = [...result];
+    } catch (error) {
+      print("ERROR IN FETCH DIY: " + error.toString());
+    }
+  }
+
+  late Rx<DIY> currentDIY = DIY(
+          trashId: "",
+          id: "",
+          title: "",
+          shortDescription: "",
+          createAt: DateTime.now(),
+          displayImage: "")
+      .obs;
+
+  Future<void> getDIYDetails(String id) async {
+    isLoading.value = true;
+    Get.toNamed(AppRoutes.diyDetailPage, arguments: id);
+    currentDIY.value = await DIY.getDIY(id);
+    isLoading.value = false;
   }
 }

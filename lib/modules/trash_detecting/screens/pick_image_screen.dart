@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +8,7 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/core/values/app_url.dart';
+import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
@@ -21,9 +23,8 @@ class PickImageScreen extends StatelessWidget {
   PickImageScreen({super.key});
   final TrashDetectingController _trashDetectingController =
       Get.put(TrashDetectingController());
-  final DictionaryController _dictionaryController =
-      Get.put(DictionaryController());
-  final HomeController _homeController = Get.put(HomeController());
+  final DictionaryController _dictionaryController = Get.find();
+  final HomeController _homeController = Get.find();
   List<Widget> stackChildren = [];
 
   Future<void> uploadImage() async {
@@ -44,6 +45,7 @@ class PickImageScreen extends StatelessWidget {
   }
 
   Future<void> pickImageToDetect({bool camera = true}) async {
+    _trashDetectingController.setDetectedTrash.value = [];
     try {
       ImageServices.pickedImage == null;
       _trashDetectingController.recognitions.value = [];
@@ -57,28 +59,28 @@ class PickImageScreen extends StatelessWidget {
       await uploadImage();
       // Post recent Trash
       ++DataCenter.timesDeteted.value;
-      for (var object in _trashDetectingController.recognitions) {
-        String temp = object["name"]
-            .toLowerCase()
-            .substring(0, object["name"].length - 1);
-        for (var trash in DataCenter.dictionary) {
-          String trashName = trash.name.toLowerCase();
-          if (temp.contains(trashName) ||
-              (temp == "bottle" && trashName == 'plastic bottle')) {
-            _dictionaryController.currentTrash.value = trash;
-            _homeController.indexHasColor.value =
-                DataCenter.recentDetectedTrashes.length;
-            await _dictionaryController.postRecentTrashToLocalStorage(
-                isDetected: true);
 
-            _homeController.updateTotalDetectedObjects();
-            _homeController
-                .setColorForPieChart(_homeController.indexHasColor.value);
-            break;
-          }
-        }
+      Set<dynamic> set = _trashDetectingController.recognitions.map((trash) {
+        return trash["name"];
+      }).toSet();
+
+      for (var name in set) {
+        Trash? t = await _trashDetectingController.getDetectedTrash(name);
+        if (t != null) _trashDetectingController.setDetectedTrash.add(t);
+
+        // chart
+        _dictionaryController.currentTrash.value = t!;
+        _homeController.indexHasColor.value =
+            DataCenter.recentDetectedTrashes.length;
+        await _dictionaryController.postRecentTrashToLocalStorage(
+            isDetected: true);
+
+        _homeController.updateTotalDetectedObjects();
+        _homeController
+            .setColorForPieChart(_homeController.indexHasColor.value);
       }
     } catch (error) {
+      log(error.toString());
     } finally {
       _trashDetectingController.isLoading.value = false;
     }

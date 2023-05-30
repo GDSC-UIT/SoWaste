@@ -19,6 +19,14 @@ class QuestionScreen extends StatelessWidget {
     return Scaffold(
         appBar: ArrowBackAppBar(
           title: _dictionaryController.currentTrash.value.name,
+          icon: const Icon(
+            Icons.close_sharp,
+            color: AppColors.error,
+          ),
+          onTap: () {
+            Get.back();
+            _dictionaryController.initCurrentQuiz();
+          },
         ),
         body: Obx(() {
           final index = _dictionaryController.currentQuestionIndex.value;

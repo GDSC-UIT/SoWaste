@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/core/values/app_assets/app_icons.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 import 'package:sowaste/core/values/app_constant.dart';
 import 'package:sowaste/data/services/data_center.dart';
@@ -61,15 +62,28 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leadingWidth: 0,
           title: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: SizedBox(
               height: 44,
-              child: Image.asset(AppImages.appLogo),
+              child: Image.asset(
+                AppImages.appLogo,
+                height: 44,
+              ),
             ),
           ),
           backgroundColor: AppColors.background,
           elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: GestureDetector(
+                onTap: _controller.navigateToProfile,
+                child: Image.asset(AppIcons.profile),
+              ),
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
@@ -108,46 +122,44 @@ class HomeScreen extends StatelessWidget {
                       ),
               ),
               gap(),
-              title(
-                  "Your badge",
-                  () => {
-                        Get.toNamed(AppRoutes.quizzesPage),
-                      },
-                  true),
-              Card(
-                color: AppColors.primaryLight.withOpacity(0.7),
-                shape:
-                    RoundedRectangleBorder(borderRadius: AppConst.borderRadius),
-                elevation: 7,
-                shadowColor: AppConst.shadowColor,
-                child: Container(
-                  height: 150,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(child: Image.asset(AppImages.cloud)),
-                        Flexible(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "Start donate to recycling points",
-                                style: CustomTextStyle.bodyBold(
-                                    AppColors.primaryDark),
-                              ),
-                              const Icon(
-                                Icons.arrow_forward,
-                                color: AppColors.primaryDark,
-                                size: 24,
-                              )
-                            ],
+              title("Your badge", _controller.navigateToReward, true),
+              GestureDetector(
+                onTap: _controller.navigateToReward,
+                child: Card(
+                  color: AppColors.primaryLight.withOpacity(0.7),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: AppConst.borderRadius),
+                  elevation: 7,
+                  shadowColor: AppConst.shadowColor,
+                  child: Container(
+                    height: 150,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 24, horizontal: 24),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(child: Image.asset(AppImages.cloud)),
+                          Flexible(
+                            flex: 2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "Start donate to recycling points",
+                                  style: CustomTextStyle.bodyBold(
+                                      AppColors.primaryDark),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward,
+                                  color: AppColors.primaryDark,
+                                  size: 24,
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ]),
+                        ]),
+                  ),
                 ),
               ),
               gap(),

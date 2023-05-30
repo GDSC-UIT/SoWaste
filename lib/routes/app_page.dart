@@ -4,6 +4,7 @@ import 'package:sowaste/modules/base/base_screen.dart';
 import 'package:sowaste/modules/dictionary/dictionary_binding.dart';
 import 'package:sowaste/modules/dictionary/screens/categories_diy_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/dictionary_overview_screen.dart';
+import 'package:sowaste/modules/dictionary/screens/diy_details_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/question_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quiz_result_screen.dart';
 import 'package:sowaste/modules/dictionary/screens/quizzes.dart';
@@ -58,7 +59,7 @@ class AppPages {
 
     GetPage(
         name: AppRoutes.savedTypesPage,
-        page: () => const SavedTrashesScreen(),
+        page: () => SavedTrashesScreen(),
         transition: Transition.cupertino,
         binding: DictionaryBinding()),
     GetPage(
@@ -102,6 +103,12 @@ class AppPages {
       binding: DictionaryBinding(),
     ),
     GetPage(
+      name: AppRoutes.diyDetailPage,
+      page: () => DIYDetailScreen(),
+      transition: Transition.cupertino,
+      binding: DictionaryBinding(),
+    ),
+    GetPage(
       name: AppRoutes.resultQuizPage,
       page: () => QuizResultScreen(),
       transition: Transition.cupertino,
@@ -125,8 +132,6 @@ class AppPages {
       page: () => PickImageScreen(),
       transition: Transition.cupertino,
     ),
-
-    //Test tflite
 
     // Reward
     GetPage(
@@ -152,6 +157,14 @@ class AppPages {
       page: () => SignInScreen(),
       transition: Transition.cupertino,
       binding: SignInBinding(),
+    ),
+
+    //profile
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => ProfileScreen(),
+      transition: Transition.cupertino,
+      binding: HomeBinding(),
     ),
   ];
 }

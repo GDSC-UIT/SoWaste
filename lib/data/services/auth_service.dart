@@ -36,6 +36,5 @@ class AuthServices {
   }
 
   static User? get currentUser => FirebaseAuth.instance.currentUser;
-
   static bool isLoggedIn() => FirebaseAuth.instance.currentUser != null;
 }

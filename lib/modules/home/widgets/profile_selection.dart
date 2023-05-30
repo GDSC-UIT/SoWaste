@@ -3,7 +3,7 @@ import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 
 class ProfileSelection extends StatelessWidget {
-  Function? onTap;
+  void Function()? onTap;
   String title;
   IconData icon;
   ProfileSelection({
@@ -18,17 +18,25 @@ class ProfileSelection extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: () {
-        onTap;
-      },
+      onTap: onTap,
       child: Container(
         width: screenWidth * (390 / 428),
         height: 72,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16), color: Colors.white),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1), // Màu shadow và độ mờ
+              spreadRadius: 1, // Kích thước của shadow
+              blurRadius: 3, // Độ mờ của shadow
+              offset: Offset(0, 2), // Vị trí của shadow
+            ),
+          ],
+        ),
         child: Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 23.5,
             ),
             Container(
@@ -36,7 +44,7 @@ class ProfileSelection extends StatelessWidget {
               height: 48,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(180),
-                  color: AppColors.primaryDark),
+                  color: AppColors.primary),
               child: Center(
                 child: Icon(
                   icon,
@@ -44,7 +52,7 @@ class ProfileSelection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15.5,
             ),
             Text(

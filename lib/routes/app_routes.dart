@@ -13,6 +13,7 @@ class AppRoutes {
   static const trashDetailPage = '/dictionary/detail';
   static const detectPage = '/detect';
   static const resultQuizPage = '/dictionary/quiz/result';
+  static const diyDetailPage = '/dictionary/diy/detail';
   // env news route
   static const environmentNewsPage = '/news';
   static const detailNewsPage = '/news/detail';

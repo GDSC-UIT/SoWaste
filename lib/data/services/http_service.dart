@@ -30,6 +30,16 @@ class HttpService {
     );
   }
 
+  static Future<http.Response> deleteRequest(url) async {
+    return await http.delete(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer ${AuthServices.idToken}',
+      },
+    );
+  }
+
   static Future<http.Response> postRequestWithParam(
       {required Map<String, dynamic> parameters, required String url}) async {
     final uri = Uri.parse(url);

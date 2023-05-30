@@ -16,6 +16,6 @@ class Option {
         description: json["description"],
         questionId: json["question_id"],
         trashId: json["dictionary_id"],
-        isCorrect: json["is_correct"]);
+        isCorrect: json["is_correct"] ?? false);
   }
 }

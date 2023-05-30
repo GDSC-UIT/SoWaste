@@ -24,6 +24,10 @@ class QuizResult {
     for (var q in quiz) {
       quizPoint += q.point;
     }
+    print("NAME: " + json["dictionary"][0]["name"]);
+    print("TOTAL POINT: " + quizPoint.toString());
+    print("USER POINT: " + json["total"].toString());
+
     return QuizResult(
       quizId: json["_id"],
       trashId: json["dictionary_id"],

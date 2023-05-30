@@ -4,18 +4,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/data/models/article.dart';
-import 'package:sowaste/data/models/quiz_result.dart';
+import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/auth_service.dart';
 import 'package:sowaste/data/services/data_center.dart';
+import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
+import 'package:sowaste/modules/base/base_controller.dart';
+import 'package:sowaste/routes/app_routes.dart';
 
 class HomeController extends GetxController {
   RxList<Article> news = <Article>[].obs;
+  RxList<Trash> saveTrashList = <Trash>[].obs;
 
   @override
   void onInit() async {
     super.onInit();
-    print(AuthServices.currentUser!.displayName.toString());
     DataCenter.doneQuizzesFolder =
         await LocalService.createFolderInAppDocDir("quizzes");
     await Future.wait([
@@ -51,5 +54,13 @@ class HomeController extends GetxController {
       sum += trash["count"] as int;
     }
     totalDetectedObjects.value = sum;
+  }
+
+  void navigateToProfile() {
+    Get.toNamed(AppRoutes.profile);
+  }
+
+  void navigateToReward() {
+    BaseController.changeIndexPage(4);
   }
 }

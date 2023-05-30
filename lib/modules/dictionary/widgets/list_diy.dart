@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sowaste/data/services/data_center.dart';
+import 'package:get/get.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/dictionary/widgets/diy_card.dart';
 
 class ListDIY extends StatelessWidget {
-  const ListDIY({super.key});
+  ListDIY({super.key});
+  final DictionaryController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
         itemBuilder: ((context, index) => DIYCard(
-              title: DataCenter.dictionary[index].name,
-              image: DataCenter.dictionary[index].displayImage,
+              onTap: () async {
+                await _controller.getDIYDetails(_controller.diyList[index].id);
+              },
+              title: _controller.diyList[index].title,
+              image: _controller.diyList[index].displayImage,
             )),
         separatorBuilder: (context, index) => SizedBox(
               height: 16,
             ),
-        itemCount: DataCenter.dictionary.length);
+        itemCount: _controller.diyList.length);
     ;
   }
 }

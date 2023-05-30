@@ -8,7 +8,7 @@ class Article {
   String title;
   String? description;
   String shortDescription;
-  String source;
+  String? source;
   DateTime createAt;
   String displayImage;
 
@@ -16,7 +16,7 @@ class Article {
       {required this.id,
       required this.title,
       required this.shortDescription,
-      required this.source,
+      this.source,
       required this.createAt,
       required this.displayImage,
       this.description});

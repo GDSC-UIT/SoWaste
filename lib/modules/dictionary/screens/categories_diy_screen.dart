@@ -109,7 +109,7 @@ class _CategoriesandDIYscreenState extends State<CategoriesandDIYscreen>
                 controller: tabController,
                 children: [
                   ListCategories(),
-                  const ListDIY(),
+                  ListDIY(),
                 ],
               ),
             ),

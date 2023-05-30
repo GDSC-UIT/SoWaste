@@ -27,4 +27,6 @@ class AppColors {
   static const Color dropShadow = Color.fromRGBO(4, 6, 15, 0.07);
 
   static const Color gray400 = Color(0xFF999EA4);
+
+  static const Color text = Color(0xFF171827);
 }

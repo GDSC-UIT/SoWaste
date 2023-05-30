@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   DataCenter.AppFilePath = await LocalService.getFilePath;
-
+  await DataCenter.fetchRecentTrashes();
   runApp(const MyApp());
 }
 

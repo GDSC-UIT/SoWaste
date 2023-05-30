@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/data/models/trash.dart';
 import 'package:sowaste/data/services/image_picker_services.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 
@@ -80,20 +81,13 @@ class TrashDetectingScreen extends StatelessWidget {
                                     .recognitions.isNotEmpty
                                 ? Column(
                                     children: _trashDetectingController
-                                        .recognitions
-                                        .map((trash) => trash["name"])
-                                        .toSet()
-                                        .map((trash) => Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4),
-                                              child: TrashButton(
-                                                  trash:
-                                                      _trashDetectingController
-                                                          .getDetectedTrash(
-                                                              trash)),
-                                            ))
-                                        .toList())
+                                        .setDetectedTrash
+                                        .map((trash) {
+                                    return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 4),
+                                        child: TrashButton(trash: trash));
+                                  }).toList())
                                 : Container()))
                   ]),
                 );

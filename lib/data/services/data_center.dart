@@ -76,19 +76,24 @@ class DataCenter extends GetxController {
       final response = await HttpService.getRequest(UrlValue.questionsUrl);
       final questionsJson =
           await json.decode(utf8.decode(response.bodyBytes))["data"];
-      questionsJson
-          .forEach((q) => DataCenter.questionList.add(Question.fromJson(q)));
-      // add quiz per trash
 
+      var count = 0;
+
+      questionsJson.forEach((q) {
+        ++count;
+        DataCenter.questionList.add(Question.fromJson(q));
+      });
+      // add quiz per trash
+      print("COUNT QUESTIONS: " + count.toString());
     } catch (error) {
-      // isLoading.value = false;
+      print("ERROR WHEN FECTH QUESTION: " + error.toString());
+      ;
     }
   }
 
   static Future<void> fetchAllArticles() async {
     final EnvironmentNewsController environmentNewsController =
         Get.put(EnvironmentNewsController());
-    log("Article URL ${UrlValue.articlesUrl}");
     try {
       final response = await HttpService.getRequest(UrlValue.articlesUrl);
       final temp = await json.decode(utf8.decode(response.bodyBytes))["data"];
@@ -99,7 +104,6 @@ class DataCenter extends GetxController {
       sortNews();
       environmentNewsController.news.value = [...DataCenter.news];
     } catch (error) {
-      // isLoading.value = false;
       log(error.toString());
     }
   }

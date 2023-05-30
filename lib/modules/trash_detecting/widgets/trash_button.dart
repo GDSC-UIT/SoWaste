@@ -15,13 +15,12 @@ class TrashButton extends StatefulWidget {
 
 class _TrashButtonState extends State<TrashButton> {
   bool isShowedDetail = false;
-  final DictionaryController _dictionaryController =
-      Get.put(DictionaryController());
+  final DictionaryController _dictionaryController = Get.find();
   @override
   Widget build(BuildContext context) {
     if (widget.trash == null) return Container();
-    String typeOfTrash = (widget.trash!.isOrganic ? "Organic" : "") +
-        (widget.trash!.isRecyable ? "Recyable" : "");
+    String typeOfTrash = (widget.trash!.isOrganic! ? "Organic" : "") +
+        (widget.trash!.isRecyable! ? "Recyable" : "");
 
     return GestureDetector(
         onTap: () {
@@ -68,7 +67,7 @@ class _TrashButtonState extends State<TrashButton> {
                                 .copyWith(height: 1.5),
                           ),
                           Text(
-                            widget.trash!.shortDescription,
+                            widget.trash!.shortDescription!,
                             style: CustomTextStyle.normal(AppColors.info)
                                 .copyWith(height: 1.2),
                             maxLines: 2,

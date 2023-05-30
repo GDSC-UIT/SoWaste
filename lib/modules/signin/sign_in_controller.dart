@@ -48,16 +48,21 @@ class SignInController extends GetxController {
   }
 
   void signInAction() async {
-    User? user = await AuthServices().signInWithGoogle();
-    final displayName = name.text;
-    // Cập nhật thông tin người dùng trên Firebase Authentication
-    await user?.updateDisplayName(displayName);
-    await HttpService.postRequestWithParam(
-            parameters: {"uid": user!.uid}, url: UrlValue.createUser)
-        .then((value) => print(value.body));
-    await setUserInfo();
-    await LocalService.saveContent({"idToken": AuthServices.idToken},
-        "${DataCenter.AppFilePath}/app.json");
-    Get.offAndToNamed(AppRoutes.base);
+    try {
+      log("AUTH ACTION");
+      User? user = await AuthServices().signInWithGoogle();
+      final displayName = name.text;
+      // Cập nhật thông tin người dùng trên Firebase Authentication
+      await user?.updateDisplayName(displayName);
+      await HttpService.postRequestWithParam(
+              parameters: {"uid": user!.uid}, url: UrlValue.createUser)
+          .then((value) => log(value.body));
+      await setUserInfo();
+      await LocalService.saveContent({"idToken": AuthServices.idToken},
+          "${DataCenter.AppFilePath}/app.json");
+      Get.offAndToNamed(AppRoutes.base);
+    } catch (error) {
+      log("ERROR WHEN SIGN IN: " + error.toString());
+    }
   }
 }

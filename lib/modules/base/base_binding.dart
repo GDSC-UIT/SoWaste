@@ -8,7 +8,7 @@ class BaseBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<BaseController>(() => BaseController());
-    Get.put<HomeController>(HomeController());
+    Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<EnvironmentNewsController>(() => EnvironmentNewsController());
     Get.put<DictionaryController>(DictionaryController());
   }

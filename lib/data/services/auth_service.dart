@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthServices {
   final _auth = FirebaseAuth.instance;
   final _ggSignIn = GoogleSignIn();
-  static late final String? idToken;
+  static late String? idToken;
   signInWithGoogle() async {
     try {
       final GoogleSignInAccount? ggSignInAccount = await _ggSignIn.signIn();
@@ -26,8 +28,9 @@ class AuthServices {
         return user;
       }
     } on FirebaseAuthException catch (e) {
-      print(e.message);
-      throw e;
+      log("FirebaseAuthException $e");
+    } catch (e) {
+      log(e.toString());
     }
   }
 

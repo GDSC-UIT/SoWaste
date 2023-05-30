@@ -28,6 +28,7 @@ import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
 import '../modules/home/screens/home_screen.dart';
+import '../modules/reward/reward_binding.dart';
 import '../modules/trash_detecting/trash_detecting_binding.dart';
 import 'app_routes.dart';
 
@@ -138,6 +139,7 @@ class AppPages {
       name: AppRoutes.rewardPage,
       page: () => const RewardScreen(),
       transition: Transition.cupertino,
+      binding: RewardBinding(),
     ),
     //welcome
     GetPage(

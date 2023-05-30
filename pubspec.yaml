@@ -58,6 +58,10 @@ dependencies:
   firebase_core: ^2.13.0
   firebase_auth: ^4.6.1
   google_sign_in: ^6.1.0
+  camera: ^0.10.5+2
+  qr_code_scanner: ^1.0.1
+  flutter_easyloading: ^3.0.5
+  
 
 flutter_icons:
   android: true

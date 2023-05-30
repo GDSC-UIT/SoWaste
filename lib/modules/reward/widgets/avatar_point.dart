@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/core/values/app_assets/app_images.dart';
 
+import '../reward_controller.dart';
+
 class AvatarPoint extends StatelessWidget {
-  String image;
-  int point;
-  AvatarPoint({super.key, this.image = '', this.point = 0});
+  final String image;
+  const AvatarPoint({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
+    final rewardController = Get.find<RewardController>();
     return Column(
       children: [
         Container(
@@ -21,21 +24,19 @@ class AvatarPoint extends StatelessWidget {
             image: DecorationImage(image: NetworkImage(image)),
           ),
         ),
-        SizedBox(
-          height: 16,
-        ),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-                width: 21, height: 30, child: Image.asset(AppImages.trophy)),
             SizedBox(
+                width: 21, height: 30, child: Image.asset(AppImages.trophy)),
+            const SizedBox(
               width: 8,
             ),
-            Text(
-              "$point",
-              style: CustomTextStyle.sub(AppColors.primary),
-            ),
+            Obx(() => Text(
+                  "${rewardController.userPoint.value}",
+                  style: CustomTextStyle.sub(AppColors.primary),
+                ))
           ],
         )
       ],

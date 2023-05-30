@@ -15,4 +15,5 @@ class AppImages {
   static const String cloud = 'assets/images/cloud.png';
   static const String fail = 'assets/images/fail.png';
   static const String congra = 'assets/images/congra.png';
+  static const String happyEarth = 'assets/images/happy_earth.png';
 }

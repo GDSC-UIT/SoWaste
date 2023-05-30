@@ -55,7 +55,7 @@ class SignInController extends GetxController {
       // Cập nhật thông tin người dùng trên Firebase Authentication
       await user?.updateDisplayName(displayName);
       await HttpService.postRequestWithParam(
-              parameters: {"uid": user!.uid}, url: UrlValue.createUser)
+              parameters: {"uid": user!.uid}, url: UrlValue.userUrl)
           .then((value) => log(value.body));
       await setUserInfo();
       await LocalService.saveContent({"idToken": AuthServices.idToken},

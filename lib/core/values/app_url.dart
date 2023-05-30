@@ -7,5 +7,17 @@ class UrlValue {
   static const articlesUrl = "$appUrl/api/articles";
   static const questionsUrl = "$appUrl/api/questions";
   static const trashUrl = "$appUrl/api/dictionary";
-  static const createUser = "$appUrl/api/user";
+  static const userUrl = "$appUrl/api/user";
+  static const updateUserPointUrl = "$appUrl/api/user/point";
+
+  // reward
+  static const getAllAppRewardsUrl = "$appUrl/api/reward";
+  static const getAllUserRewardsUrl = "$appUrl/api/exchanged/user";
+  static const getAllAppBadgesUrl = "$appUrl/api/badge";
+  static const getAllUserBadgesUrl = "$appUrl/api/badge-collection/user";
+  static const createUserExchangeUrl = "$appUrl/api/user/exchange";
+  static const deleteUserExchangeUrl = "$appUrl/api/exchanged";
+
+  //qr
+  static const postQrCodeUrl = "$appUrl/api/qr/scan";
 }

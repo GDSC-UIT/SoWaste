@@ -30,7 +30,7 @@ class HttpService {
     );
   }
 
-  static Future<http.Response> deleteRequest(url) async {
+  static Future<http.Response> deleteRequest({required String url}) async {
     return await http.delete(
       Uri.parse(url),
       headers: <String, String>{
@@ -53,15 +53,5 @@ class HttpService {
     };
 
     return await http.post(uriWithParams, headers: headers);
-  }
-
-  static Future<http.Response> deleteRequest({required String url}) async {
-    return await http.delete(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ${AuthServices.idToken}',
-      },
-    );
   }
 }

@@ -41,6 +41,14 @@ class TrashDetailScreen extends StatelessWidget {
       return IconButton(
         onPressed: () => {dictionaryController.saveTrash(trash)},
         icon: Obx(() {
+          dictionaryController.isSaved.value = false;
+          for (Trash t in dictionaryController.savedTrashList) {
+            if (t.id == trash.id) {
+              dictionaryController.isSaved.value = true;
+              break;
+            }
+          }
+
           return dictionaryController.isSaved.value
               ? const Icon(
                   Icons.bookmark,

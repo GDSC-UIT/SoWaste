@@ -110,10 +110,10 @@ class DictionaryController extends GetxController {
           url: "${UrlValue.appUrl}/api/saved");
     } else {
       await HttpService.deleteRequest(
-          "${UrlValue.appUrl}/api/saved/user/${currentTrash.value.id}");
+          url: "${UrlValue.appUrl}/api/saved/user/${currentTrash.value.id}");
     }
     isSaved.value = !isSaved.value;
-    fetchSavedTrashList();
+    await fetchSavedTrashList();
   }
 
   RxInt count = 0.obs;

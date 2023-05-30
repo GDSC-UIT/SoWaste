@@ -63,10 +63,17 @@ class RewardController extends GetxController {
 
   Future<void> updateUserPoint(int rewardPoint) async {
     EasyLoading.show(status: "Loading...");
-    await RewardService.ins.updateUserPoint(rewardPoint);
-    userPoint.value -= rewardPoint;
-    DataCenter.user?.point = userPoint.value;
+    var success = await RewardService.ins.updateUserPoint(rewardPoint);
     EasyLoading.dismiss();
+    if (success) {
+      userPoint.value -= rewardPoint;
+      DataCenter.user?.point = userPoint.value;
+    } else {
+      await defaultDialog(
+        title: "Error",
+        content: "Something went wrong, please try again later",
+      );
+    }
   }
 
   Future<bool> deleteUserReward(String userRewardId) async {

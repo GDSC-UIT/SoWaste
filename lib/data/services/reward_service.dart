@@ -154,10 +154,18 @@ class RewardService {
     return false;
   }
 
-  Future<void> updateUserPoint(int rewardPoint) {
-    return HttpService.postRequest(
+  Future<bool> updateUserPoint(int rewardPoint) async {
+    var res = await HttpService.postRequest(
         url:
             "${UrlValue.updateUserPointUrl}?action=decrease&point=$rewardPoint");
+    try {
+      if (res.isOk) {
+        return true;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
   }
 
   Future<bool> deleteUserExchange(String rewardId) async {

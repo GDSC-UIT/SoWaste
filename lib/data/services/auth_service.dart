@@ -36,6 +36,7 @@ class AuthServices {
 
   signOut() async {
     await _auth.signOut();
+    await _ggSignIn.signOut();
   }
 
   static User? get currentUser => FirebaseAuth.instance.currentUser;

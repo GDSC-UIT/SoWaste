@@ -21,6 +21,8 @@ class DictionaryController extends GetxController {
   TextEditingController searchInput = TextEditingController();
   RxList<Trash> foundTrash = <Trash>[].obs;
   RxList<DIY> diyList = <DIY>[].obs;
+  RxList<Trash> allTrash = <Trash>[].obs;
+  RxList<String> selectedTrash = <String>[].obs;
 
   RxList<Question> currentQuiz = <Question>[].obs; // quiz fetch from api
   RxInt currentQuestionIndex = 0.obs;
@@ -57,6 +59,7 @@ class DictionaryController extends GetxController {
     ]);
 
     foundTrash.value = [...DataCenter.dictionary];
+    allTrash.value = [...DataCenter.dictionary];
     super.onInit();
   }
 

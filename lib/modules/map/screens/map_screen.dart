@@ -1,16 +1,21 @@
 import 'dart:math';
 
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart' as geo;
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/map/helpers/map_place.dart';
 import 'package:sowaste/modules/map/map_constants.dart';
 import 'package:sowaste/modules/map/map_model.dart';
 import 'package:sowaste/modules/map/map_repository.dart';
+import 'package:sowaste/modules/map/widgets/bottom_modal_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapScreen extends StatefulWidget {
@@ -66,6 +71,24 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     });
   }
 
+  DictionaryController dictionaryController = Get.find();
+  void onPressFilter() async {
+    // _drawerController.
+    String? isCancel = await showBottomModal(context);
+    if (isCancel == "Cancel") {
+      return;
+    }
+    if (dictionaryController.selectedTrash.isEmpty) {
+      return;
+    }
+
+    keyword = dictionaryController.selectedTrash
+        .map((v) => "$v recycling center")
+        .join(" OR ");
+    print("keyword: $keyword");
+    initMarkers();
+  }
+
   double distance = 0;
   Directions? destination;
   bool joined = false;
@@ -79,6 +102,12 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       setState(() {});
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    dictionaryController.selectedTrash.clear();
+    super.dispose();
   }
 
   @override
@@ -133,11 +162,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                   child: AnimatedOpacity(
                                     duration: Duration(milliseconds: 500),
                                     opacity: 1,
-                                    child: Icon(
-                                      Icons.my_location_sharp,
-                                      color: Colors.red,
-                                      size: 30,
-                                    ),
+                                    child: AvatarGlow(
+                                        endRadius: 60,
+                                        glowColor: Colors.blueAccent,
+                                        child: Icon(
+                                          Icons.circle,
+                                          color: Colors.blue,
+                                          size: 20,
+                                        )),
                                   ),
                                 ),
                               );
@@ -190,11 +222,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                       opacity: selectedIndex == i ? 1 : 0.5,
                                       child: const Icon(
                                         Icons.location_on,
-                                        color: AppColors.primaryDark,
+                                        color: Colors.red,
                                         size: 40,
                                         shadows: [
                                           BoxShadow(
-                                            color: AppColors.primaryLight,
+                                            color: Colors.redAccent,
                                             blurRadius: 5,
                                             spreadRadius: 1,
                                             offset: Offset(0, 0),
@@ -394,6 +426,28 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           ),
                         )
                       : const SizedBox(),
+                  Positioned(
+                      top: 20,
+                      right: 20,
+                      child: Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3))
+                              ]),
+                          child: IconButton(
+                            onPressed: () {
+                              onPressFilter();
+                            },
+                            icon: const Icon(Icons.filter_alt_outlined),
+                          ))),
                 ],
               )
             : const Center(
@@ -455,13 +509,33 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
     setState(() {});
   }
 
+  late String keyword = "recycling center";
+
   Future<String> initMarkers() async {
     try {
-      final List<MapMarker> places = await mapHelper.searchPlaces(
-          'recycling center', radius, currentLocation);
-      mapMarkers = places;
+      setState(() {
+        mapMarkers = [];
+        destination = null;
+      });
+      final List<MapMarker> places =
+          await mapHelper.searchPlaces(keyword, radius, currentLocation);
+      print(places.length);
+      if (places.isEmpty) {
+        Fluttertoast.showToast(
+            msg: "No place found!",
+            backgroundColor: AppColors.error,
+            gravity: ToastGravity.CENTER);
+      } else {
+        setState(() {
+          mapMarkers = places;
+        });
+      }
       return Future.value('success');
     } catch (error) {
+      Fluttertoast.showToast(
+          msg: "No place found!",
+          backgroundColor: AppColors.error,
+          gravity: ToastGravity.CENTER);
       setState(() {
         mapMarkers = [];
       });

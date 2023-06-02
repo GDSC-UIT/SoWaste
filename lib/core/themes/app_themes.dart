@@ -5,7 +5,7 @@ import 'app_colors.dart';
 
 class CustomTextStyle extends TextStyle {
   static TextStyle h1(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 44,
         fontWeight: FontWeight.w600,
         color: color,
@@ -14,7 +14,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle h2(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 36,
         fontWeight: FontWeight.w600,
         color: color,
@@ -23,7 +23,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle h3(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 30,
         fontWeight: FontWeight.w600,
         color: color,
@@ -32,7 +32,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle h4(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 26,
         fontWeight: FontWeight.w600,
         color: color,
@@ -41,7 +41,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle sub(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 22,
       fontWeight: FontWeight.w600,
       color: color,
@@ -50,7 +50,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle subHeading(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 18,
       fontWeight: FontWeight.w600,
       color: color,
@@ -59,7 +59,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle title(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: color,
@@ -68,7 +68,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle heading() {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 26,
       fontWeight: FontWeight.w700,
       color: AppColors.primaryDark,
@@ -76,7 +76,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle dictionaryTitle(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 26,
       fontWeight: FontWeight.bold,
       color: color,
@@ -85,7 +85,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle tabTitle() {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 16,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.5,
@@ -93,7 +93,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle DIYtitle() {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 18,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.5,
@@ -102,7 +102,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle Categoriestitle() {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 15,
       color: Colors.black,
       fontWeight: FontWeight.w600,
@@ -111,7 +111,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle bodyBold(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: color,
@@ -120,7 +120,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle large(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: color,
@@ -129,7 +129,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle medium(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: color,
@@ -138,7 +138,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle normal(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: color,
@@ -147,7 +147,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle boldButton(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       color: color,
@@ -155,7 +155,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle button(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 12,
       fontWeight: FontWeight.w400,
       color: color,
@@ -163,7 +163,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle link(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
         fontSize: 12,
         fontWeight: FontWeight.w600,
         color: color,
@@ -171,7 +171,7 @@ class CustomTextStyle extends TextStyle {
   }
 
   static TextStyle tinyText(Color color) {
-    return GoogleFonts.roboto(
+    return GoogleFonts.questrial(
       fontSize: 7,
       fontWeight: FontWeight.w300,
       color: color,

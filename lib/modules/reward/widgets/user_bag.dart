@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sowaste/core/themes/app_themes.dart';
 
 import '../../../core/values/app_assets/app_images.dart';
 import '../../../data/models/api_result.dart';
@@ -33,7 +34,7 @@ class UserBag extends StatelessWidget {
                       Container(height: 100),
                       Text(
                         (result as ErrorResult).message,
-                        style: const TextStyle(color: Colors.red),
+                        style: CustomTextStyle.normal(Colors.red),
                       ),
                     ],
                   );
@@ -42,7 +43,7 @@ class UserBag extends StatelessWidget {
                     children: [
                       Container(height: 100),
                       Text((result as FailedResult).message,
-                          style: const TextStyle(color: Colors.red)),
+                          style: CustomTextStyle.normal(Colors.red)),
                     ],
                   );
                 case SuccessResult:

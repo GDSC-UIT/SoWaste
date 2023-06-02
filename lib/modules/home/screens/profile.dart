@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/data/services/auth_service.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/global_widget/arrow_back_app_bar.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
@@ -41,6 +43,20 @@ class ProfileScreen extends StatelessWidget {
           onTap: () => Get.toNamed(
             AppRoutes.quizzesPage,
           ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        ProfileSelection(
+          title: "Log out",
+          icon: Icons.logout_rounded,
+          color: AppColors.error,
+          onTap: () async {
+            await AuthServices().signOut();
+            Get.toNamed(
+              AppRoutes.signInPage,
+            );
+          },
         ),
         const SizedBox(
           height: 48,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/global_widget/search_input.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 
@@ -45,8 +46,10 @@ class SearchTrash extends StatelessWidget {
                     GestureDetector(
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child:
-                            Text(_dictionaryController.foundTrash[index].name),
+                        child: Text(
+                          _dictionaryController.foundTrash[index].name,
+                          style: CustomTextStyle.normal(Colors.black),
+                        ),
                       ),
                       onTap: () => {
                         _dictionaryController.getDetailTrash(

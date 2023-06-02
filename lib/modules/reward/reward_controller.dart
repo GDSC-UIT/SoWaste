@@ -58,6 +58,21 @@ class RewardController extends GetxController {
     }
   }
 
+  Future<bool> refund(UserReward reward) async {
+    EasyLoading.show(status: "Loading...");
+    var res = await RewardService.ins.refundUserExchange(reward.id);
+    EasyLoading.dismiss();
+    if (res) {
+      userRewards.removeWhere((item) => item.id == reward.id);
+      futureKey.value += 1;
+      userPoint.value += reward.reward.point;
+      DataCenter.user?.point = userPoint.value;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<void> updateUserPoint(int rewardPoint) async {
     EasyLoading.show(status: "Loading...");
     var success = await RewardService.ins.updateUserPoint(rewardPoint);

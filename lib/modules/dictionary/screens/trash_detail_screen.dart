@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
@@ -16,19 +17,20 @@ class TrashDetailScreen extends StatelessWidget {
   });
 
   Widget unorderList(List<dynamic>? itemList, Icon icon) {
-    return itemList != null
+    return itemList != null && itemList.isNotEmpty
         ? Column(
-            children: itemList
-                .map((e) => ListTile(
-                      horizontalTitleGap: 0,
-                      contentPadding: const EdgeInsets.all(0),
-                      leading: icon,
-                      title: Text(
-                        e,
-                        style: CustomTextStyle.normal(AppColors.text),
-                      ),
-                    ))
-                .toList())
+            children: itemList.map((e) {
+            print("E: $e");
+            return ListTile(
+              horizontalTitleGap: 0,
+              contentPadding: const EdgeInsets.all(0),
+              leading: icon,
+              title: Text(
+                e,
+                style: CustomTextStyle.normal(AppColors.text),
+              ),
+            );
+          }).toList())
         : Container();
   }
 
@@ -69,17 +71,11 @@ class TrashDetailScreen extends StatelessWidget {
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            AppButton(
-                buttonText: "DONATE TO RECEIVE RECYCLING POINT",
-                onPressedFunction: () {
-                  Get.back();
-                  BaseController.changeIndexPage(4);
-                }),
             Obx(() => dictionaryController.currentQuiz.isNotEmpty
                 ? AppButton(
                     buttonText: "START QUIZ",
-                    color: AppColors.background,
-                    textColor: Colors.black,
+                    color: AppColors.primary,
+                    textColor: Colors.white,
                     onPressedFunction: () async {
                       Get.to(() => QuestionScreen());
                     })
@@ -93,6 +89,7 @@ class TrashDetailScreen extends StatelessWidget {
             );
           } else {
             final Trash trash = dictionaryController.currentTrash.value;
+            print(trash.nonReItems);
             return Padding(
               padding: const EdgeInsets.only(left: 16, right: 16, top: 0),
               child: ListView(
@@ -160,7 +157,7 @@ class TrashDetailScreen extends StatelessWidget {
                                   title: Text(
                                     trash.isRecyable!
                                         ? "Possible"
-                                        : "Not possible",
+                                        : "Impossible",
                                     style: trash.isRecyable!
                                         ? CustomTextStyle.normal(
                                             AppColors.primary)
@@ -209,44 +206,56 @@ class TrashDetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: 18,
                       ),
-                      Text(
-                        "Types of ${trash.name.toLowerCase()}",
-                        style: CustomTextStyle.title(AppColors.text),
-                      ),
-                      unorderList(
-                          trash.types!,
-                          const Icon(
-                            Icons.circle,
-                            size: 4,
-                          )),
+                      trash.types != null && trash.types!.isNotEmpty
+                          ? Text(
+                              "Types of ${trash.name.toLowerCase()}",
+                              style: CustomTextStyle.title(AppColors.text),
+                            )
+                          : Container(),
+                      trash.types != null && trash.types!.isNotEmpty
+                          ? unorderList(
+                              trash.types!,
+                              const Icon(
+                                Icons.circle,
+                                size: 4,
+                              ))
+                          : Container(),
                       const SizedBox(
                         height: 18,
                       ),
-                      Text(
-                        "${trash.reItems["title"]}",
-                        style: CustomTextStyle.title(AppColors.text),
-                      ),
-                      unorderList(
-                          trash.reItems["data"],
-                          const Icon(
-                            Icons.check_circle_sharp,
-                            color: AppColors.primary,
-                            size: 24,
-                          )),
+                      !mapEquals(trash.reItems, {})
+                          ? Text(
+                              "${trash.reItems["title"]}",
+                              style: CustomTextStyle.title(AppColors.text),
+                            )
+                          : Container(),
+                      !mapEquals(trash.reItems, {})
+                          ? unorderList(
+                              trash.reItems["data"],
+                              const Icon(
+                                Icons.check_circle_sharp,
+                                color: AppColors.primary,
+                                size: 24,
+                              ))
+                          : Container(),
                       const SizedBox(
                         height: 18,
                       ),
-                      Text(
-                        "${trash.nonReItems["title"]}",
-                        style: CustomTextStyle.title(AppColors.text),
-                      ),
-                      unorderList(
-                          trash.nonReItems["data"],
-                          const Icon(
-                            Icons.close_sharp,
-                            color: AppColors.error,
-                            size: 24,
-                          )),
+                      !mapEquals(trash.nonReItems, {})
+                          ? Text(
+                              "${trash.nonReItems["title"]}",
+                              style: CustomTextStyle.title(AppColors.text),
+                            )
+                          : Container(),
+                      !mapEquals(trash.nonReItems, {})
+                          ? unorderList(
+                              trash.nonReItems["data"],
+                              const Icon(
+                                Icons.close_sharp,
+                                color: AppColors.error,
+                                size: 24,
+                              ))
+                          : Container(),
                       const SizedBox(
                         height: 18,
                       ),

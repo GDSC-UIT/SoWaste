@@ -1,4 +1,6 @@
 class AppRoutes {
+  //Temp
+  static const temp = '/temp';
   //Home
   static const homeScreen = '/';
   static const profile = '/profile';

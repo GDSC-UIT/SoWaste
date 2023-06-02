@@ -180,4 +180,17 @@ class RewardService {
     }
     return false;
   }
+
+  Future<bool> refundUserExchange(String exchangeId) async {
+    var res = await HttpService.deleteRequest(
+        url: "${UrlValue.refundUserExchangeUrl}/$exchangeId");
+    try {
+      if (res.isOk) {
+        return true;
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
+  }
 }

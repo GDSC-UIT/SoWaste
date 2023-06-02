@@ -40,8 +40,11 @@ class Trash {
         displayImage: json["display_image"],
         types: json["types"] ?? [],
         goodToKnow: json["good_to_know"] ?? "",
-        reItems: json["recyclable_items"] as Map<String, dynamic>,
-        nonReItems: json["non_recyclable_items"] as Map<String, dynamic>,
+        reItems:
+            json["recyclable_items"] == {} ? null : json["recyclable_items"],
+        nonReItems: json["non_recyclable_items"] == {}
+            ? null
+            : json["non_recyclable_items"],
         howToRe: json["how_to_recyclable"] ?? "");
   }
 

@@ -11,7 +11,7 @@ class TrashDetectingController extends GetxController {
   int imgHeight = 1;
 
   Future<Trash?> getDetectedTrash(String name) async {
-    String temp = name.toLowerCase().substring(0, name.length - 1);
+    String temp = name.toLowerCase().substring(0, name.length);
     for (var trash in DataCenter.dictionary) {
       String trashName = trash.name.toLowerCase();
       if (temp.contains(trashName) ||

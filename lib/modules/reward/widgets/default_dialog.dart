@@ -8,7 +8,11 @@ Future defaultDialog({required String title, required String content}) async {
   return await Get.defaultDialog(
     barrierDismissible: false,
     title: title,
-    content: Text(content),
+    titleStyle: CustomTextStyle.h4(Colors.black),
+    content: Text(
+      content,
+      style: CustomTextStyle.normal(Colors.black),
+    ),
     confirm: TextButton(
       onPressed: () => Get.back(),
       child: Container(

@@ -64,20 +64,26 @@ class PickImageScreen extends StatelessWidget {
         return trash["class"];
       }).toSet();
 
+      print(set.length);
+
       for (var name in set) {
-        Trash? t = await _trashDetectingController.getDetectedTrash(name);
-        if (t != null) _trashDetectingController.setDetectedTrash.add(t);
+        try {
+          Trash? t = await _trashDetectingController.getDetectedTrash(name);
+          if (t != null) _trashDetectingController.setDetectedTrash.add(t);
 
-        // chart
-        _dictionaryController.currentTrash.value = t!;
-        _homeController.indexHasColor.value =
-            DataCenter.recentDetectedTrashes.length;
-        await _dictionaryController.postRecentTrashToLocalStorage(
-            isDetected: true);
+          // chart
+          _dictionaryController.currentTrash.value = t!;
+          _homeController.indexHasColor.value =
+              DataCenter.recentDetectedTrashes.length;
+          await _dictionaryController.postRecentTrashToLocalStorage(
+              isDetected: true);
 
-        _homeController.updateTotalDetectedObjects();
-        _homeController
-            .setColorForPieChart(_homeController.indexHasColor.value);
+          _homeController.updateTotalDetectedObjects();
+          _homeController
+              .setColorForPieChart(_homeController.indexHasColor.value);
+        } catch (error) {
+          log(error.toString());
+        }
       }
     } catch (error) {
       log(error.toString());

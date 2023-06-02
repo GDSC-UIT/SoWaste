@@ -68,7 +68,7 @@ class _CategoriesandDIYscreenState extends State<CategoriesandDIYscreen>
                   child: TextField(
                     controller: _controller.searchInput,
                     onChanged: (value) => _controller.filterWord(value),
-                    style: const TextStyle(fontSize: 14),
+                    style: CustomTextStyle.normal(Colors.black),
                     decoration: InputDecoration(
                       hintText: "Search type of waste here",
                       prefixIcon: const Icon(Icons.search),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:sowaste/modules/reward/widgets/default_dialog.dart';
 
 import '../../../core/themes/app_colors.dart';
 import '../../../core/themes/app_themes.dart';
@@ -17,7 +19,7 @@ class ExchangeNowDialog extends StatelessWidget {
       titlePadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
       title: Container(
-        height: 336,
+        // height: 336,
         width: 384,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         decoration: BoxDecoration(
@@ -31,7 +33,7 @@ class ExchangeNowDialog extends StatelessWidget {
               width: 89,
               child: Image.network(
                 userReward.reward.displayImage,
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 32),
@@ -49,6 +51,11 @@ Attention: By clicking "EXCHANGE NOW", this means you received the real-life rew
                     await rewardController.deleteUserReward(userReward.id);
                 if (success) {
                   Get.back();
+                  Fluttertoast.showToast(
+                      msg: "Exchange successfully",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1);
                 } else {
                   Get.back();
                   Get.snackbar("Error", "Something went wrong");
@@ -65,6 +72,39 @@ Attention: By clicking "EXCHANGE NOW", this means you received the real-life rew
                   child: Text(
                     "Exchange now".toUpperCase(),
                     style: CustomTextStyle.button(Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            InkWell(
+              onTap: () async {
+                var isOk = await rewardController.refund(userReward);
+                if (!isOk) {
+                  await defaultDialog(
+                      title: "Error",
+                      content: "Something went wrong, please try again later");
+                } else {
+                  Get.back();
+                  Fluttertoast.showToast(
+                      msg: "Refund successfully",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1);
+                }
+              },
+              child: Container(
+                width: double.infinity,
+                height: 48,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Colors.white,
+                  border: Border.all(color: AppColors.primary, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    "Refund".toUpperCase(),
+                    style: CustomTextStyle.button(AppColors.primary),
                   ),
                 ),
               ),

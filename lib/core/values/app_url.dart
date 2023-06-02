@@ -17,7 +17,9 @@ class UrlValue {
   static const getAllUserBadgesUrl = "$appUrl/api/badge-collection/user";
   static const createUserExchangeUrl = "$appUrl/api/user/exchange";
   static const deleteUserExchangeUrl = "$appUrl/api/exchanged";
+  static const refundUserExchangeUrl = "$appUrl/api/exchanged/refund";
 
   //qr
   static const postQrCodeUrl = "$appUrl/api/qr/scan";
+  static const getQrCodes = "$appUrl/api/qr";
 }

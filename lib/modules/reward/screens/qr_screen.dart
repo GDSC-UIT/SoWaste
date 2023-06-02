@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/data/models/api_result.dart';
+import 'package:sowaste/data/services/qr_service.dart';
 
 import '../reward_controller.dart';
 import '../widgets/default_dialog.dart';
@@ -36,10 +38,18 @@ class _QrScreenState extends State<QrScreen> {
     controller.scannedDataStream.listen(
       (scanData) async {
         result = scanData;
+        print(result!.code);
         if (result != null) {
           controller.pauseCamera();
+          bool isQrExist = await QrService.isQrExist(result!.code!);
+          if (!isQrExist) {
+            await defaultDialog(
+                title: "Failed",
+                content: "This QR code is not a valid QR code for this app");
+            controller.resumeCamera();
+            return;
+          }
           var apiResult = await rewardController.postQrCode(result!.code!);
-          print(apiResult);
           switch (apiResult.runtimeType) {
             case SuccessResult:
               int point = (apiResult as SuccessResult).data as int;
@@ -69,7 +79,10 @@ class _QrScreenState extends State<QrScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Scan QR Code"),
+        title: Text(
+          "Scan QR Code",
+          style: CustomTextStyle.bodyBold(Colors.white),
+        ),
         backgroundColor: AppColors.primary,
         actions: [
           IconButton(
@@ -101,14 +114,10 @@ class _QrScreenState extends State<QrScreen> {
               width: Get.width,
               height: 100,
               color: Colors.black.withOpacity(0.5),
-              child: const Center(
+              child: Center(
                 child: Text(
                   "Scan QR Code",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: CustomTextStyle.h4(Colors.white),
                 ),
               ),
             ),

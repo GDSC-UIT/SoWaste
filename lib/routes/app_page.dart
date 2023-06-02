@@ -24,6 +24,7 @@ import 'package:sowaste/modules/signin/screens/sign_in_screen.dart';
 import 'package:sowaste/modules/signin/screens/user_name_screen.dart';
 import 'package:sowaste/modules/signin/screens/welcome_screen.dart';
 import 'package:sowaste/modules/signin/sign_in_binding.dart';
+import 'package:sowaste/modules/temp/temp_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/pick_image_screen.dart';
 import 'package:sowaste/modules/trash_detecting/screens/trash_decteting_screen.dart';
 
@@ -34,6 +35,7 @@ import 'app_routes.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
+    GetPage(name: AppRoutes.temp, page: () => const TempScreen()),
     //home page
     GetPage(
       name: AppRoutes.homeScreen,

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:sowaste/core/values/app_url.dart';
 import 'package:sowaste/data/models/user.dart';
@@ -11,6 +12,7 @@ import 'package:sowaste/data/services/auth_service.dart';
 import 'package:sowaste/data/services/data_center.dart';
 import 'package:sowaste/data/services/http_service.dart';
 import 'package:sowaste/data/services/local_data.dart';
+import 'package:sowaste/modules/reward/widgets/default_dialog.dart';
 import 'package:sowaste/routes/app_routes.dart';
 
 class SignInController extends GetxController {
@@ -51,6 +53,8 @@ class SignInController extends GetxController {
     try {
       log("AUTH ACTION");
       User? user = await AuthServices().signInWithGoogle();
+      Fluttertoast.showToast(
+          msg: "Signing in...", toastLength: Toast.LENGTH_LONG);
       final displayName = name.text;
       // Cập nhật thông tin người dùng trên Firebase Authentication
       await user?.updateDisplayName(displayName);
@@ -60,6 +64,8 @@ class SignInController extends GetxController {
       await setUserInfo();
       await LocalService.saveContent({"idToken": AuthServices.idToken},
           "${DataCenter.AppFilePath}/app.json");
+      Fluttertoast.cancel();
+      Fluttertoast.showToast(msg: "Sign in successfully");
       Get.offAndToNamed(AppRoutes.base);
     } catch (error) {
       log("ERROR WHEN SIGN IN: " + error.toString());

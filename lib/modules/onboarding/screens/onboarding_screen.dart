@@ -95,7 +95,7 @@ class OnboardingScreen extends StatelessWidget {
                   ? AppButton(
                       buttonText: "GET STARTED",
                       onPressedFunction: () =>
-                          {Get.offAndToNamed(AppRoutes.base)})
+                          {Get.offAndToNamed(AppRoutes.signInPage)})
                   : Container(),
             ),
           ),

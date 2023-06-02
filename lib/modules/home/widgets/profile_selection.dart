@@ -6,11 +6,13 @@ class ProfileSelection extends StatelessWidget {
   void Function()? onTap;
   String title;
   IconData icon;
+  Color color;
   ProfileSelection({
     super.key,
     this.onTap,
     required this.title,
     required this.icon,
+    this.color = AppColors.primary,
   });
 
   @override
@@ -43,8 +45,7 @@ class ProfileSelection extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(180),
-                  color: AppColors.primary),
+                  borderRadius: BorderRadius.circular(180), color: color),
               child: Center(
                 child: Icon(
                   icon,

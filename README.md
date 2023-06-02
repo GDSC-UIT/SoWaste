@@ -33,7 +33,7 @@ Bellow steps are required to run fully gateway application which include Flutter
 
 ## Mobile Installation
 
-Download APK file **<ins>[here](./apk/app.apk)!</ins>**
+Download APK file **<ins>[here](./apk/sowaste.apk)!</ins>**
 
 ## Local Installation
 

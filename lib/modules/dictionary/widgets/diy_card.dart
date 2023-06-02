@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sowaste/core/themes/app_themes.dart';
+import 'package:sowaste/data/services/image_picker_services.dart';
 
 class DIYCard extends StatelessWidget {
   String title;
@@ -9,7 +10,6 @@ class DIYCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(image);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
@@ -18,8 +18,8 @@ class DIYCard extends StatelessWidget {
         Container(
           height: screenHeight * (232 / 932),
           decoration: BoxDecoration(
-            image:
-                DecorationImage(image: NetworkImage(image), fit: BoxFit.fill),
+            image: DecorationImage(
+                image: NetworkImage(image), fit: BoxFit.contain),
             borderRadius: BorderRadius.circular(16),
           ),
         ),

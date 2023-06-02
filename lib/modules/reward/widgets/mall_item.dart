@@ -29,7 +29,7 @@ class MallItem extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: AppColors.primarySubtle),
-            child: Image.network(image, fit: BoxFit.fill),
+            child: Image.network(image, fit: BoxFit.contain),
           ),
           if (showPoint)
             Expanded(

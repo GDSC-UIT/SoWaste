@@ -34,7 +34,7 @@ class CategoriesCard extends StatelessWidget {
                     color: AppColors.imageCategories,
                     borderRadius: BorderRadius.circular(180),
                     image: DecorationImage(
-                        image: NetworkImage(image), fit: BoxFit.fill)),
+                        image: NetworkImage(image), fit: BoxFit.contain)),
               ),
               SizedBox(
                 width: 16,

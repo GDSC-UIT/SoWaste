@@ -17,7 +17,7 @@ class ListDIY extends StatelessWidget {
               title: _controller.diyList[index].title,
               image: _controller.diyList[index].displayImage,
             )),
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
               height: 16,
             ),
         itemCount: _controller.diyList.length);

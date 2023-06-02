@@ -23,20 +23,23 @@ class _QrScreenState extends State<QrScreen> {
   Barcode? result;
   QRViewController? controller;
   final rewardController = Get.find<RewardController>();
-
   @override
   void initState() {
     super.initState();
   }
 
   void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
+    setState(() {
+      this.controller = controller;
+    });
+    controller.resumeCamera();
     controller.scannedDataStream.listen(
       (scanData) async {
         result = scanData;
         if (result != null) {
           controller.pauseCamera();
           var apiResult = await rewardController.postQrCode(result!.code!);
+          print(apiResult);
           switch (apiResult.runtimeType) {
             case SuccessResult:
               int point = (apiResult as SuccessResult).data as int;
@@ -47,11 +50,12 @@ class _QrScreenState extends State<QrScreen> {
             case FailedResult:
               await defaultDialog(
                   title: "Failed",
-                  content: "User have already scanned this QR code");
+                  content: (apiResult as FailedResult).message);
               controller.resumeCamera();
               break;
             case ErrorResult:
-              await defaultDialog(title: "Error", content: "Invalid QR code");
+              await defaultDialog(
+                  title: "Error", content: (apiResult as ErrorResult).message);
               controller.resumeCamera();
               break;
           }
@@ -64,58 +68,52 @@ class _QrScreenState extends State<QrScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: AppColors.secondary,
-            size: 25,
-          ),
-        ),
-        elevation: 1,
+        title: const Text("Scan QR Code"),
+        backgroundColor: AppColors.primary,
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState(() {
+                controller?.flipCamera();
+              });
+            },
+            icon: const Icon(Icons.flip_camera_ios),
+          )
+        ],
       ),
-      body: Center(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SizedBox(
-          width: double.infinity,
-          height: context.height * 0.6,
-          child: QRView(
+      body: Stack(
+        children: [
+          QRView(
             key: qrKey,
             onQRViewCreated: _onQRViewCreated,
+            overlay: QrScannerOverlayShape(
+                cutOutSize: MediaQuery.of(context).size.width * 0.8,
+                borderLength: 20,
+                borderColor: AppColors.primary,
+                borderWidth: 10,
+                borderRadius: 10),
+            formatsAllowed: const [BarcodeFormat.qrcode],
           ),
-        ),
-      )),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 62),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(25),
-              height: 82,
-              width: 82,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(90),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 6,
-                      offset: const Offset(0, 4),
-                    ),
-                  ]),
-              child: const Icon(
-                Icons.camera_alt,
-                color: AppColors.primary,
-                size: 35,
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: Get.width,
+              height: 100,
+              color: Colors.black.withOpacity(0.5),
+              child: const Center(
+                child: Text(
+                  "Scan QR Code",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

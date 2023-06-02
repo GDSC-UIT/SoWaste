@@ -116,7 +116,10 @@ class TrashDetailScreen extends StatelessWidget {
                           save(trash)
                         ],
                       ),
-                      Image.network(trash.displayImage),
+                      Image.network(trash.displayImage,
+                          fit: BoxFit.contain,
+                          width: MediaQuery.of(context).size.width,
+                          height: 200),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 24),
                         decoration: BoxDecoration(

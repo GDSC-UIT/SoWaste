@@ -82,7 +82,7 @@ class DictionaryCard extends StatelessWidget {
                 ),
               ),
               child: FadeInImage(
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 placeholder: const AssetImage('assets/images/placeholder.png'),
                 image: NetworkImage(trash.displayImage),
               ),

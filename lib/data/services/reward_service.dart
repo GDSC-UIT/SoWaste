@@ -128,15 +128,14 @@ class RewardService {
     var res =
         await HttpService.postRequest(url: "${UrlValue.postQrCodeUrl}/$qrCode");
     try {
-      if (res.isOk) {
+      if (res.statusCode == 200) {
         if (res.data == null) {
           return EmptyResult();
         }
         return SuccessResult(data: res.data["QR"]["point"]);
       }
     } catch (e) {
-      log(e.toString());
-      return ErrorResult(message: e.toString());
+      return ErrorResult(message: res.message);
     }
     return FailedResult(message: res.message);
   }

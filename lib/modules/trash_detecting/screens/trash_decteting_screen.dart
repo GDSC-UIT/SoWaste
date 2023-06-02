@@ -39,7 +39,7 @@ class TrashDetectingScreen extends StatelessWidget {
             width: 3,
           )),
           child: Text(
-            "${re["name"]} ${(double.parse(re["confidence"]) * 100).toStringAsFixed(0)}%",
+            "${re["class"]} ${(double.parse(re["confidence"]) * 100).toStringAsFixed(0)}%",
             style: TextStyle(
               background: Paint()..color = AppColors.primaryLight,
               color: Colors.black,
@@ -66,7 +66,7 @@ class TrashDetectingScreen extends StatelessWidget {
           return _trashDetectingController.isLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Scrollbar(
-                  isAlwaysShown: true,
+                  thumbVisibility: true,
                   thickness: 8.0,
                   radius: const Radius.circular(10),
                   child: ListView(children: [

@@ -61,7 +61,7 @@ class PickImageScreen extends StatelessWidget {
       ++DataCenter.timesDeteted.value;
 
       Set<dynamic> set = _trashDetectingController.recognitions.map((trash) {
-        return trash["name"];
+        return trash["class"];
       }).toSet();
 
       for (var name in set) {

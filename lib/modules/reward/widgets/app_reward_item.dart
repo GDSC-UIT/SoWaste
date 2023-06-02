@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sowaste/data/models/reward.dart';
 import 'package:sowaste/data/services/reward_service.dart';
 import 'package:sowaste/modules/reward/reward_controller.dart';
 
@@ -50,11 +51,11 @@ class AppRewardItem extends StatelessWidget {
                 ],
               );
             case SuccessResult:
-              final appRewards = (result as SuccessResult).data;
+              final List<Reward> appRewards = (result as SuccessResult).data;
               return GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: appRewards?.length,
+                itemCount: appRewards.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   childAspectRatio: 120 / 177,
@@ -63,10 +64,11 @@ class AppRewardItem extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   return MallItem(
-                    point: appRewards?[index].point ?? -999,
-                    image: appRewards?[index].displayImage ??
-                        "https://link.gdsc.app/XFblK6o",
-                    onTap: () => rewardController.tradeItem(appRewards?[index]),
+                    point: appRewards[index].point,
+                    image: appRewards[index].displayImage != ""
+                        ? appRewards[index].displayImage
+                        : "https://link.gdsc.app/XFblK6o",
+                    onTap: () => rewardController.tradeItem(appRewards[index]),
                   );
                 },
               );

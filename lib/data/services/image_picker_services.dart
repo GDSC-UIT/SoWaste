@@ -1,7 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+class ImageSize {
+  final double? width;
+  final double? height;
+  ImageSize({this.width, this.height});
+}
 
 class ImageServices {
   static File? pickedImage;
@@ -26,5 +33,20 @@ class ImageServices {
       if (image == null) return;
       pickedImage = File(image.path);
     } on PlatformException catch (e) {}
+  }
+
+  static Future<ImageSize> getImageSize(String imageUrl) async {
+    // get the bytes from the image
+    final ByteData data =
+        await NetworkAssetBundle(Uri.parse(imageUrl)).load(imageUrl);
+    final Uint8List bytes = data.buffer.asUint8List();
+
+    // decode the bytes to get the image size
+    final decodedImage = await decodeImageFromList(bytes);
+
+    // set the state
+    return ImageSize(
+        width: decodedImage.width.toDouble(),
+        height: decodedImage.height.toDouble());
   }
 }

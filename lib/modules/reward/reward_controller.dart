@@ -24,9 +24,6 @@ class RewardController extends GetxController {
   RxInt userPoint = RxInt(DataCenter.user?.point ?? 0);
 
   Future<ApiResult> postQrCode(String qrCode) async {
-    if (isUrl(qrCode)) {
-      return ErrorResult(message: "Invalid QR Code");
-    }
     var res = await RewardService.ins.postQrCode(qrCode);
     if (res is SuccessResult) {
       DataCenter.user?.point += (res).data as int;

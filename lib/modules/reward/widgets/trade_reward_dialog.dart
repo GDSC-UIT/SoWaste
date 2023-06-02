@@ -31,8 +31,10 @@ class TradeRewardDialog extends StatelessWidget {
               height: 96,
               width: 89,
               child: Image.network(
-                reward.displayImage,
-                fit: BoxFit.fill,
+                reward.displayImage != ""
+                    ? reward.displayImage
+                    : "https://link.gdsc.app/XFblK6o",
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 32),

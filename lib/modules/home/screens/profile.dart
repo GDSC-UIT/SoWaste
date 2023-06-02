@@ -53,9 +53,6 @@ class ProfileScreen extends StatelessWidget {
           color: AppColors.error,
           onTap: () async {
             await AuthServices().signOut();
-            Get.toNamed(
-              AppRoutes.signInPage,
-            );
           },
         ),
         const SizedBox(

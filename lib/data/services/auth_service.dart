@@ -43,10 +43,12 @@ class AuthServices {
   }
 
   signOut() async {
-    DataCenter.user = null;
-    await LocalService.clearContent("${DataCenter.AppFilePath}/app.json");
     await _auth.signOut();
-    await _ggSignIn.signOut();
+    await _ggSignIn.signOut().then((value) async {
+      DataCenter.user = null;
+      await LocalService.clearContent("${DataCenter.AppFilePath}/app.json");
+      Get.offAllNamed(AppRoutes.signInPage);
+    });
   }
 
   Future<void> setUserInfo() async {

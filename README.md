@@ -5,7 +5,7 @@
 ![python support](https://img.shields.io/badge/python%20support-%3E%3D%20%203.8.0-yellow)
 ![go support](https://img.shields.io/badge/go%20support-%3E%3D%20%201.18.0-blue)
 
->The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
+> The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification and increasing awareness of the environmental impact of waste.
 
 **Watch SoWaste demo video here: https://youtu.be/Nebw10PnLNE**
 
@@ -33,7 +33,7 @@ Bellow steps are required to run fully gateway application which include Flutter
 
 ## Mobile Installation
 
-Download APK file **<ins>[here](https://www.tuankietcoder.tech/file/sowaste.apk)!</ins>**
+Download APK file **<ins>[here](./apk/app.apk)!</ins>**
 
 ## Local Installation
 
@@ -105,9 +105,9 @@ Here are some examples of waste our AI system has detected:
 <hr />
 
 ## The app user flow
+
 <img src="images/gif/demo.gif" height="600" />
 <hr/>
-
 
 ## Contributors:
 

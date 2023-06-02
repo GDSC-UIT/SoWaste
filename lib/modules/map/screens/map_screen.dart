@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:sowaste/core/themes/app_colors.dart';
+import 'package:sowaste/core/themes/app_themes.dart';
 import 'package:sowaste/modules/dictionary/dictionary_controller.dart';
 import 'package:sowaste/modules/map/helpers/map_place.dart';
 import 'package:sowaste/modules/map/map_constants.dart';
@@ -246,7 +247,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                       ? Positioned(
                           left: 0,
                           right: 0,
-                          height: 300,
+                          height: 320,
                           bottom: 20,
                           child: PageView.builder(
                             controller: pageController,
@@ -330,11 +331,9 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                               SizedBox(
                                                 width: 240,
                                                 child: Text(item.title ?? '',
-                                                    style: const TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        height: 1.2)),
+                                                    style: CustomTextStyle
+                                                        .dictionaryTitle(
+                                                            Colors.black)),
                                               ),
                                               const SizedBox(
                                                 height: 10,
@@ -344,9 +343,9 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                       width: 200,
                                                       child: Text(
                                                         item.vicinity ?? '',
-                                                        style: const TextStyle(
-                                                          fontSize: 15,
-                                                        ),
+                                                        style: CustomTextStyle
+                                                            .normal(
+                                                                Colors.black),
                                                       ))),
                                               const SizedBox(
                                                 height: 10,
@@ -358,15 +357,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                         isOpen
                                                             ? 'Openning'
                                                             : 'Closed',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 18,
-                                                          color: isOpen
-                                                              ? AppColors
-                                                                  .primaryDark
-                                                              : Colors.red,
-                                                        ),
+                                                        style: CustomTextStyle
+                                                            .bodyBold(isOpen
+                                                                ? AppColors
+                                                                    .primaryDark
+                                                                : Colors.red),
                                                       ))),
                                               const SizedBox(
                                                 height: 10,
@@ -391,7 +386,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                         alignment: Alignment
                                                             .bottomRight,
                                                         child: Text(
-                                                            '${destination != null ? destination!.totalDistance : 0}')),
+                                                          '${destination != null ? destination!.totalDistance : 0}',
+                                                          style: CustomTextStyle
+                                                              .normal(
+                                                                  Colors.black),
+                                                        )),
                                                   ]),
                                             ],
                                           ),
@@ -418,7 +417,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 ),
                                               ),
                                             ),
-                                            child: const Text('Direct'),
+                                            child: Text(
+                                              'Direct',
+                                              style: CustomTextStyle.boldButton(
+                                                  Colors.white),
+                                            ),
                                           ),
                                         ],
                                       )));

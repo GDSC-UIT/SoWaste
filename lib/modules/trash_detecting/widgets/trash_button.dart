@@ -20,7 +20,7 @@ class _TrashButtonState extends State<TrashButton> {
   Widget build(BuildContext context) {
     if (widget.trash == null) return Container();
     String typeOfTrash = (widget.trash!.isOrganic! ? "Organic" : "") +
-        (widget.trash!.isRecyable! ? "Recyable" : "");
+        (widget.trash!.isRecyable! ? "Recyclable" : "");
 
     return GestureDetector(
         onTap: () {

@@ -1,7 +1,7 @@
 class UrlValue {
   static const appUrl = 'https://sowaste-dev.up.railway.app';
   static const detectTrashUrl =
-      'http://35.197.129.203/detect?bb_format=xyxy&return_image=false';
+      'http://34.142.147.198/detect?bb_format=xyxy&return_image=false';
 
   static const dictionaryUrl = "$appUrl/api/dictionaries";
   static const articlesUrl = "$appUrl/api/articles";

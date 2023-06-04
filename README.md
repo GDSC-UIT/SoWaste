@@ -7,7 +7,7 @@
 
 > The application aims to help users classify waste quickly and accurately, while also providing knowledge about waste classification, and creating a positive and rewarding experience for users, reinforcing their commitment to waste reduction and environmental conservation.
 
-**Watch SoWaste demo video here: SoWaste - GDSC Solution Challenge 2023(https://youtu.be/fcUmrlrwuZA)**
+**Watch SoWaste demo video here: [SoWaste - GDSC Solution Challenge 2023](https://youtu.be/fcUmrlrwuZA)**
 
 ## Overall
 

@@ -1,7 +1,7 @@
 [submodule "sowaste-backend"]
     path = sowaste-backend
     url = https://github.com/GDSC-UIT/sowaste-backend.git
-    branch = main
+    branch = new_api
 [submodule "waste_detect_api"]
 	path = waste_detect_api
 	url = https://github.com/tien02/waste_detect_api.git
